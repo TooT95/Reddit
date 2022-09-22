@@ -22,9 +22,9 @@ class OnboardFragment :
             animDrawable.setEnterFadeDuration(2500)
             animDrawable.setExitFadeDuration(1000)
             animDrawable.start()
+
             val adapter = OnboardStateAdapter(requireActivity())
             viewpagerOnboard.adapter = adapter
-            springDotsIndicator.attachTo(viewpagerOnboard)
             includeToolbar.toolbar.apply {
                 setOnMenuItemClickListener {
                     when (it.itemId) {
@@ -38,6 +38,7 @@ class OnboardFragment :
                     }
                 }
             }
+
             viewpagerOnboard.registerOnPageChangeCallback(object :
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -53,8 +54,9 @@ class OnboardFragment :
                     }
 
                 }
-
             })
+
+            springDotsIndicator.attachTo(viewpagerOnboard)
         }
     }
 }

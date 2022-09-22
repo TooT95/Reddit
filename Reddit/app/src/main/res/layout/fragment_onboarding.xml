@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/constraint_onboard"
+    style="@style/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/ConstraintLayout"
     android:padding="@dimen/default_margin">
 
     <androidx.viewpager2.widget.ViewPager2
@@ -25,9 +25,11 @@
         android:layout_marginTop="@dimen/margin_top_dot_layout"
         android:layout_marginBottom="@dimen/margint_botto_dot_layout"
         app:dampingRatio="0.5"
+        app:dotsColor="@color/primaryColor"
         app:dotsCornerRadius="@dimen/dot_corner_radius"
         app:dotsSize="@dimen/dot_size"
         app:dotsSpacing="@dimen/dot_spacing"
+        app:dotsStrokeColor="@color/primaryTextColor"
         app:dotsStrokeWidth="@dimen/dot_stroke_width"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
