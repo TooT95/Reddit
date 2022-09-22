@@ -15,4 +15,9 @@
         </item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ConstraintLayout" parent="">
+        <item name="android:background">@drawable/gradient_animation_dark</item>
+    </style>
+
 </resources>

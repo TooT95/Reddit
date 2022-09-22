@@ -9,4 +9,6 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#ffffff</color>
     <color name="toolbar_title">#5222D0</color>
+
+    <color name="black">#000000</color>
 </resources>

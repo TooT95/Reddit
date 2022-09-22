@@ -2,15 +2,15 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/gradient_background1"
+        android:drawable="@drawable/gradient_background_light1"
         android:duration="2000" />
 
     <item
-        android:drawable="@drawable/gradient_background2"
+        android:drawable="@drawable/gradient_background_light2"
         android:duration="3500" />
 
     <item
-        android:drawable="@drawable/gradient_background3"
+        android:drawable="@drawable/gradient_background_light3"
         android:duration="3500" />
 
 </animation-list>

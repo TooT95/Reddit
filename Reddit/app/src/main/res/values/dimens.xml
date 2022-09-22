@@ -4,4 +4,17 @@
     <dimen name="default_match_parent">0dp</dimen>
     <dimen name="default_margin_top_onboard">140dp</dimen>
     <dimen name="margin_image_text_onboard">48dp</dimen>
+    <dimen name="iv_onboard_height">280dp</dimen>
+
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+
+    <dimen name="margin_top_dot_layout">80dp</dimen>
+    <dimen name="margint_botto_dot_layout">57dp</dimen>
+    <dimen name="dot_corner_radius">10dp</dimen>
+    <dimen name="dot_size">8dp</dimen>
+    <dimen name="dot_spacing">8dp</dimen>
+    <dimen name="dot_stroke_width">1dp</dimen>
+
 </resources>

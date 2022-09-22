@@ -4,9 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_animation.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_animation_dark.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background1.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background2.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background3.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background_dark1.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background_dark2.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background_dark3.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background_light2.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background_light3.xml" value="0.2655" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/ic_onboard_1.xml" value="0.1845" />
+        <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/ic_onboard_2.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/ic_reddit_logo.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/layout/activity_main.xml" value="0.340625" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/layout/fragment_onboard_item.xml" value="0.3536458333333333" />
