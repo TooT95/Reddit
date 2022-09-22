@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.reddit"
-        minSdk 27
+        minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -29,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -42,6 +45,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Fragment view model implementation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
+    def fragView = "2.5.2"
+    implementation "androidx.navigation:navigation-fragment-ktx:$fragView"
+    implementation "androidx.navigation:navigation-ui-ktx:$fragView"
+
+    // Dots indicator
+    implementation("com.tbuonomo:dotsindicator:4.3")
+
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
 }

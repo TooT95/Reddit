@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_margin">8dp</dimen>
+    <dimen name="default_match_parent">0dp</dimen>
+    <dimen name="default_margin_top_onboard">140dp</dimen>
+    <dimen name="margin_image_text_onboard">48dp</dimen>
+</resources>

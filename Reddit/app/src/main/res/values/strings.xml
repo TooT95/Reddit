@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">Reddit</string>
+    <string name="app_name">Humblr</string>
+    <string name="text_skip">Пропустить</string>
+    <string name="text_ready">Готово</string>
+
+    <array name="text_onboard_text">
+        <item>Добро пожаловать в Humblr</item>
+        <item>SubHumblr</item>
+        <item>Делись и сохраняй</item>
+    </array>
+    <array name="text_onboard_desc">
+        <item>Здесь собраны сообщества по всевозможным интересам</item>
+        <item>Ты можешь найти новые сабы по интересам и посмотреть сабы, на которые подписан</item>
+        <item>Вкладка избранное хранит закладки с комментариями и сабами. В профиле ты найдёшь информацию о себе.
+        </item>
+    </array>
 </resources>
