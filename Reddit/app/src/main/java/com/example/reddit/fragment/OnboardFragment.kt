@@ -3,10 +3,12 @@ package com.example.reddit.fragment
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.reddit.R
 import com.example.reddit.adapter.OnboardStateAdapter
 import com.example.reddit.databinding.FragmentOnboardingBinding
+
 
 class OnboardFragment :
     BaseFragment<FragmentOnboardingBinding>(FragmentOnboardingBinding::inflate) {
@@ -30,6 +32,9 @@ class OnboardFragment :
                     when (it.itemId) {
                         R.id.item_skip -> {
                             viewpagerOnboard.currentItem = viewpagerOnboard.currentItem + 1
+                            if (viewpagerOnboard.currentItem == 2) {
+                                findNavController().navigate(R.id.action_loginFragment_to_employerMainFragment)
+                            }
                             return@setOnMenuItemClickListener false
                         }
                         else -> {

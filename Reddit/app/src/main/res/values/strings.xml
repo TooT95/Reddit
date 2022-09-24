@@ -2,6 +2,8 @@
     <string name="app_name">Humblr</string>
     <string name="text_skip">Пропустить</string>
     <string name="text_ready">Готово</string>
+    <string name="text_about_app">Найди единомышленников с Humblr</string>
+    <string name="text_auth">Войти</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>

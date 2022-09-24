@@ -23,6 +23,13 @@
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
+    <style name="TextOnboard40sp" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="font">@font/montserrat_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/text_size_40</item>
+    </style>
+
     <style name="ToolbarTextOnboard20sp" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">sans-serif-black</item>
         <item name="android:textStyle">bold</item>
@@ -45,4 +52,5 @@
         <item name="android:background">@drawable/gradient_animation_light</item>
     </style>
 
+    <dimen name="text_size_40">40sp</dimen>
 </resources>

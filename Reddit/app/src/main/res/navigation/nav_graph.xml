@@ -9,5 +9,17 @@
         android:id="@+id/onboardingFragment"
         android:name="com.example.reddit.fragment.OnboardFragment"
         android:label="OnboardingFragment"
-        tools:layout="@layout/fragment_onboarding" />
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_loginFragment_to_employerMainFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.reddit.fragment.AuthFragment"
+        android:label="AuthFragment" />
+
+
 </navigation>
