@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.reddit.R
 import com.example.reddit.adapter.OnboardStateAdapter
 import com.example.reddit.databinding.FragmentOnboardingBinding
+import com.example.reddit.utils.Utils
 
 
 class OnboardFragment :
@@ -34,6 +35,7 @@ class OnboardFragment :
                             viewpagerOnboard.currentItem = viewpagerOnboard.currentItem + 1
                             if (viewpagerOnboard.currentItem == 2) {
                                 findNavController().navigate(R.id.action_loginFragment_to_employerMainFragment)
+                                Utils.saveOnboardPassed(requireContext(), true)
                             }
                             return@setOnMenuItemClickListener false
                         }
