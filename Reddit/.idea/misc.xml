@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/diplom_android_lvl1/Reddit/app/src/main/res/layout/auth_dialog.xml" value="0.33489583333333334" />
+        <entry key="..\:/AndroidProjects/diplom_android_lvl1/Reddit/app/src/main/res/layout/fragment_auth.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/diplom_android_lvl1/Reddit/app/src/main/res/layout/fragment_auth_token.xml" value="0.33489583333333334" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_animation.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_animation_dark.xml" value="0.2655" />
         <entry key="..\:/Javohir/diplomv1/diplom_android_lvl1/Reddit/app/src/main/res/drawable/gradient_background.xml" value="0.2655" />
@@ -30,7 +33,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="true" project-jdk-name="12" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -5,7 +5,8 @@ import android.content.Context
 object Utils {
 
     private const val ONBOARD_VALUE_KEY = "onboard passed"
-    private const val APP_SHARED_PREF_KEY = "app shared pref"
+    const val APP_SHARED_PREF_KEY = "app shared pref"
+    private const val AUTH_CODE_KEY = "auth code key"
 
     fun onboardPassed(context: Context): Boolean {
         return context.getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
@@ -13,10 +14,15 @@ object Utils {
     }
 
     fun saveOnboardPassed(context: Context, value: Boolean) {
-        context.getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
-            .edit()
-            .putBoolean(ONBOARD_VALUE_KEY, value)
-            .apply()
+        context.saveField {
+            putBoolean(ONBOARD_VALUE_KEY, value)
+        }
+    }
+
+    fun setAuthCode(context: Context, authCode: String) {
+        context.saveField {
+            putString(AUTH_CODE_KEY, authCode)
+        }
     }
 
 }
