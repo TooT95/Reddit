@@ -9,8 +9,10 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.example.reddit.databinding.FragmentOauthBinding
 import com.example.reddit.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::inflate) {
 
     var DEVICE_ID: String = UUID.randomUUID().toString()

@@ -2,8 +2,10 @@ package com.example.reddit.application
 
 import android.app.Application
 import com.example.reddit.BuildConfig
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class RedditApplication : Application() {
 
     override fun onCreate() {

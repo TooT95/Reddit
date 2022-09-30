@@ -9,8 +9,10 @@ import com.example.reddit.R
 import com.example.reddit.adapter.OnboardStateAdapter
 import com.example.reddit.databinding.FragmentOnboardingBinding
 import com.example.reddit.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class OnboardFragment :
     BaseFragment<FragmentOnboardingBinding>(FragmentOnboardingBinding::inflate) {
 

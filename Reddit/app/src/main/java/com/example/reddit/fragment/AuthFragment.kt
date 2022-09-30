@@ -5,8 +5,9 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.reddit.R
 import com.example.reddit.databinding.FragmentAuthBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::inflate) {
 
 
@@ -15,7 +16,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>(FragmentAuthBinding::infl
         initUI()
     }
 
-    fun initUI() {
+    private fun initUI() {
         binding.btnAuth.setOnClickListener {
             findNavController().navigate(R.id.action_authFragment_to_OAuthFragment)
         }

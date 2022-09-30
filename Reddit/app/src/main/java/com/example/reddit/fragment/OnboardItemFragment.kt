@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import com.example.reddit.R
 import com.example.reddit.databinding.FragmentOnboardItemBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardItemFragment :
     BaseFragment<FragmentOnboardItemBinding>(FragmentOnboardItemBinding::inflate) {
 
