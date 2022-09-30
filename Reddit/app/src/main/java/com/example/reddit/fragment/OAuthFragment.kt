@@ -7,16 +7,17 @@ import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.fragment.app.viewModels
 import com.example.reddit.databinding.FragmentOauthBinding
 import com.example.reddit.utils.Utils
+import com.example.reddit.viewmodel.NetworkViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
 class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::inflate) {
 
-    var DEVICE_ID: String = UUID.randomUUID().toString()
-    var authCode = ""
+    private val viewModel: NetworkViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,42 +26,14 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
 
     private fun initUI() {
         auth()
+        observeViewModel()
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun auth2() {
-        val baseUrl = Utils.oAuthUrl
-        binding.webv.also {
-            it.settings.javaScriptEnabled = true
-            it.loadUrl(baseUrl)
-            it.webViewClient = object : WebViewClient() {
-
-                override fun shouldOverrideUrlLoading(
-                    view: WebView?,
-                    request: WebResourceRequest?
-                ): Boolean {
-                    val url = request?.url.toString()
-                    view?.loadUrl(url)
-                    return true
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-                    url?.let { urlPageFinished ->
-                        if (urlPageFinished.contains("?code=") || urlPageFinished.contains("&code")) {
-                            authCode = Uri.parse(url).getQueryParameter("code") ?: ""
-                            Utils.setAuthCode(requireContext(), authCode)
-                            toast(authCode)
-                        } else if (urlPageFinished.contains("error=access_denied")) {
-                            Utils.setAuthCode(requireContext(), authCode)
-                            toast(authCode)
-                        }
-
-                    }
-                }
-            }
-
+    private fun observeViewModel() {
+        viewModel.authResponseLiveData.observe(viewLifecycleOwner) {
+            toast(it.access_token.toString())
         }
+        viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -85,14 +58,12 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
                     super.onPageFinished(view, url)
                     url?.let { urlPageFinished ->
                         if (urlPageFinished.contains("?code=") || urlPageFinished.contains("&code")) {
-                            authCode = Uri.parse(url).getQueryParameter("code") ?: ""
+                            val authCode = Uri.parse(url).getQueryParameter("code") ?: ""
                             Utils.setAuthCode(requireContext(), authCode)
-
+                            viewModel.getAuthToken()
                         } else if (urlPageFinished.contains("error=access_denied")) {
-                            Utils.setAuthCode(requireContext(), authCode)
-
+                            Utils.setAuthCode(requireContext(), "")
                         }
-
                     }
                 }
             }

@@ -25,8 +25,13 @@ class NetworkModule {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
             .client(client)
-            .baseUrl(Utils.tokenBaseUrl)
+            .baseUrl(Utils.BASE_URL)
             .build()
+    }
+
+    @Provides
+    fun tokenApi(retrofit: Retrofit): TokenApi {
+        return retrofit.create(TokenApi::class.java)
     }
 
 }

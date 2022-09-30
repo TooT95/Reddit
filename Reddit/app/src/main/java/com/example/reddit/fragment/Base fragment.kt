@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import timber.log.Timber
 
 open class BaseFragment<T : ViewBinding>(private val bindingInflater: (layoutInflater: LayoutInflater, container: ViewGroup?, attachToParent: Boolean) -> T) :
     Fragment() {
@@ -30,6 +31,7 @@ open class BaseFragment<T : ViewBinding>(private val bindingInflater: (layoutInf
     }
 
     fun toast(text: String) {
+        Timber.d("toast $text")
         Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
     }
 }
