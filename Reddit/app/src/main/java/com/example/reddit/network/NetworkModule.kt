@@ -16,6 +16,7 @@ class NetworkModule {
     @Provides
     fun provideClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(BasicAuthInterceptor())
             .followRedirects(true)
             .build()
     }

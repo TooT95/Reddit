@@ -8,10 +8,11 @@ object Utils {
     const val APP_SHARED_PREF_KEY = "app shared pref"
     private const val AUTH_CODE_KEY = "auth code key"
     const val BASE_URL = "https://www.reddit.com"
-    private const val CLIENT_ID = "gnpcyrAKl8k8AMR6fVjeGg"
+    const val CLIENT_ID = "48dA8yDoFftCi7jHnmSj3Q"
     const val REDIRECT_URI = "http://www.example.com/unused/redirect/uri"
     const val TOKEN_BASE_URL = "/api/v1/access_token"
     private const val AUTH_BASE_URL = "/api/v1/authorize"
+    const val CLIENT_SECRET = "ZsGcBxYotfK0atp3RtsWljvcnptI3w"
 
     const val oAuthUrl =
         "${BASE_URL + AUTH_BASE_URL}?client_id=$CLIENT_ID&response_type=code&state=MobileAppReddit&redirect_uri=$REDIRECT_URI&duration=temporary&scope=identity"

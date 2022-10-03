@@ -12,15 +12,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class NetworkViewModel @Inject constructor(
     private val repository: NetwokrRepository,
-    application: Application
+    application: Application,
 ) : AndroidViewModel(application) {
 
-    val errorScope = CoroutineExceptionHandler { coroutineContext, throwable ->
+    private val errorScope = CoroutineExceptionHandler { coroutineContext, throwable ->
         toastMutableLiveData.postValue("Context:$coroutineContext message:${throwable.message}")
     }
 
