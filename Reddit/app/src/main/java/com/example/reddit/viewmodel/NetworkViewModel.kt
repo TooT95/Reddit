@@ -22,7 +22,7 @@ class NetworkViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val errorScope = CoroutineExceptionHandler { coroutineContext, throwable ->
-        toastMutableLiveData.postValue("Context:$coroutineContext message:${throwable.message}")
+        toastMutableLiveData.postValue("Context:$coroutineContext message:${throwable.localizedMessage}")
     }
 
     private val authResponseMutableLiveData = MutableLiveData<AuthResponse>()
@@ -36,7 +36,8 @@ class NetworkViewModel @Inject constructor(
 
     fun getAuthToken() {
         viewModelScope.launch(errorScope + Dispatchers.IO) {
-            repository.getAuthToken()
+            val tt = repository.getAuthToken()
+
         }
     }
 

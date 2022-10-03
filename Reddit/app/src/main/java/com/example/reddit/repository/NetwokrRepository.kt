@@ -19,12 +19,12 @@ class NetwokrRepository @Inject constructor(
 
     suspend fun getAuthToken(): AuthResponse {
 //        val authBody = AuthBody()
-        val response = AccessToken.getLL(Utils.getAuthCode(application)).execute()
-        if (response.isSuccessful) {
-            val jsonData: String = response.body()!!.string()
-            val jobject = JSONObject(jsonData)
-            Timber.d("object: ${jobject.get("access_token")}")
-        }
+//        val response = AccessToken.getLL(Utils.getAuthCode(application)).execute()
+//        if (response.isSuccessful) {
+//            val jsonData: String = response.body()!!.string()
+//            val jobject = JSONObject(jsonData)
+//            Timber.d("object: ${jobject.get("access_token")}")
+//        }
         return tokenApi.getAuthToken(MultipartBody.FORM, Utils.getAuthCode(application),
             "authorization_code",
             Utils.REDIRECT_URI)
