@@ -7,6 +7,7 @@ object Utils {
     private const val ONBOARD_VALUE_KEY = "onboard passed"
     const val APP_SHARED_PREF_KEY = "app shared pref"
     private const val AUTH_CODE_KEY = "auth code key"
+    private const val TOKEN_KEY = "token key"
     const val BASE_URL = "https://www.reddit.com"
     const val CLIENT_ID = "48dA8yDoFftCi7jHnmSj3Q"
     const val REDIRECT_URI = "http://www.example.com/unused/redirect/uri"
@@ -39,4 +40,14 @@ object Utils {
             .getString(AUTH_CODE_KEY, "") ?: ""
     }
 
+    fun setAccessToken(context: Context, token: String) {
+        context.saveField {
+            putString(TOKEN_KEY, token)
+        }
+    }
+
+    fun getAccessToken(context:Context):String{
+        return context.getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
+            .getString(TOKEN_KEY, "") ?: ""
+    }
 }

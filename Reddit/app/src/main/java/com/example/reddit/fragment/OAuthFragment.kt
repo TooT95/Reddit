@@ -7,12 +7,14 @@ import android.view.View
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.reddit.R
 import com.example.reddit.databinding.FragmentOauthBinding
 import com.example.reddit.utils.Utils
 import com.example.reddit.viewmodel.NetworkViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::inflate) {
@@ -30,8 +32,8 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
     }
 
     private fun observeViewModel() {
-        viewModel.authResponseLiveData.observe(viewLifecycleOwner) {
-            toast(it.access_token.toString())
+        viewModel.accessTokenGotLiveData.observe(viewLifecycleOwner) {
+            if (it) findNavController().navigate(R.id.action_OAuthFragment_to_mainFragment)
         }
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
     }
@@ -40,14 +42,14 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
     private fun auth() {
 
         val baseUrl = Utils.oAuthUrl
-        binding.webv.also {
-            it.settings.javaScriptEnabled = true
-            it.loadUrl(baseUrl)
-            it.webViewClient = object : WebViewClient() {
+        binding.webv.also { webView ->
+            webView.settings.javaScriptEnabled = true
+            webView.loadUrl(baseUrl)
+            webView.webViewClient = object : WebViewClient() {
 
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
-                    request: WebResourceRequest?
+                    request: WebResourceRequest?,
                 ): Boolean {
                     val url = request?.url.toString()
                     view?.loadUrl(url)
@@ -60,6 +62,7 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
                         if (urlPageFinished.contains("?code=") || urlPageFinished.contains("&code")) {
                             val authCode = Uri.parse(url).getQueryParameter("code") ?: ""
                             Utils.setAuthCode(requireContext(), authCode)
+                            webView.isVisible = false
                             viewModel.getAuthToken()
                         } else if (urlPageFinished.contains("error=access_denied")) {
                             Utils.setAuthCode(requireContext(), "")

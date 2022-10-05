@@ -5,19 +5,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.reddit.model.AuthResponse
-import com.example.reddit.repository.NetwokrRepository
+import com.example.reddit.repository.NetworkRepository
 import com.example.reddit.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
 class NetworkViewModel @Inject constructor(
-    private val repository: NetwokrRepository,
+    private val repository: NetworkRepository,
     application: Application,
 ) : AndroidViewModel(application) {
 
@@ -25,19 +23,18 @@ class NetworkViewModel @Inject constructor(
         toastMutableLiveData.postValue("Context:$coroutineContext message:${throwable.localizedMessage}")
     }
 
-    private val authResponseMutableLiveData = MutableLiveData<AuthResponse>()
+    private val accessTokenGotMutableLiveData = MutableLiveData<Boolean>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
 
-    val authResponseLiveData: LiveData<AuthResponse>
-        get() = authResponseMutableLiveData
+    val accessTokenGotLiveData: LiveData<Boolean>
+        get() = accessTokenGotMutableLiveData
 
     val toastLiveData: LiveData<String>
         get() = toastMutableLiveData
 
     fun getAuthToken() {
         viewModelScope.launch(errorScope + Dispatchers.IO) {
-            val tt = repository.getAuthToken()
-
+            accessTokenGotMutableLiveData.postValue(repository.authTokenGot())
         }
     }
 

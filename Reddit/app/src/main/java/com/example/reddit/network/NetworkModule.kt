@@ -30,9 +30,4 @@ class NetworkModule {
             .build()
     }
 
-    @Provides
-    fun tokenApi(retrofit: Retrofit): TokenApi {
-        return retrofit.create(TokenApi::class.java)
-    }
-
 }

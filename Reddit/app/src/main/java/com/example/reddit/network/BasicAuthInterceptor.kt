@@ -11,6 +11,5 @@ class BasicAuthInterceptor : Interceptor {
         var request = chain.request()
         request = request.newBuilder().header("Authorization", credentials).build()
         return chain.proceed(request)
-
     }
 }
