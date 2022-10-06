@@ -33,7 +33,9 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
 
     private fun observeViewModel() {
         viewModel.accessTokenGotLiveData.observe(viewLifecycleOwner) {
-            if (it) findNavController().navigate(R.id.action_OAuthFragment_to_mainFragment)
+            if (it) {
+                findNavController().navigate(R.id.action_OAuthFragment_to_mainFragment)
+            }
         }
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
     }
