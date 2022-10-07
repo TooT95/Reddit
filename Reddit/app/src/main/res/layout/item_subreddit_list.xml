@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/sr_list_item_card_bottom_margin"
+    android:elevation="@dimen/default_match_parent"
+    app:cardCornerRadius="@dimen/margin_10">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_name"
+            style="@style/TextSub14sp"
+            android:layout_width="@dimen/default_match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/sr_list_txt_start_margin"
+            android:layout_marginTop="@dimen/sr_list_txt_top_margin"
+            android:layout_marginEnd="@dimen/sr_list_txt_end_margin"
+            android:layout_marginBottom="@dimen/sr_list_txt_bottom_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_subscribe"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@tools:sample/last_names" />
+
+        <ImageView
+            android:id="@+id/iv_subscribe"
+            android:layout_width="@dimen/sr_list_iv_width"
+            android:layout_height="@dimen/sr_list_iv_height"
+            android:layout_marginEnd="@dimen/sr_list_iv_end_margin"
+            android:contentDescription="@string/text_search"
+            android:src="@drawable/ic_notsubscriber"
+            app:layout_constraintBottom_toBottomOf="@id/txt_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/txt_name" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_listing_list"
+            android:layout_width="@dimen/default_match_parent"
+            android:layout_height="@dimen/default_match_parent"
+            android:layout_marginTop="@dimen/margin_10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

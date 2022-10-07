@@ -9,7 +9,11 @@
         android:id="@+id/subredditListFragment"
         android:name="com.example.reddit.fragment.SubredditListFragment"
         android:label="SubredditListFragment"
-        tools:layout="@layout/fragment_subreddit_list" />
+        tools:layout="@layout/fragment_subreddit_list">
+        <action
+            android:id="@+id/action_subredditListFragment_to_subredditListingFragment"
+            app:destination="@id/subredditListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/likedSubredditFragment"
         android:name="com.example.reddit.fragment.LikedSubredditFragment"
@@ -20,4 +24,9 @@
         android:name="com.example.reddit.fragment.AccountFragment"
         android:label="AccountFragment"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/subredditListingFragment"
+        android:name="com.example.reddit.fragment.SubredditListingFragment"
+        android:label="SubredditListingFragment"
+        tools:layout="@layout/fragment_subreddit_listing" />
 </navigation>

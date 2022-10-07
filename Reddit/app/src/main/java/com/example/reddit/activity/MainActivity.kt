@@ -28,13 +28,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showMainNavGraph(show: Boolean) {
-        binding.fragmentauth.isVisible = !show
-        binding.fragment.isVisible = show
         binding.bnavMain.isVisible = show
         if (show) {
-            val hostFragment = supportFragmentManager.findFragmentById(R.id.fragment)
+            val hostFragment = supportFragmentManager.findFragmentById(R.id.fragmentauth)
             if (hostFragment != null) {
                 val navController = hostFragment.findNavController()
+                navController.setGraph(R.navigation.nav_graph)
                 setupWithNavController(binding.bnavMain, navController)
             }
         }

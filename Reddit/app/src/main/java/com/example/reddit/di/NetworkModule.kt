@@ -1,5 +1,7 @@
-package com.example.reddit.network
+package com.example.reddit.di
 
+import com.example.reddit.network.BasicAuthInterceptor
+import com.example.reddit.network.SubredditApi
 import com.example.reddit.utils.Utils
 import dagger.Module
 import dagger.Provides
@@ -10,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)

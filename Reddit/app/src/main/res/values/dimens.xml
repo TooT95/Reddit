@@ -24,5 +24,13 @@
     <dimen name="default_main_fragment_bottom_margin">12dp</dimen>
 
     <dimen name="margin_10">10dp</dimen>
+    <dimen name="sr_list_item_card_bottom_margin">11dp</dimen>
+    <dimen name="sr_list_txt_start_margin">12dp</dimen>
+    <dimen name="sr_list_txt_top_margin">17dp</dimen>
+    <dimen name="sr_list_txt_end_margin">27dp</dimen>
+    <dimen name="sr_list_txt_bottom_margin">21dp</dimen>
+    <dimen name="sr_list_iv_width">18dp</dimen>
+    <dimen name="sr_list_iv_height">21dp</dimen>
+    <dimen name="sr_list_iv_end_margin">22dp</dimen>
 
 </resources>

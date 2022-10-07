@@ -21,23 +21,29 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
 
     private val scope = CoroutineScope(Dispatchers.IO)
 
-    suspend fun getSubredditList(): List<Subreddit> {
+    suspend fun getSubredditList(method: String): List<Subreddit> {
         return suspendCoroutine { continuation ->
             scope.launch {
-                subApi.getNewList(null, 20, 1).enqueue(object : Callback<ResponseBody> {
-                    override fun onResponse(
-                        call: Call<ResponseBody>,
-                        response: Response<ResponseBody>,
-                    ) {
-                        val responseString = response.body()?.string().orEmpty()
-                        continuation.resume(getSubListParsedJson(responseString))
-                    }
+                subApi.apply {
+                    if (method == METHOD_NEW_SUBREDDIT_LIST) {
+                        getNewList()
+                    } else {
+                        getPopularList()
+                    }.enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>,
+                        ) {
+                            val responseString = response.body()?.string().orEmpty()
+                            continuation.resume(getSubListParsedJson(responseString))
+                        }
 
-                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        continuation.resumeWithException(t)
-                    }
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            continuation.resumeWithException(t)
+                        }
 
-                })
+                    })
+                }
             }
         }
     }
@@ -47,13 +53,23 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
         val jsonObject = JSONObject(jsonString)
         val jsonDataObject = jsonObject.getJSONObject("data")
         val childrenObjectList = jsonDataObject.getJSONArray("children")
-        for (item in 1..childrenObjectList.length()) {
-            val currentItemJson = childrenObjectList.getJSONObject(0)
+
+        for (item in 0 until childrenObjectList.length()) {
+            val currentItemJson = childrenObjectList.getJSONObject(item).getJSONObject("data")
+
+            val id = currentItemJson.getString(Subreddit.COL_ID)
             val displayName = currentItemJson.getString(Subreddit.COL_DISPLAY_NAME)
-            val userSubscriber = currentItemJson.getBoolean(Subreddit.COL_USER_SUBSCRIBER)
+            val title = currentItemJson.getString(Subreddit.COL_TITLE)
             val name = currentItemJson.getString(Subreddit.COL_NAME)
-            subredditList.add(Subreddit(displayName, userSubscriber, name))
+            val isFollower = currentItemJson.getBoolean(Subreddit.COL_USER_SUBSCRIBER)
+
+            subredditList.add(Subreddit(id, displayName, title, isFollower, name))
         }
-        return emptyList()
+        return subredditList
+    }
+
+    companion object {
+        const val METHOD_NEW_SUBREDDIT_LIST = "new"
+        const val METHOD_POPULAR_SUBREDDIT_LIST = "new"
     }
 }
