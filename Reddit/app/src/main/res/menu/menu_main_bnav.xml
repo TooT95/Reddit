@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_sub"
+        android:icon="@drawable/ic_sub_list"
+        android:title="@string/text_sublist" />
+    <item
+        android:id="@+id/item_liked"
+        android:icon="@drawable/ic_liked"
+        android:title="@string/text_sublist" />
+    <item
+        android:id="@+id/item_account"
+        android:icon="@drawable/ic_account"
+        android:title="@string/text_sublist" />
+
+
+</menu>

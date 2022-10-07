@@ -11,4 +11,5 @@
     <color name="toolbar_title">#5222D0</color>
 
     <color name="black">#000000</color>
+    <color name="color_unselected">#764BE9</color>
 </resources>

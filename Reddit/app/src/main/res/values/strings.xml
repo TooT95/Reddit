@@ -4,6 +4,8 @@
     <string name="text_ready">Готово</string>
     <string name="text_about_app">Найди единомышленников с Humblr</string>
     <string name="text_auth">Войти</string>
+    <string name="text_search">Search</string>
+    <string name="text_sublist">SubList</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>

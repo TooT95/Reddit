@@ -17,4 +17,10 @@
     <dimen name="dot_spacing">8dp</dimen>
     <dimen name="dot_stroke_width">1dp</dimen>
 
+    <dimen name="default_main_fragment_start_end_margin">30dp</dimen>
+    <dimen name="default_main_fragment_top_margin">27dp</dimen>
+    <dimen name="default_search_radius">50dp</dimen>
+    <dimen name="default_search_stroke_width">2dp</dimen>
+    <dimen name="default_main_fragment_bottom_margin">12dp</dimen>
+
 </resources>
