@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_sub"
+        android:id="@+id/subredditListFragment"
         android:icon="@drawable/ic_sub_list"
         android:title="@string/text_sublist" />
     <item
-        android:id="@+id/item_liked"
+        android:id="@+id/likedSubredditFragment"
         android:icon="@drawable/ic_liked"
         android:title="@string/text_sublist" />
     <item
-        android:id="@+id/item_account"
+        android:id="@+id/accountFragment"
         android:icon="@drawable/ic_account"
         android:title="@string/text_sublist" />
 

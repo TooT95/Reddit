@@ -1,6 +1,7 @@
 package com.example.reddit.utils
 
 import android.content.Context
+import android.os.Build
 
 object Utils {
 
@@ -56,4 +57,9 @@ object Utils {
     fun getAccessToken(): String {
         return ACCESS_TOKEN
     }
+
+    fun haveM(): Boolean {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    }
+
 }

@@ -23,4 +23,6 @@
     <dimen name="default_search_stroke_width">2dp</dimen>
     <dimen name="default_main_fragment_bottom_margin">12dp</dimen>
 
+    <dimen name="margin_10">10dp</dimen>
+
 </resources>

@@ -1,34 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/layout_background">
 
-    <LinearLayout
-        android:layout_width="@dimen/default_match_parent"
-        android:layout_height="@dimen/default_match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/default_main_fragment_start_end_margin"
+        android:layout_marginTop="@dimen/default_main_fragment_top_margin"
+        android:layout_marginEnd="@dimen/default_main_fragment_start_end_margin"
+        android:layout_marginBottom="@dimen/default_main_fragment_bottom_margin"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/default_search_radius"
-            app:strokeColor="@color/primaryColor"
-            app:strokeWidth="@dimen/default_search_stroke_width">
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <SearchView
-                android:id="@+id/sv_movie_tv"
+
+        <LinearLayout
+            android:id="@+id/linear_subreddit_search"
+            android:layout_width="@dimen/default_match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:iconifiedByDefault="false"
-                android:queryHint="@string/text_search" />
+                app:cardCornerRadius="@dimen/default_search_radius"
+                app:strokeColor="@color/primaryColor"
+                app:strokeWidth="@dimen/default_search_stroke_width">
 
-        </com.google.android.material.card.MaterialCardView>
+                <SearchView
+                    android:id="@+id/sv_movie_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:iconifiedByDefault="false"
+                    android:queryHint="@string/text_search" />
 
-    </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_new_popular"
+            android:layout_width="@dimen/default_match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear_subreddit_search">
+
+            <TextView
+                android:id="@+id/txt_new_subreddit"
+                style="@style/TextOnboardWithColor14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_new"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txt_popular_subreddit"
+                style="@style/TextOnboardWithoutColor14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/text_popular"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

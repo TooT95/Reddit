@@ -6,21 +6,22 @@ import com.example.reddit.network.SubredditApi
 import com.example.reddit.utils.Utils
 import okhttp3.*
 import org.json.JSONObject
+import retrofit2.Callback
+import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
 
 class NetworkRepository @Inject constructor(
-    private val subApi:SubredditApi,
     private val application: Application,
 ) {
     suspend fun authTokenGot(): Boolean {
         val response = getToken().execute()
         if (response.isSuccessful) {
             val jsonData: String = response.body!!.string()
-            Utils.setAccessToken(application, JSONObject(jsonData).getString("access_token"))
-            val result = subApi.getNewList(null,20,1)
-            Timber.d("dist ${result.data.dist}")
+            val accessToken = JSONObject(jsonData).getString("access_token")
+            Utils.setAccessToken(application, accessToken)
+            Timber.d("accessToken $accessToken")
             return true
         }
         return false

@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.reddit.R
+import com.example.reddit.activity.MainActivity
 import com.example.reddit.databinding.FragmentOauthBinding
 import com.example.reddit.utils.Utils
 import com.example.reddit.viewmodel.NetworkViewModel
@@ -34,7 +35,8 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
     private fun observeViewModel() {
         viewModel.accessTokenGotLiveData.observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().navigate(R.id.action_OAuthFragment_to_mainFragment)
+                val activity = requireActivity() as MainActivity
+                activity.showMainNavGraph(true)
             }
         }
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
