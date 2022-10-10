@@ -13,9 +13,9 @@ class ObjectDiffUtil<T : Any> : DiffUtil.ItemCallback<T>() {
                 newItem as Subreddit
                 oldItem.id == newItem.id
             }
-            is SubredditListing.ListingVideo -> {
-                newItem as SubredditListing.ListingVideo
-                oldItem.title == newItem.title
+            is SubredditListing -> {
+                newItem as SubredditListing
+                oldItem.id == newItem.id
             }
             else -> false
         }

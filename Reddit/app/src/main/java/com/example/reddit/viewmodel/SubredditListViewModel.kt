@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.reddit.model.subreddit.Subreddit
+import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.repository.SubredditRepository
 import com.example.reddit.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,13 +26,13 @@ class SubredditListViewModel @Inject constructor(
     }
 
     private val subredditListMutableLiveData = MutableLiveData<List<Subreddit>>()
-    private val subredditListingMutableLiveData = MutableLiveData<List<Subreddit>>()
+    private val subredditListingMutableLiveData = MutableLiveData<List<SubredditListing>>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
 
     val subredditListLiveData: LiveData<List<Subreddit>>
         get() = subredditListMutableLiveData
-    val subredditListingLiveData: LiveData<List<Subreddit>>
-        get() = subredditListMutableLiveData
+    val subredditListingLiveData: LiveData<List<SubredditListing>>
+        get() = subredditListingMutableLiveData
     val toastLiveData: LiveData<String>
         get() = toastMutableLiveData
 
@@ -49,9 +50,9 @@ class SubredditListViewModel @Inject constructor(
 
     fun getSubredditListing(subredditName: String) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
-            toastMutableLiveData.postValue("Listing size: ${
-                repository.getSubredditListingList(subredditName).size.toString()
-            }")
+            subredditListingMutableLiveData.postValue(repository.getSubredditListingList(
+                subredditName))
+
         }
     }
 }

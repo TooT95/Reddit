@@ -65,6 +65,13 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
+    <style name="TextListingCommentWithColor12sp" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">serif-serif-black</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
     <style name="TextPublishedAt12sp" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="fontFamily">serif-serif-black</item>
         <item name="android:textSize">@dimen/text_size_12</item>

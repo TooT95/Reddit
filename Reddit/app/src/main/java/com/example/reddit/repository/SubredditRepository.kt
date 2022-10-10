@@ -90,6 +90,7 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
             val created = currentItemJson.getDouble(SubredditListing.COL_CREATED)
             val selfText = currentItemJson.getString(SubredditListing.COL_SELF_TEXT)
             val imageUrl = currentItemJson.getString(SubredditListing.COL_IMAGE_URl)
+            val score = currentItemJson.getInt(SubredditListing.COL_SCORE)
             when {
                 isVideo -> {
                     val mediaObject = currentItemJson.getJSONObject(SubredditListing.COL_MEDIA)
@@ -100,7 +101,8 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
                         commentNum,
                         author,
                         created,
-                        videoUrl))
+                        videoUrl,
+                        score))
                 }
                 imageUrl.contains("self") -> {
                     subredditListing.add(SubredditListing.ListingPost(id,
@@ -108,15 +110,31 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
                         commentNum,
                         selfText,
                         created,
-                        author))
+                        author,
+                        score))
+                }
+                imageUrl.contains("default") -> {
+                    subredditListing.add(SubredditListing.ListingPost(id,
+                        title,
+                        commentNum,
+                        title,
+                        created,
+                        author,
+                        score))
                 }
                 else -> {
+                    val width = currentItemJson.getInt(SubredditListing.COL_IMAGE_WIDTH)
+                    val height = currentItemJson.getInt(SubredditListing.COL_IMAGE_HEIGHT)
+                    val imageUrlCommon =currentItemJson.getString(SubredditListing.COL_IMAGE_URl_COMMON)
                     subredditListing.add(SubredditListing.ListingImage(id,
                         title,
                         commentNum,
                         author,
                         created,
-                        imageUrl))
+                        imageUrlCommon,
+                        score,
+                        width,
+                        height))
                 }
             }
 

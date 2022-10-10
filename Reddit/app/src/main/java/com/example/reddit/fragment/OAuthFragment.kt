@@ -25,6 +25,7 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
+        //showLoading(true)
     }
 
     private fun initUI() {
@@ -44,13 +45,12 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun auth() {
-
         val baseUrl = Utils.oAuthUrl
         binding.webv.also { webView ->
             webView.settings.javaScriptEnabled = true
             webView.loadUrl(baseUrl)
+            showLoading(false)
             webView.webViewClient = object : WebViewClient() {
-
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
                     request: WebResourceRequest?,
@@ -66,15 +66,21 @@ class OAuthFragment : BaseFragment<FragmentOauthBinding>(FragmentOauthBinding::i
                         if (urlPageFinished.contains("?code=") || urlPageFinished.contains("&code")) {
                             val authCode = Uri.parse(url).getQueryParameter("code") ?: ""
                             Utils.setAuthCode(requireContext(), authCode)
-                            webView.isVisible = false
                             viewModel.getAuthToken()
+                            showLoading(true)
                         } else if (urlPageFinished.contains("error=access_denied")) {
                             Utils.setAuthCode(requireContext(), "")
                         }
                     }
                 }
             }
+        }
+    }
 
+    private fun showLoading(show: Boolean) {
+        with(binding) {
+            pbLoading.isVisible = show
+            webv.isVisible = !show
         }
     }
 }

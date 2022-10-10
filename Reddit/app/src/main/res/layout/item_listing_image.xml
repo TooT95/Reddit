@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/default_margin">
 
         <ImageView
             android:id="@+id/iv_subscriber"
@@ -41,7 +42,7 @@
             tools:text="@tools:sample/last_names" />
 
         <ImageView
-            android:id="@+id/iv_self_text"
+            android:id="@+id/iv_place_holder"
             style="@style/TextSelfText14sp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/iv_listing_image_video"
@@ -62,18 +63,29 @@
             android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_self_text"
+            app:layout_constraintTop_toBottomOf="@id/iv_place_holder"
             tools:text="@tools:sample/last_names" />
 
         <TextView
             android:id="@+id/txt_comment_num"
-            style="@style/TextPublishedAt12sp"
+            style="@style/TextListingCommentWithColor12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txt_title"
             tools:text="@tools:sample/last_names" />
+
+        <ImageView
+            android:id="@+id/iv_comment_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_author_subscribe_image"
+            android:contentDescription="@string/text_search"
+            android:src="@drawable/ic_comment_sign"
+            app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
+            app:layout_constraintStart_toEndOf="@id/txt_comment_num"
+            app:layout_constraintTop_toTopOf="@id/txt_comment_num" />
 
         <TextView
             android:id="@+id/txt_like_num"

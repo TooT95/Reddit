@@ -69,4 +69,8 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-fragment:1.0.0")
 
     implementation "com.squareup.okhttp3:logging-interceptor:4.8.0"
+
+    // Glide implementation
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 }
