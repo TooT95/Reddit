@@ -6,6 +6,8 @@
     <dimen name="margin_image_text_onboard">48dp</dimen>
     <dimen name="iv_onboard_height">280dp</dimen>
 
+    <dimen name="iv_listing_image_video">200dp</dimen>
+
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
@@ -32,5 +34,9 @@
     <dimen name="sr_list_iv_width">18dp</dimen>
     <dimen name="sr_list_iv_height">21dp</dimen>
     <dimen name="sr_list_iv_end_margin">22dp</dimen>
+    <dimen name="margin_sr_listing_start_end">9dp</dimen>
+    <dimen name="corner_radius_post">5dp</dimen>
+    <dimen name="margin_author_subscribe_image">3dp</dimen>
+
 
 </resources>

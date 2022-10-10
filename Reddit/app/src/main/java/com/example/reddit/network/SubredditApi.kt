@@ -15,7 +15,7 @@ interface SubredditApi {
     fun getPopularList(): Call<ResponseBody>
 
     @GET("/r/{sr}/hot.json")
-    fun getPopularList(
+    fun getSrListingList(
         @Path("sr") srName: String,
         @Query("limit") limit: Int,
         @Query("after") after: String?,

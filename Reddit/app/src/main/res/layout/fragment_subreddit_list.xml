@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/txt_new_subreddit"
-                style="@style/TextOnboardWithColor14sp"
+                style="@style/TextSubredditListWithColor14sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -66,7 +66,7 @@
 
             <TextView
                 android:id="@+id/txt_popular_subreddit"
-                style="@style/TextOnboardWithoutColor14sp"
+                style="@style/TextSubredditListWithoutColor14sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

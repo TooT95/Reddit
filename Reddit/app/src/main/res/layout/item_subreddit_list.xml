@@ -38,17 +38,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/txt_name" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_listing_list"
-            android:layout_width="@dimen/default_match_parent"
-            android:layout_height="@dimen/default_match_parent"
-            android:layout_marginTop="@dimen/margin_10"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_name" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

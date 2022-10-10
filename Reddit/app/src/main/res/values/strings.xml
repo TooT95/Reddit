@@ -8,6 +8,7 @@
     <string name="text_sublist">SubList</string>
     <string name="text_new">Новое</string>
     <string name="text_popular">Популярное</string>
+    <string name="text_share">Share</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>

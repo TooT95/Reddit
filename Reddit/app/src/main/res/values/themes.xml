@@ -50,7 +50,7 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <style name="TextOnboardWithColor14sp" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextSubredditListWithColor14sp" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">serif-serif-black</item>
@@ -58,7 +58,24 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
-    <style name="TextOnboardWithoutColor14sp" parent="TextAppearance.MaterialComponents.Headline3">
+    <style name="TextListingAuthorWithColor14sp" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">serif-serif-black</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="TextPublishedAt12sp" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">serif-serif-black</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+    </style>
+
+    <style name="TextSelfText14sp" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">serif-serif-black</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="TextSubredditListWithoutColor14sp" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>

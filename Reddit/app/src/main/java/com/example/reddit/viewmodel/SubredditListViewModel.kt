@@ -49,7 +49,9 @@ class SubredditListViewModel @Inject constructor(
 
     fun getSubredditListing(subredditName: String) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
-
+            toastMutableLiveData.postValue("Listing size: ${
+                repository.getSubredditListingList(subredditName).size.toString()
+            }")
         }
     }
 }

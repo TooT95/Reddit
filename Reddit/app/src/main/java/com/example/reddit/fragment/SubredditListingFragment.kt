@@ -3,7 +3,9 @@ package com.example.reddit.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.reddit.R
 import com.example.reddit.databinding.FragmentSubredditListingBinding
+import com.example.reddit.utils.Utils
 import com.example.reddit.viewmodel.SubredditListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +26,10 @@ class SubredditListingFragment :
         }
         with(binding.inToolbar.toolbar) {
             title = srName
+            if (Utils.haveM()) {
+                setTitleTextColor(resources.getColor(R.color.primaryTextColor,
+                    resources.newTheme()))
+            }
             setNavigationOnClickListener {
                 activity?.onBackPressed()
             }

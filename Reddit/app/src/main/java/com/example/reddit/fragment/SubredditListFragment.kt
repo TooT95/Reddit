@@ -90,8 +90,8 @@ class SubredditListFragment :
 
     private fun setUnsetTextApperance(setTextView: TextView, unsetTextView: TextView) {
         if (Utils.haveM()) {
-            setTextView.setTextAppearance(R.style.TextOnboardWithColor14sp)
-            unsetTextView.setTextAppearance(R.style.TextOnboardWithoutColor14sp)
+            setTextView.setTextAppearance(R.style.TextSubredditListWithColor14sp)
+            unsetTextView.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
         }
     }
 
