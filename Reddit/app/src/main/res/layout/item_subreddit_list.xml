@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/sr_list_txt_top_margin"
             android:layout_marginEnd="@dimen/sr_list_txt_end_margin"
             android:layout_marginBottom="@dimen/sr_list_txt_bottom_margin"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/iv_header_img"
             app:layout_constraintEnd_toStartOf="@id/iv_subscribe"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +37,20 @@
             app:layout_constraintBottom_toBottomOf="@id/txt_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/txt_name" />
+
+        <ImageView
+            android:id="@+id/iv_header_img"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:contentDescription="@string/text_search"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_name"
+            tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

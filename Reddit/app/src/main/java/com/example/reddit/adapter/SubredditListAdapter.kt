@@ -2,18 +2,21 @@ package com.example.reddit.adapter
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
 import com.example.reddit.databinding.ItemSubredditListBinding
+import com.example.reddit.extension.glideImageWithParams
 import com.example.reddit.extension.inflateLayout
+import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.Subreddit
 
-class SubredditListAdapter(private val onItemClicked: (itemId: Int) -> Unit) :
+class SubredditListAdapter(private val itemClickListener: (item: Subreddit, listenerType: ListenerType) -> Unit) :
     ListAdapter<Subreddit, SubredditListAdapter.SubredditListViewHolder>(ObjectDiffUtil<Subreddit>()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubredditListViewHolder {
-        return SubredditListViewHolder(onItemClicked,
+        return SubredditListViewHolder(itemClickListener,
             parent.inflateLayout(R.layout.item_subreddit_list))
     }
 
@@ -23,26 +26,31 @@ class SubredditListAdapter(private val onItemClicked: (itemId: Int) -> Unit) :
 
     override fun getItemCount(): Int = currentList.size
 
-    class SubredditListViewHolder(private val onItemClicked: (itemId: Int) -> Unit, view: View) :
+    class SubredditListViewHolder(
+        private val itemClickListener: (item: Subreddit, listenerType: ListenerType) -> Unit,
+        view: View,
+    ) :
         RecyclerView.ViewHolder(view) {
 
         private val itemBinding = ItemSubredditListBinding.bind(view)
 
-        init {
-            itemView.setOnClickListener {
-                onItemClicked(adapterPosition)
-            }
-        }
-
-        private fun initAdapter() {
-
-        }
-
         fun onBind(subreddit: Subreddit) {
+            itemView.setOnClickListener {
+                itemClickListener(subreddit, ListenerType.OPEN_SUBREDDIT)
+            }
             with(itemBinding) {
                 txtName.text = subreddit.title
+                ivHeaderImg.isVisible = subreddit.headerImage.isNotEmpty()
+                if (subreddit.headerImage.isNotEmpty()) {
+                    ivHeaderImg.glideImageWithParams(itemView, subreddit.headerImage)
+                }
                 if (subreddit.userSubscriber) {
                     ivSubscribe.setImageResource(R.drawable.ic_subscriber)
+                } else {
+                    ivSubscribe.setImageResource(R.drawable.ic_notsubscriber)
+                }
+                ivSubscribe.setOnClickListener {
+                    itemClickListener(subreddit, ListenerType.SUBSCRIBE)
                 }
             }
         }

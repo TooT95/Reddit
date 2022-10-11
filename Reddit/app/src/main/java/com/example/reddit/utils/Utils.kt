@@ -23,6 +23,9 @@ object Utils {
     const val COL_DATA_API = "data"
     const val COL_CHILDREN_API = "children"
 
+    var SUB_AFTER = ""
+    var SUB_LISTING_AFTER = ""
+
     fun onboardPassed(context: Context): Boolean {
         return context.getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
             .getBoolean(ONBOARD_VALUE_KEY, false)

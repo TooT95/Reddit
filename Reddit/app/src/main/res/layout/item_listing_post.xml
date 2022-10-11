@@ -53,13 +53,24 @@
             tools:text="@tools:sample/last_names" />
 
         <TextView
+            android:id="@+id/txt_title"
+            style="@style/TextSelfText14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_self_text"
+            tools:text="@tools:sample/last_names" />
+
+        <TextView
             android:id="@+id/txt_comment_num"
             style="@style/TextListingCommentWithColor12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_self_text"
+            app:layout_constraintTop_toBottomOf="@id/txt_title"
             tools:text="@tools:sample/last_names" />
 
         <ImageView
@@ -74,17 +85,6 @@
             app:layout_constraintTop_toTopOf="@id/txt_comment_num" />
 
         <TextView
-            android:id="@+id/txt_like_num"
-            style="@style/TextPublishedAt12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_author_subscribe_image"
-            app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
-            app:layout_constraintEnd_toStartOf="@id/iv_like"
-            app:layout_constraintTop_toTopOf="@id/txt_comment_num"
-            tools:text="@tools:sample/last_names" />
-
-        <TextView
             android:id="@+id/txt_share"
             style="@style/TextPublishedAt12sp"
             android:layout_width="wrap_content"
@@ -92,19 +92,36 @@
             android:layout_marginEnd="@dimen/sr_list_iv_width"
             android:text="@string/text_share"
             app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
-            app:layout_constraintEnd_toStartOf="@id/txt_like_num"
+            app:layout_constraintEnd_toStartOf="@id/linear_save"
             app:layout_constraintTop_toTopOf="@id/txt_comment_num" />
 
-        <ImageView
-            android:id="@+id/iv_like"
+        <LinearLayout
+            android:id="@+id/linear_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/text_search"
-            android:src="@drawable/ic_like"
             app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/txt_comment_num" />
+            app:layout_constraintTop_toTopOf="@id/txt_comment_num">
 
+            <ImageButton
+                android:id="@+id/iv_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryTextColor"
+                android:contentDescription="@string/text_search"
+                android:src="@drawable/ic_save_comment"
+                app:tint="@color/gray_icon" />
+
+            <ImageButton
+                android:id="@+id/iv_un_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primaryTextColor"
+                android:contentDescription="@string/text_search"
+                android:src="@drawable/ic_save_comment"
+                app:tint="@color/saved_icon" />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,8 @@
 package com.example.reddit.di
 
 import com.example.reddit.network.SubredditApi
+import com.example.reddit.network.SubredditListingApi
+import com.example.reddit.repository.SubredditListingRepository
 import com.example.reddit.repository.SubredditRepository
 import dagger.Module
 import dagger.Provides
@@ -14,6 +16,11 @@ class RepositoryModule {
     @Provides
     fun provideSubredditRepository(subredditApi: SubredditApi): SubredditRepository {
         return SubredditRepository(subredditApi)
+    }
+
+    @Provides
+    fun provideSubredditListingRepository(subredditApi: SubredditListingApi): SubredditListingRepository {
+        return SubredditListingRepository(subredditApi)
     }
 
 }

@@ -5,22 +5,25 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
 import com.example.reddit.adapter.SubredditListingAdapter
 import com.example.reddit.databinding.FragmentSubredditListingBinding
+import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.utils.Utils
-import com.example.reddit.viewmodel.SubredditListViewModel
+import com.example.reddit.viewmodel.SubredditListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SubredditListingFragment :
     BaseFragment<FragmentSubredditListingBinding>(FragmentSubredditListingBinding::inflate) {
 
-    private val viewModel: SubredditListViewModel by viewModels()
+    private val viewModel: SubredditListingViewModel by viewModels()
     private var srName = ""
+    private var isLoading = false
     private val listingAdapter: SubredditListingAdapter by lazy {
-        SubredditListingAdapter()
+        SubredditListingAdapter(::onItemClickListener)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +43,18 @@ class SubredditListingFragment :
 
     private fun observeViewModels() {
         viewModel.subredditListingLiveData.observe(viewLifecycleOwner, ::refreshSrListing)
+        viewModel.subredditNewListingLiveData.observe(viewLifecycleOwner, ::refreshNewSrListing)
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
     }
 
     private fun refreshSrListing(srList: List<SubredditListing>) {
         listingAdapter.submitList(srList)
         showLoading(false)
+    }
+
+    private fun refreshNewSrListing(srList: List<SubredditListing>) {
+        listingAdapter.submitList(listingAdapter.currentList + srList)
+        showBottomLoading(false)
     }
 
     private fun initUI() {
@@ -63,7 +72,25 @@ class SubredditListingFragment :
             adapter = listingAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val layManager = layoutManager as LinearLayoutManager
+                    if (!isLoading && layManager.findLastCompletelyVisibleItemPosition() == (listingAdapter.currentList.size - 1)
+                        && listingAdapter.currentList.size > 10
+                    ) {
+                        loadMore()
+                        showBottomLoading(true)
+                    }
+                }
+
+            })
         }
+    }
+
+    private fun loadMore() {
+        viewModel.getSubredditListing(srName, Utils.SUB_LISTING_AFTER, true)
+        Utils.SUB_LISTING_AFTER = ""
     }
 
     private fun showLoading(show: Boolean) {
@@ -73,8 +100,19 @@ class SubredditListingFragment :
         }
     }
 
+    private fun showBottomLoading(show: Boolean) {
+        binding.pbLoadingBottom.isVisible = show
+        isLoading = show
+    }
+
     companion object {
         const val KEY_SUBREDDIT_NAME = "subreddit name"
+    }
+
+    private fun onItemClickListener(item: SubredditListing, listenerType: ListenerType) {
+        if (listenerType == ListenerType.SAVE) {
+
+        }
     }
 
 }

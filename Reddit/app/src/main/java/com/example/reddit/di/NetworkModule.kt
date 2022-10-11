@@ -2,6 +2,7 @@ package com.example.reddit.di
 
 import com.example.reddit.network.BasicAuthInterceptor
 import com.example.reddit.network.SubredditApi
+import com.example.reddit.network.SubredditListingApi
 import com.example.reddit.utils.Utils
 import dagger.Module
 import dagger.Provides
@@ -37,6 +38,11 @@ class NetworkModule {
 
     @Provides
     fun provideSubredditApi(retrofit: Retrofit): SubredditApi {
+        return retrofit.create()
+    }
+
+    @Provides
+    fun provideSubredditListingApi(retrofit: Retrofit): SubredditListingApi {
         return retrofit.create()
     }
 

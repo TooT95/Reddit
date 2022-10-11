@@ -26,33 +26,51 @@ class SubredditListViewModel @Inject constructor(
     }
 
     private val subredditListMutableLiveData = MutableLiveData<List<Subreddit>>()
-    private val subredditListingMutableLiveData = MutableLiveData<List<SubredditListing>>()
+    private val subredditNewListMutableLiveData = MutableLiveData<List<Subreddit>>()
+    private val subredditSubscribeMutableLiveData = SingleLiveEvent<Int?>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
 
     val subredditListLiveData: LiveData<List<Subreddit>>
         get() = subredditListMutableLiveData
-    val subredditListingLiveData: LiveData<List<SubredditListing>>
-        get() = subredditListingMutableLiveData
+    val subredditNewListLiveData: LiveData<List<Subreddit>>
+        get() = subredditNewListMutableLiveData
+    val subredditSubscribeLiveData: LiveData<Int?>
+        get() = subredditSubscribeMutableLiveData
     val toastLiveData: LiveData<String>
         get() = toastMutableLiveData
 
-    fun getNewSubredditList() {
+    fun getNewSubredditList(after: String? = null, uploadNewSr: Boolean = false) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
-            subredditListMutableLiveData.postValue(repository.getSubredditList(SubredditRepository.METHOD_NEW_SUBREDDIT_LIST))
+            if (uploadNewSr) {
+                subredditNewListMutableLiveData.postValue(repository.getSubredditList(
+                    SubredditRepository.METHOD_NEW_SUBREDDIT_LIST,
+                    after))
+            } else {
+                subredditListMutableLiveData.postValue(repository.getSubredditList(
+                    SubredditRepository.METHOD_NEW_SUBREDDIT_LIST,
+                    after))
+            }
         }
     }
 
-    fun getPopularSubredditList() {
+    fun getPopularSubredditList(after: String? = null, uploadNewSr: Boolean = false) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
-            subredditListMutableLiveData.postValue(repository.getSubredditList(SubredditRepository.METHOD_POPULAR_SUBREDDIT_LIST))
+            if (uploadNewSr) {
+                subredditNewListMutableLiveData.postValue(repository.getSubredditList(
+                    SubredditRepository.METHOD_POPULAR_SUBREDDIT_LIST,
+                    after))
+            } else {
+                subredditListMutableLiveData.postValue(repository.getSubredditList(
+                    SubredditRepository.METHOD_POPULAR_SUBREDDIT_LIST,
+                    after))
+            }
         }
     }
 
-    fun getSubredditListing(subredditName: String) {
+    fun subUnSubSubreddit(index: Int, subreddit: Subreddit) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
-            subredditListingMutableLiveData.postValue(repository.getSubredditListingList(
-                subredditName))
-
+            subredditSubscribeMutableLiveData.postValue(repository.subscribeSubreddit(
+                index, subreddit))
         }
     }
 }

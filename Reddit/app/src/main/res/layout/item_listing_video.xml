@@ -41,17 +41,14 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/last_names" />
 
-        <ImageView
-            android:id="@+id/iv_place_holder"
-            android:layout_width="match_parent"
+        <VideoView
+            android:id="@+id/videoview"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/iv_onboard_height"
             android:layout_marginTop="@dimen/default_margin"
-            android:contentDescription="@string/text_search"
-            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_author_name"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toBottomOf="@id/txt_author_name" />
 
         <TextView
             android:id="@+id/txt_title"
@@ -61,7 +58,7 @@
             android:layout_marginTop="@dimen/default_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_place_holder"
+            app:layout_constraintTop_toBottomOf="@id/videoview"
             tools:text="@tools:sample/last_names" />
 
         <TextView
