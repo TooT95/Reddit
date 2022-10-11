@@ -53,6 +53,28 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
         }
     }
 
+    suspend fun searchSubreddit(query: String, after: String? = null): List<Subreddit> {
+        return suspendCoroutine { continuation ->
+            scope.launch {
+                subApi.searchSubreddit(after, query).enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val responseString = response.body()?.string().orEmpty()
+                            continuation.resume(getSubListParsedJson(responseString))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        continuation.resumeWithException(t)
+                    }
+                })
+            }
+        }
+    }
+
     suspend fun subscribeSubreddit(
         index: Int,
         subreddit: Subreddit,

@@ -34,7 +34,7 @@
                 app:strokeWidth="@dimen/default_search_stroke_width">
 
                 <SearchView
-                    android:id="@+id/sv_movie_tv"
+                    android:id="@+id/sv_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:iconifiedByDefault="false"

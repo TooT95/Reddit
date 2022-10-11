@@ -15,6 +15,12 @@ interface SubredditApi {
     @GET(NetworkUtils.PATH_SUB_POPULAR)
     fun getPopularList(@Query(NetworkUtils.QUERY_AFTER) after: String?): Call<ResponseBody>
 
+    @GET(NetworkUtils.PATH_SUB_SEARCH)
+    fun searchSubreddit(
+        @Query(NetworkUtils.QUERY_AFTER) after: String?,
+        @Query(NetworkUtils.QUERY_SEARCH) q: String,
+    ): Call<ResponseBody>
+
     @POST(NetworkUtils.PATH_SUBREDDIT_SUBSCRIBE)
     fun subUnsubSubreddit(
         @Query(NetworkUtils.QUERY_SUBREDDIT_PREFIXED_NAME) dName: String,

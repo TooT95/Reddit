@@ -1,10 +1,8 @@
 package com.example.reddit.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.reddit.extension.changeFlow
 import com.example.reddit.model.subreddit.Subreddit
 import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.repository.SubredditRepository
@@ -12,6 +10,7 @@ import com.example.reddit.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,12 +25,15 @@ class SubredditListViewModel @Inject constructor(
     }
 
     private val subredditListMutableLiveData = MutableLiveData<List<Subreddit>>()
+    private val subredditSearchListMutableLiveData = MutableLiveData<List<Subreddit>?>()
     private val subredditNewListMutableLiveData = MutableLiveData<List<Subreddit>>()
     private val subredditSubscribeMutableLiveData = SingleLiveEvent<Int?>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
 
     val subredditListLiveData: LiveData<List<Subreddit>>
         get() = subredditListMutableLiveData
+    val subredditSearchListLiveData: LiveData<List<Subreddit>?>
+        get() = subredditSearchListMutableLiveData
     val subredditNewListLiveData: LiveData<List<Subreddit>>
         get() = subredditNewListMutableLiveData
     val subredditSubscribeLiveData: LiveData<Int?>
@@ -71,6 +73,30 @@ class SubredditListViewModel @Inject constructor(
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
             subredditSubscribeMutableLiveData.postValue(repository.subscribeSubreddit(
                 index, subreddit))
+        }
+    }
+
+    fun searchSubreddit(
+        changeFlow: Flow<String?>,
+    ) {
+        viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
+            changeFlow
+                .debounce(500)
+                .distinctUntilChanged()
+                .mapLatest {
+                    if (it == null) {
+                        null
+                    } else {
+                        if (it.isNotEmpty()) {
+                            repository.searchSubreddit(it)
+                        } else {
+                            emptyList()
+                        }
+                    }
+                }
+                .collect {
+                    subredditSearchListMutableLiveData.postValue(it)
+                }
         }
     }
 }

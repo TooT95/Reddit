@@ -2,19 +2,23 @@ package com.example.reddit.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
 import com.example.reddit.adapter.SubredditListAdapter
 import com.example.reddit.databinding.FragmentSubredditListBinding
+import com.example.reddit.extension.changeFlow
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.Subreddit
 import com.example.reddit.utils.Utils
 import com.example.reddit.viewmodel.SubredditListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.*
 
 @AndroidEntryPoint
 class SubredditListFragment :
@@ -22,6 +26,7 @@ class SubredditListFragment :
 
     private var isNew = true
     private var isLoading = false
+    private var searched = false
     private val viewModel: SubredditListViewModel by viewModels()
     private val srListAdapter: SubredditListAdapter by lazy {
         SubredditListAdapter(::itemClickListener)
@@ -40,30 +45,51 @@ class SubredditListFragment :
     }
 
     private fun observeViewModels() {
-        viewModel.subredditListLiveData.observe(viewLifecycleOwner) {
-            srListAdapter.submitList(it)
-            showPbLoading(false)
+        viewModel.subredditListLiveData.observe(viewLifecycleOwner, ::refreshSubreddit)
+        viewModel.subredditNewListLiveData.observe(viewLifecycleOwner, ::uploadSubreddit)
+        viewModel.subredditSearchListLiveData.observe(viewLifecycleOwner, ::searchSubreddit)
+        viewModel.subredditSubscribeLiveData.observe(viewLifecycleOwner, ::subscribeSubreddit)
+        viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
+    }
+
+    private fun subscribeSubreddit(index: Int?) {
+        index?.let {
+            val item = srListAdapter.currentList[it]
+            item.userSubscriber =
+                !item.userSubscriber
+            srListAdapter.notifyItemChanged(it)
+            toast("${if (item.userSubscriber) "Subscribed" else "Unsubscribed"} to ${item.title}")
         }
-        viewModel.subredditNewListLiveData.observe(viewLifecycleOwner) {
-            srListAdapter.submitList(srListAdapter.currentList + it)
-            showBottomLoading(false)
-        }
-        viewModel.subredditSubscribeLiveData.observe(viewLifecycleOwner) { index ->
-            index?.let {
-                val item = srListAdapter.currentList[it]
-                item.userSubscriber =
-                    !item.userSubscriber
-                srListAdapter.notifyItemChanged(it)
-                toast("${if (item.userSubscriber) "Subscribed" else "Unsubscribed"} to ${item.title}")
+
+    }
+
+    private fun refreshSubreddit(srList: List<Subreddit>) {
+        srListAdapter.submitList(srList)
+        showPbLoading(false)
+    }
+
+    private fun searchSubreddit(srList: List<Subreddit>?) {
+        if (srList == null) {
+            viewModel.getNewSubredditList()
+        } else {
+            if (srList.isNotEmpty()) {
+                srListAdapter.submitList(srList)
+                showPbLoading(false)
             }
         }
-        viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
+    }
+
+    private fun uploadSubreddit(srList: List<Subreddit>) {
+        srListAdapter.submitList(srListAdapter.currentList + srList)
+        showBottomLoading(false)
     }
 
     private fun initUI() {
         showPbLoading(true)
         initNewPopularListener()
         setAdapter()
+
+        viewModel.searchSubreddit(binding.svSearch.changeFlow())
     }
 
     private fun setAdapter() {
