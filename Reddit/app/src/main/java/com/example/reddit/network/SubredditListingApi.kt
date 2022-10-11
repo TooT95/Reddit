@@ -17,4 +17,11 @@ interface SubredditListingApi {
         @Query(NetworkUtils.QUERY_SUBREDDIT_DETAIL) sr_detail: Int,
     ): Call<ResponseBody>
 
+    @POST(NetworkUtils.PATH_SAVE_UNSAVE)
+    fun saveUnsavePost(
+        @Path(NetworkUtils.PATH_SAVE_ACTION) saveUnsave: String,
+        @Query(NetworkUtils.QUERY_ID) id: String,
+        @Query(NetworkUtils.QUERY_CATEGORY) category: String,
+    ): Call<ResponseBody>
+
 }

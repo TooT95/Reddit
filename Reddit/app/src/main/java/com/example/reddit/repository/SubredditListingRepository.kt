@@ -45,6 +45,30 @@ class SubredditListingRepository @Inject constructor(private val subApi: Subredd
         }
     }
 
+    suspend fun saveUnsaveListing(name: String, save: Boolean, index: Int): Int? {
+        return suspendCoroutine { continuation ->
+            subApi.saveUnsavePost(if (save) UN_SAVE_LISTING_ACTION else SAVE_LISTING_ACTION,
+                name,
+                CATEGORY_LISTING).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>,
+                ) {
+                    if (response.isSuccessful) {
+                        continuation.resume(index)
+                    } else {
+                        continuation.resume(null)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    continuation.resumeWithException(t)
+                }
+
+            })
+        }
+    }
+
     private fun getSrListingList(jsonString: String): List<SubredditListing> {
         val subredditListing = mutableListOf<SubredditListing>()
         val childrenObjectList = SubredditRepository.childrenJsonArray(jsonString, false)
@@ -116,7 +140,8 @@ class SubredditListingRepository @Inject constructor(private val subApi: Subredd
     }
 
     companion object {
-        const val METHOD_NEW_SUBREDDIT_LIST = "new"
-        const val METHOD_POPULAR_SUBREDDIT_LIST = "popular"
+        const val SAVE_LISTING_ACTION = "save"
+        const val UN_SAVE_LISTING_ACTION = "unsave"
+        const val CATEGORY_LISTING = "link"
     }
 }

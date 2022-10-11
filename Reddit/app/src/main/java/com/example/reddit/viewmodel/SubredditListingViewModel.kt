@@ -26,8 +26,11 @@ class SubredditListingViewModel @Inject constructor(
 
     private val subredditListingMutableLiveData = MutableLiveData<List<SubredditListing>>()
     private val subredditNewListingMutableLiveData = MutableLiveData<List<SubredditListing>>()
+    private val listingSaveMutableLiveData = SingleLiveEvent<Int?>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
 
+    val listingSaveLiveData: LiveData<Int?>
+        get() = listingSaveMutableLiveData
     val subredditListingLiveData: LiveData<List<SubredditListing>>
         get() = subredditListingMutableLiveData
     val subredditNewListingLiveData: LiveData<List<SubredditListing>>
@@ -51,9 +54,11 @@ class SubredditListingViewModel @Inject constructor(
         }
     }
 
-    fun saveUnsaveListing(fullName: String, index: Int) {
+    fun saveUnsaveListing(listing: SubredditListing, index: Int) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
-
+            listingSaveMutableLiveData.postValue(repository.saveUnsaveListing(listing.fullName,
+                listing.saved,
+                index))
         }
     }
 }

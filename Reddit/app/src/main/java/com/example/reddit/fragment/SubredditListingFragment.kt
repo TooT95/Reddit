@@ -44,7 +44,15 @@ class SubredditListingFragment :
     private fun observeViewModels() {
         viewModel.subredditListingLiveData.observe(viewLifecycleOwner, ::refreshSrListing)
         viewModel.subredditNewListingLiveData.observe(viewLifecycleOwner, ::refreshNewSrListing)
+        viewModel.listingSaveLiveData.observe(viewLifecycleOwner, ::saveListing)
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
+    }
+
+    private fun saveListing(index: Int?) {
+        if (index != null) {
+            listingAdapter.currentList[index].saved = !listingAdapter.currentList[index].saved
+            listingAdapter.notifyItemChanged(index)
+        }
     }
 
     private fun refreshSrListing(srList: List<SubredditListing>) {
@@ -110,8 +118,10 @@ class SubredditListingFragment :
     }
 
     private fun onItemClickListener(item: SubredditListing, listenerType: ListenerType) {
-        if (listenerType == ListenerType.SAVE) {
-
+        if (listenerType == ListenerType.SAVE
+            || listenerType == ListenerType.UNSAVE
+        ) {
+            viewModel.saveUnsaveListing(item, listingAdapter.currentList.indexOf(item))
         }
     }
 

@@ -8,11 +8,17 @@ object NetworkUtils {
     const val QUERY_SUBREDDIT_PREFIXED_NAME = "sr_name"
     const val QUERY_LIMIT = "limit"
     const val QUERY_ACTION = "action"
+    const val QUERY_ID = "id"
+    const val QUERY_CATEGORY = "category"
 
     const val PATH_SUB_NEW = "/subreddits/new"
     const val PATH_SUB_POPULAR = "/subreddits/popular"
 
     const val PATH_SUB_HOT = "/r/{sr}/hot.json"
     const val PATH_SUBREDDIT_SUBSCRIBE = "/api/subscribe.json?"
+
+    const val PATH_SAVE_UNSAVE = "/api/{action}?"
+
+    const val PATH_SAVE_ACTION = "action"
 
 }

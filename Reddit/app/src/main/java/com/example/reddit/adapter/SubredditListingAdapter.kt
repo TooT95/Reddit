@@ -156,12 +156,14 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             with(itemView.findViewById<ImageView>(R.id.iv_save)) {
                 isVisible = !saved
                 setOnClickListener {
-                    onItemClicked(item, ListenerType.SAVE)
+                    onItemClicked(item, ListenerType.UNSAVE)
                 }
             }
             with(itemView.findViewById<ImageView>(R.id.iv_un_save)) {
                 isVisible = saved
-                onItemClicked(item, ListenerType.UNSAVE)
+                setOnClickListener {
+                    onItemClicked(item, ListenerType.SAVE)
+                }
             }
         }
 
