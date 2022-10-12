@@ -123,7 +123,7 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             private val binding = ItemListingVideoBinding.bind(view)
             fun onBind(listing: SubredditListing.ListingVideo) {
                 with(binding) {
-                    videoview.setUrlAndMediaPlayer(itemView.context, listing.videoUrl)
+                    videoView.setUrlAndMediaPlayer(itemView.context, listing.videoUrl)
                     showSampleViews(onItemClicked, itemView, listing)
                 }
             }

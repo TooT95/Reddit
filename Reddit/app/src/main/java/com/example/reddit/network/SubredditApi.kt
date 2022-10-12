@@ -21,6 +21,9 @@ interface SubredditApi {
         @Query(NetworkUtils.QUERY_SEARCH) q: String,
     ): Call<ResponseBody>
 
+    @GET(NetworkUtils.PATH_SUBREDDIT_SUBSCRIBER)
+    fun getSubscribedList(@Query(NetworkUtils.QUERY_AFTER) after: String?): Call<ResponseBody>
+
     @POST(NetworkUtils.PATH_SUBREDDIT_SUBSCRIBE)
     fun subUnsubSubreddit(
         @Query(NetworkUtils.QUERY_SUBREDDIT_PREFIXED_NAME) dName: String,

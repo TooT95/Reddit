@@ -13,6 +13,9 @@ import android.widget.VideoView
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.example.reddit.R
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.ui.PlayerView
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
@@ -29,21 +32,16 @@ fun ImageView.glideImageWithParams(view: View, url: String) {
         .into(this)
 }
 
-fun VideoView.setUrlAndMediaPlayer(context: Context, url: String) {
-    val position = 0
-    val mediaController = MediaController(context)
-    setMediaController(mediaController)
-    setVideoURI(Uri.parse(url))
-    setOnPreparedListener {
-        seekTo(position)
-
-        if (position == 0) {
-            start()
-        } else {
-            pause()
-        }
+fun PlayerView.setUrlAndMediaPlayer(context: Context, url: String) {
+    player = ExoPlayer.Builder(context).build()
+    player?.run {
+        val mediaItem = MediaItem.Builder()
+            .setUri(url)
+            .build()
+        setMediaItem(mediaItem)
+        prepare()
+        player
     }
-    start()
 }
 
 fun SearchView.changeFlow(): Flow<String?> {

@@ -16,9 +16,13 @@
     </fragment>
     <fragment
         android:id="@+id/likedSubredditFragment"
-        android:name="com.example.reddit.fragment.LikedSubredditFragment"
+        android:name="com.example.reddit.fragment.LikedFragment"
         android:label="LikedSubredditFragment"
-        tools:layout="@layout/fragment_liked" />
+        tools:layout="@layout/fragment_liked" >
+        <action
+            android:id="@+id/action_likedSubredditFragment_to_subredditListingFragment"
+            app:destination="@id/subredditListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.reddit.fragment.AccountFragment"

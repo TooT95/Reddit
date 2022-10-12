@@ -73,4 +73,11 @@ dependencies {
     // Glide implementation
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+
+    //exoplayer
+    def exoPlayer = '2.18.1'
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoPlayer"
+    implementation "com.google.android.exoplayer:exoplayer-dash:$exoPlayer"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoPlayer"
+
 }

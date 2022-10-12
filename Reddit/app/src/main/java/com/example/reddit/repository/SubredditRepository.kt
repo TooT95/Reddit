@@ -29,10 +29,10 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
         return suspendCoroutine { continuation ->
             scope.launch {
                 subApi.apply {
-                    if (method == METHOD_NEW_SUBREDDIT_LIST) {
-                        getNewList(after)
-                    } else {
-                        getPopularList(after)
+                    when (method) {
+                        METHOD_NEW_SUBREDDIT_LIST -> getNewList(after)
+                        METHOD_SUBSCRIBED_SUBREDDIT_LIST -> getSubscribedList(after)
+                        else -> getPopularList(after)
                     }.enqueue(object : Callback<ResponseBody> {
                         override fun onResponse(
                             call: Call<ResponseBody>,
@@ -144,5 +144,6 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
 
         const val METHOD_NEW_SUBREDDIT_LIST = "new"
         const val METHOD_POPULAR_SUBREDDIT_LIST = "popular"
+        const val METHOD_SUBSCRIBED_SUBREDDIT_LIST = "subscribe"
     }
 }

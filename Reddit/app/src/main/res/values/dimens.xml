@@ -19,6 +19,7 @@
     <dimen name="dot_spacing">8dp</dimen>
     <dimen name="dot_stroke_width">1dp</dimen>
 
+    <dimen name="top_subreddit_comment_list_margin">25dp</dimen>
     <dimen name="default_main_fragment_start_end_margin">30dp</dimen>
     <dimen name="default_main_fragment_top_margin">27dp</dimen>
     <dimen name="default_search_radius">50dp</dimen>
@@ -37,6 +38,9 @@
     <dimen name="margin_sr_listing_start_end">9dp</dimen>
     <dimen name="corner_radius_post">5dp</dimen>
     <dimen name="margin_author_subscribe_image">3dp</dimen>
+
+    <dimen name="subreddit_comment_list_margin">6dp</dimen>
+    <dimen name="height_subreddit_comment_list">26dp</dimen>
 
 
 </resources>

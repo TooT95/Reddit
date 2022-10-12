@@ -69,6 +69,20 @@ class SubredditListViewModel @Inject constructor(
         }
     }
 
+    fun getSubscribedSubredditList(after: String? = null, uploadNewSr: Boolean = false) {
+        viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
+            if (uploadNewSr) {
+                subredditNewListMutableLiveData.postValue(repository.getSubredditList(
+                    SubredditRepository.METHOD_SUBSCRIBED_SUBREDDIT_LIST,
+                    after))
+            } else {
+                subredditListMutableLiveData.postValue(repository.getSubredditList(
+                    SubredditRepository.METHOD_SUBSCRIBED_SUBREDDIT_LIST,
+                    after))
+            }
+        }
+    }
+
     fun subUnSubSubreddit(index: Int, subreddit: Subreddit) {
         viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
             subredditSubscribeMutableLiveData.postValue(repository.subscribeSubreddit(
