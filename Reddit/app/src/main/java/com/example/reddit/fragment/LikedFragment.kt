@@ -53,12 +53,19 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
                 subreddit.id != item.id
             })
         }
-
+        if (srListAdapter.currentList.isEmpty()) {
+            showTextAvailable(true)
+        }
     }
 
     private fun refreshSubreddit(srList: List<Subreddit>) {
-        srListAdapter.submitList(srList)
         showPbLoading(false)
+        if (srList.isEmpty()) {
+            showTextAvailable(true)
+            return
+        }
+        showTextAvailable(false)
+        srListAdapter.submitList(srList)
     }
 
     private fun uploadSubreddit(srList: List<Subreddit>) {
@@ -128,12 +135,9 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
                     txtSubredditList -> {
                         if (isSubreddit) return@OnClickListener
                         showPbLoading(true)
-                        viewModel.getNewSubredditList()
+                        viewModel.getSubscribedSubredditList()
                     }
                     txtCommentList -> {
-                        if (!isSubreddit) return@OnClickListener
-                        showPbLoading(true)
-                        viewModel.getPopularSubredditList()
                     }
                 }
                 isSubreddit = !isSubreddit
@@ -162,6 +166,13 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
         with(binding) {
             rvSubredditList.isVisible = !show
             pbLoading.isVisible = show
+        }
+    }
+
+    private fun showTextAvailable(show: Boolean) {
+        with(binding) {
+            rvSubredditList.isVisible = !show
+            txtNotFoundDetail.isVisible = show
         }
     }
 

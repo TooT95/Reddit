@@ -66,7 +66,11 @@ class SubredditListFragment :
 
     private fun searchSubreddit(srList: List<Subreddit>?) {
         if (srList == null) {
-            viewModel.getNewSubredditList()
+            if (isNew) {
+                viewModel.getNewSubredditList()
+            } else {
+                viewModel.getPopularSubredditList()
+            }
         } else {
             if (srList.isNotEmpty()) {
                 srListAdapter.submitList(srList)

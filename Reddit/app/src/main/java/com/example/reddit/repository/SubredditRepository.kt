@@ -1,8 +1,6 @@
 package com.example.reddit.repository
 
-import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.Subreddit
-import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.network.NetworkUtils
 import com.example.reddit.network.SubredditApi
 import com.example.reddit.utils.Utils
@@ -15,7 +13,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException

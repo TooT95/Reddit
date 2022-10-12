@@ -14,6 +14,7 @@
     <color name="color_unselected">#764BE9</color>
 
     <color name="layout_background">#0A5222D0</color>
+    <color name="account_name_background">#335222D0</color>
     <color name="gray_icon">#BDBDBD</color>
 
     <color name="saved_icon">#EC615B</color>

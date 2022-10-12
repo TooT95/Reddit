@@ -11,6 +11,7 @@
     <string name="text_share">Share</string>
     <string name="text_subreddits">Сабреддиты</string>
     <string name="text_comment_list">Комментарии</string>
+    <string name="text_information_not_available">Информация недоступна</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>

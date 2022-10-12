@@ -11,6 +11,9 @@
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_40">40sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+
 
     <dimen name="margin_top_dot_layout">80dp</dimen>
     <dimen name="margint_botto_dot_layout">57dp</dimen>
@@ -41,6 +44,11 @@
 
     <dimen name="subreddit_comment_list_margin">6dp</dimen>
     <dimen name="height_subreddit_comment_list">26dp</dimen>
+    <dimen name="account_material_top">70dp</dimen>
+    <dimen name="avatar_size">95dp</dimen>
+    <dimen name="avatar_iv_start_end_margin">102dp</dimen>
+    <dimen name="avatar_iv_top">19dp</dimen>
+    <dimen name="account_common_bottom">14dp</dimen>
 
 
 </resources>
