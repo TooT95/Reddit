@@ -15,6 +15,7 @@ object NetworkUtils {
     const val PATH_SUB_NEW = "/subreddits/new"
     const val PATH_SUB_POPULAR = "/subreddits/popular"
     const val PATH_SUBREDDIT_SUBSCRIBER = "/subreddits/mine/subscriber"
+    const val PATH_ME = "/api/me"
     const val PATH_SUB_SEARCH = "/subreddits/search"
 
     const val PATH_SUB_HOT = "/r/{sr}/hot.json"

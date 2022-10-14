@@ -29,4 +29,8 @@ interface SubredditApi {
         @Query(NetworkUtils.QUERY_SUBREDDIT_PREFIXED_NAME) dName: String,
         @Query(NetworkUtils.QUERY_ACTION) action: String?,
     ): Call<ResponseBody>
+
+    @GET(NetworkUtils.PATH_ME)
+    fun getMe(): Call<ResponseBody>
+
 }
