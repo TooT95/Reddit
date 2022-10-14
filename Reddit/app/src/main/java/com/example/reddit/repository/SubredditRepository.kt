@@ -108,22 +108,24 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
         for (item in 0 until childrenObjectList.length()) {
             val currentItemJson =
                 childrenObjectList.getJSONObject(item).getJSONObject(Utils.COL_DATA_API)
-
-            val id = currentItemJson.getString(Subreddit.COL_ID)
-            val displayName = currentItemJson.getString(Subreddit.COL_DISPLAY_NAME)
-            val title = currentItemJson.getString(Subreddit.COL_TITLE)
-            val name = currentItemJson.getString(Subreddit.COL_NAME)
-            val isFollower = currentItemJson.getBoolean(Subreddit.COL_USER_SUBSCRIBER)
-            val headerImage = currentItemJson.getString(Subreddit.COL_HEADER_IMAGE)
-            val dNamePrefixed = currentItemJson.getString(Subreddit.COL_NAME_PREFIXED)
-
-            subredditList.add(Subreddit(id,
-                displayName,
-                title,
-                isFollower,
-                name,
-                headerImage,
-                dNamePrefixed))
+            try {
+                val id = currentItemJson.getString(Subreddit.COL_ID)
+                val displayName = currentItemJson.getString(Subreddit.COL_DISPLAY_NAME)
+                val title = currentItemJson.getString(Subreddit.COL_TITLE)
+                val name = currentItemJson.getString(Subreddit.COL_NAME)
+                val isFollower = currentItemJson.getBoolean(Subreddit.COL_USER_SUBSCRIBER)
+                val headerImage = currentItemJson.getString(Subreddit.COL_HEADER_IMAGE)
+                val dNamePrefixed = currentItemJson.getString(Subreddit.COL_NAME_PREFIXED)
+                subredditList.add(Subreddit(id,
+                    displayName,
+                    title,
+                    isFollower,
+                    name,
+                    headerImage,
+                    dNamePrefixed))
+            } catch (t: Throwable) {
+                continue
+            }
         }
         return subredditList
     }

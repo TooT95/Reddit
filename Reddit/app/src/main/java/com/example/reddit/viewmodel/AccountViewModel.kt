@@ -27,6 +27,8 @@ class AccountViewModel @Inject constructor(
     private val accountMutableLiveData = MutableLiveData<Account>()
     private val accountSubredditCountMutableLiveData = MutableLiveData<Int>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
+    private val friendListMutableLiveData = MutableLiveData<List<Account>>()
+    private val friendInfoMutableLiveData = MutableLiveData<Account>()
 
     val accountLiveData: LiveData<Account>
         get() = accountMutableLiveData
@@ -36,6 +38,24 @@ class AccountViewModel @Inject constructor(
 
     val toastLiveData: LiveData<String>
         get() = toastMutableLiveData
+
+    val friendListLiveData: LiveData<List<Account>>
+        get() = friendListMutableLiveData
+
+    val friendInfoLiveData: LiveData<Account>
+        get() = friendInfoMutableLiveData
+
+    fun getFriendList() {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
+            friendListMutableLiveData.postValue(repository.getFriendList())
+        }
+    }
+
+    fun getFriendInfo(friendName: String) {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
+            friendInfoMutableLiveData.postValue(repository.getFriendInfo(friendName))
+        }
+    }
 
     fun getAccountInfo() {
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {

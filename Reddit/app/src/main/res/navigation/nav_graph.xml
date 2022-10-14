@@ -18,7 +18,7 @@
         android:id="@+id/likedSubredditFragment"
         android:name="com.example.reddit.fragment.LikedFragment"
         android:label="LikedSubredditFragment"
-        tools:layout="@layout/fragment_liked" >
+        tools:layout="@layout/fragment_liked">
         <action
             android:id="@+id/action_likedSubredditFragment_to_subredditListingFragment"
             app:destination="@id/subredditListingFragment" />
@@ -27,10 +27,19 @@
         android:id="@+id/accountFragment"
         android:name="com.example.reddit.fragment.AccountFragment"
         android:label="AccountFragment"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_friendListFragment"
+            app:destination="@id/friendListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/subredditListingFragment"
         android:name="com.example.reddit.fragment.SubredditListingFragment"
         android:label="SubredditListingFragment"
         tools:layout="@layout/fragment_subreddit_listing" />
+    <fragment
+        android:id="@+id/friendListFragment"
+        android:name="com.example.reddit.fragment.FriendListFragment"
+        android:label="FriendListFragment"
+        tools:layout="@layout/fragment_friend_list" />
 </navigation>

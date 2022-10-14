@@ -24,6 +24,7 @@
 
     <dimen name="top_subreddit_comment_list_margin">25dp</dimen>
     <dimen name="default_main_fragment_start_end_margin">30dp</dimen>
+    <dimen name="friend_item_start_end_margin">15dp</dimen>
     <dimen name="default_main_fragment_top_margin">27dp</dimen>
     <dimen name="default_search_radius">50dp</dimen>
     <dimen name="default_search_stroke_width">2dp</dimen>
@@ -46,9 +47,14 @@
     <dimen name="height_subreddit_comment_list">26dp</dimen>
     <dimen name="account_material_top">70dp</dimen>
     <dimen name="avatar_size">95dp</dimen>
+    <dimen name="friend_avatar_size">64dp</dimen>
     <dimen name="avatar_iv_start_end_margin">102dp</dimen>
+    <dimen name="friend_iv_start_end_margin">43dp</dimen>
     <dimen name="avatar_iv_top">19dp</dimen>
     <dimen name="account_common_bottom">14dp</dimen>
+    <dimen name="friend_avatar_margin_top">35dp</dimen>
+    <dimen name="friend_card_width">150dp</dimen>
+    <dimen name="friend_card_height">176dp</dimen>
 
 
 </resources>

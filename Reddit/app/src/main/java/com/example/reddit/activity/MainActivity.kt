@@ -23,18 +23,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        showMainNavGraph(false)
+        showMainNavGraph(show = false, isStart = true)
         startMainFragment()
     }
 
-    fun showMainNavGraph(show: Boolean) {
+    fun showMainNavGraph(show: Boolean, isStart: Boolean = true) {
         binding.bnavMain.isVisible = show
-        if (show) {
-            val hostFragment = supportFragmentManager.findFragmentById(R.id.fragmentauth)
-            if (hostFragment != null) {
-                val navController = hostFragment.findNavController()
+        val hostFragment = supportFragmentManager.findFragmentById(R.id.fragmentauth)
+        if (hostFragment != null) {
+            val navController = hostFragment.findNavController()
+            if (show) {
                 navController.setGraph(R.navigation.nav_graph)
                 setupWithNavController(binding.bnavMain, navController)
+            } else {
+                if (!isStart) {
+                    navController.setGraph(R.navigation.nav_graph_oauth)
+                    setupWithNavController(binding.bnavMain, navController)
+                    startMainFragment()
+                }
             }
         }
     }

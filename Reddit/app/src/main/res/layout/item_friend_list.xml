@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/friend_card_height"
+    android:layout_marginStart="@dimen/friend_item_start_end_margin"
+    android:layout_marginEnd="@dimen/friend_item_start_end_margin"
+    android:layout_marginBottom="@dimen/sr_list_item_card_bottom_margin"
+    app:cardCornerRadius="@dimen/default_main_fragment_start_end_margin">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/friend_avatar_size"
+            android:layout_height="@dimen/friend_avatar_size"
+            app:cardCornerRadius="@dimen/default_search_radius">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/text_auth"
+                tools:src="@tools:sample/avatars" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+            android:backgroundTint="@color/account_name_background"
+            app:cardCornerRadius="@dimen/default_main_fragment_start_end_margin">
+
+            <TextView
+                android:id="@+id/txt_friend_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:textAppearance="@style/TextAccountPrefix16sp"
+                tools:text="@tools:sample/full_names" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+            android:backgroundTint="@color/account_name_background"
+            app:cardCornerRadius="@dimen/default_main_fragment_start_end_margin">
+
+            <TextView
+                android:id="@+id/txt_friend_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:textAppearance="@style/TextFriendPrefix12sp"
+                tools:text="@tools:sample/full_names" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -16,6 +16,8 @@ object NetworkUtils {
     const val PATH_SUB_POPULAR = "/subreddits/popular"
     const val PATH_SUBREDDIT_SUBSCRIBER = "/subreddits/mine/subscriber"
     const val PATH_ME = "/api/me"
+    const val PATH_FRIEND_LIST = "/api/v1/me/friends"
+    const val PATH_FRIEND_INFO = "/user/{friendName}/about"
     const val PATH_SUB_SEARCH = "/subreddits/search"
 
     const val PATH_SUB_HOT = "/r/{sr}/hot.json"
@@ -24,5 +26,6 @@ object NetworkUtils {
     const val PATH_SAVE_UNSAVE = "/api/{action}?"
 
     const val PATH_SAVE_ACTION = "action"
+    const val PATH_FRIEND_NAME = "friendName"
 
 }

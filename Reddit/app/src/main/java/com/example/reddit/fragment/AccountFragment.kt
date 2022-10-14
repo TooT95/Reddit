@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.reddit.R
+import com.example.reddit.activity.MainActivity
 import com.example.reddit.databinding.FragmentAccountBinding
 import com.example.reddit.extension.glideImageWithParams
 import com.example.reddit.model.Account
@@ -29,6 +32,15 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
 
     private fun initUI() {
         showPbAccountLoading(true)
+        with(binding) {
+            materialFriendList.setOnClickListener {
+                findNavController().navigate(R.id.action_accountFragment_to_friendListFragment)
+            }
+            materialLogout.setOnClickListener {
+                val mainActivity = activity as MainActivity
+                mainActivity.showMainNavGraph(false, isStart = false)
+            }
+        }
     }
 
     private fun observeViewModels() {

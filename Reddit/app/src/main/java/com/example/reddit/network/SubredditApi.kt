@@ -33,4 +33,10 @@ interface SubredditApi {
     @GET(NetworkUtils.PATH_ME)
     fun getMe(): Call<ResponseBody>
 
+    @GET(NetworkUtils.PATH_FRIEND_LIST)
+    fun getFriendList(): Call<ResponseBody>
+
+    @GET(NetworkUtils.PATH_FRIEND_INFO)
+    fun getFriendInfo(@Path(NetworkUtils.PATH_FRIEND_NAME) friendName: String): Call<ResponseBody>
+
 }
