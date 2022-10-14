@@ -35,6 +35,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/in_toolbar" />
 
+    <TextView
+        android:id="@+id/txt_not_found_detail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:gravity="center"
+        android:text="@string/text_information_not_available"
+        android:textAppearance="@style/TextSelfText14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/pb_loading_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/pb_loading_bottom"
         style="?android:attr/progressBarStyle"

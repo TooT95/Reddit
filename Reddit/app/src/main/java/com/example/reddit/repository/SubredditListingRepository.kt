@@ -139,6 +139,28 @@ class SubredditListingRepository @Inject constructor(private val subApi: Subredd
         return subredditListing
     }
 
+    suspend fun getSavedListing(accountName: String): List<SubredditListing> {
+        return suspendCoroutine { continuation ->
+            scope.launch {
+                subApi.getSavedList(accountName)
+                    .enqueue(object : Callback<ResponseBody> {
+                        override fun onResponse(
+                            call: Call<ResponseBody>,
+                            response: Response<ResponseBody>,
+                        ) {
+                            val responseString = response.body()?.string().orEmpty()
+                            continuation.resume(getSrListingList(responseString))
+                        }
+
+                        override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                            continuation.resumeWithException(t)
+                        }
+
+                    })
+            }
+        }
+    }
+
     companion object {
         const val SAVE_LISTING_ACTION = "save"
         const val UN_SAVE_LISTING_ACTION = "unsave"

@@ -18,6 +18,7 @@ object NetworkUtils {
     const val PATH_ME = "/api/me"
     const val PATH_FRIEND_LIST = "/api/v1/me/friends"
     const val PATH_FRIEND_INFO = "/user/{friendName}/about"
+    const val PATH_SAVED_LIST = "/user/{friendName}/saved"
     const val PATH_SUB_SEARCH = "/subreddits/search"
 
     const val PATH_SUB_HOT = "/r/{sr}/hot.json"

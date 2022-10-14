@@ -24,4 +24,9 @@ interface SubredditListingApi {
         @Query(NetworkUtils.QUERY_CATEGORY) category: String,
     ): Call<ResponseBody>
 
+    @GET(NetworkUtils.PATH_SAVED_LIST)
+    fun getSavedList(
+        @Path(NetworkUtils.PATH_FRIEND_NAME) accountName: String,
+    ): Call<ResponseBody>
+
 }

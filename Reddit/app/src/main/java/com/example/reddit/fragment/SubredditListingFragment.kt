@@ -105,6 +105,10 @@ class SubredditListingFragment :
         with(binding) {
             pbLoading.isVisible = show
             rvListingList.isVisible = !show
+            if (!show) {
+                rvListingList.isVisible = listingAdapter.currentList.isNotEmpty()
+                txtNotFoundDetail.isVisible = listingAdapter.currentList.isEmpty()
+            }
         }
     }
 
