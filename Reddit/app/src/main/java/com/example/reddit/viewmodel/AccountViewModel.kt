@@ -24,7 +24,7 @@ class AccountViewModel @Inject constructor(
         toastMutableLiveData.postValue("Error on $coroutineContext, message ${throwable.message}")
     }
 
-    private val accountMutableLiveData = SingleLiveEvent<Account>()
+    private val accountMutableLiveData = MutableLiveData<Account>()
     private val accountSubredditCountMutableLiveData = SingleLiveEvent<Int>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
     private val friendListMutableLiveData = MutableLiveData<List<Account>>()

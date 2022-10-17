@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
 import com.example.reddit.adapter.SubredditListAdapter
+import com.example.reddit.adapter.SubredditListingAdapter
 import com.example.reddit.databinding.FragmentLikedBinding
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.Subreddit
+import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.utils.Utils
 import com.example.reddit.viewmodel.SubredditListViewModel
+import com.example.reddit.viewmodel.SubredditListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::inflate) {
@@ -23,8 +25,20 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
     private var isSubreddit = true
     private var isLoading = false
     private val viewModel: SubredditListViewModel by viewModels()
+    private val listingViewModel: SubredditListingViewModel by viewModels()
     private val srListAdapter: SubredditListAdapter by lazy {
         SubredditListAdapter(::itemClickListener)
+    }
+    private val srListingAdapter: SubredditListingAdapter by lazy {
+        SubredditListingAdapter(::onItemClickListener)
+    }
+
+    private fun onItemClickListener(item: SubredditListing, listenerType: ListenerType) {
+        if (listenerType == ListenerType.SAVE
+            || listenerType == ListenerType.UNSAVE
+        ) {
+            listingViewModel.saveUnsaveListing(item, srListingAdapter.currentList.indexOf(item))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +57,26 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
         viewModel.subredditListLiveData.observe(viewLifecycleOwner, ::refreshSubreddit)
         viewModel.subredditNewListLiveData.observe(viewLifecycleOwner, ::uploadSubreddit)
         viewModel.subredditSubscribeLiveData.observe(viewLifecycleOwner, ::subscribeSubreddit)
+        listingViewModel.subredditSavedListingLiveData.observe(viewLifecycleOwner,
+            ::refreshSubredditListing)
+        listingViewModel.listingSaveLiveData.observe(viewLifecycleOwner, ::saveUnSaveChanged)
+    }
+
+    private fun saveUnSaveChanged(index: Int?) {
+        refreshSubredditListing(srListingAdapter.currentList.filterIndexed { i, _ ->
+            i != index
+        })
+    }
+
+    private fun refreshSubredditListing(listing: List<SubredditListing>) {
+        srListingAdapter.submitList(listing)
+        showPbLoading(false)
+        if (listing.isEmpty()) {
+            showTextAvailable(true)
+            return
+        }
+        setAdapter()
+
     }
 
     private fun subscribeSubreddit(index: Int?) {
@@ -66,6 +100,7 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
         }
         showTextAvailable(false)
         srListAdapter.submitList(srList)
+        setAdapter()
     }
 
     private fun uploadSubreddit(srList: List<Subreddit>) {
@@ -81,22 +116,29 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
 
     private fun setAdapter() {
         with(binding.rvSubredditList) {
-            adapter = srListAdapter
+            if (isSubreddit) {
+                adapter = srListAdapter
+            } else {
+                adapter = srListingAdapter
+            }
+
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
+            if (isSubreddit) {
+                addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
 
-                    val layManager = layoutManager as LinearLayoutManager
-                    if (!isLoading && layManager.findLastCompletelyVisibleItemPosition() == (srListAdapter.currentList.size - 1)
-                        && srListAdapter.currentList.size > 20
-                    ) {
-                        loadMore()
-                        showBottomLoading(true)
+                        val layManager = layoutManager as LinearLayoutManager
+                        if (!isLoading && layManager.findLastCompletelyVisibleItemPosition() == (srListAdapter.currentList.size - 1)
+                            && srListAdapter.currentList.size > 20
+                        ) {
+                            loadMore()
+                            showBottomLoading(true)
+                        }
                     }
-                }
-            })
+                })
+            }
         }
     }
 
@@ -138,6 +180,9 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
                         viewModel.getSubscribedSubredditList()
                     }
                     txtCommentList -> {
+                        if (!isSubreddit) return@OnClickListener
+                        showPbLoading(true)
+                        listingViewModel.getSavedListing(Utils.account!!.name)
                     }
                 }
                 isSubreddit = !isSubreddit
@@ -163,6 +208,7 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
     }
 
     private fun showPbLoading(show: Boolean) {
+        showTextAvailable(!show)
         with(binding) {
             rvSubredditList.isVisible = !show
             pbLoading.isVisible = show

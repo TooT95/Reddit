@@ -5,6 +5,6 @@ enum class ListenerType {
     SAVE,
     UNSAVE,
     SUBSCRIBE,
-    UNSUBSCRIBE;
-
+    COMMENT
+    ;
 }

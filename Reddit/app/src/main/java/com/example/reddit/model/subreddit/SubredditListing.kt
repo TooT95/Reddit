@@ -10,6 +10,7 @@ sealed class SubredditListing {
     abstract val author: String
     abstract val created: Double
     abstract val fullName: String
+    abstract val commentLink: String
 
     data class ListingVideo(
         override val id: String,
@@ -21,6 +22,7 @@ sealed class SubredditListing {
         override val created: Double,
         val videoUrl: String,
         override val fullName: String,
+        override val commentLink: String,
     ) :
         SubredditListing()
 
@@ -34,6 +36,7 @@ sealed class SubredditListing {
         override val created: Double,
         override val author: String,
         override val fullName: String,
+        override val commentLink: String,
     ) :
         SubredditListing()
 
@@ -47,6 +50,7 @@ sealed class SubredditListing {
         override val created: Double,
         val imageUrl: String,
         override val fullName: String,
+        override val commentLink: String,
     ) :
         SubredditListing()
 
@@ -66,5 +70,6 @@ sealed class SubredditListing {
         const val COL_IS_VIDEO = "is_video"
         const val COL_SAVED = "saved"
         const val COL_FULL_NAME = "name"
+        const val COL_COMMENT_LINK = "permalink"
     }
 }

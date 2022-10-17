@@ -67,26 +67,32 @@
             app:layout_constraintTop_toBottomOf="@id/videoView"
             tools:text="@tools:sample/last_names" />
 
-        <TextView
-            android:id="@+id/txt_comment_num"
-            style="@style/TextListingCommentWithColor12sp"
+        <LinearLayout
+            android:id="@+id/linear_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_title"
-            tools:text="@tools:sample/last_names" />
+            app:layout_constraintTop_toBottomOf="@id/txt_title">
 
-        <ImageView
-            android:id="@+id/iv_comment_sign"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_author_subscribe_image"
-            android:contentDescription="@string/text_search"
-            android:src="@drawable/ic_comment_sign"
-            app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
-            app:layout_constraintStart_toEndOf="@id/txt_comment_num"
-            app:layout_constraintTop_toTopOf="@id/txt_comment_num" />
+            <TextView
+                android:id="@+id/txt_comment_num"
+                style="@style/TextListingCommentWithColor12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@tools:sample/last_names" />
+
+            <ImageView
+                android:id="@+id/iv_comment_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_author_subscribe_image"
+                android:contentDescription="@string/text_search"
+                android:src="@drawable/ic_comment_sign" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txt_share"
@@ -95,17 +101,17 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/sr_list_iv_width"
             android:text="@string/text_share"
-            app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
+            app:layout_constraintBottom_toBottomOf="@id/linear_comment"
             app:layout_constraintEnd_toStartOf="@id/linear_save"
-            app:layout_constraintTop_toTopOf="@id/txt_comment_num" />
+            app:layout_constraintTop_toTopOf="@id/linear_comment" />
 
         <LinearLayout
             android:id="@+id/linear_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/txt_comment_num"
+            app:layout_constraintBottom_toBottomOf="@id/linear_comment"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/txt_comment_num">
+            app:layout_constraintTop_toTopOf="@id/linear_comment">
 
             <ImageButton
                 android:id="@+id/iv_save"

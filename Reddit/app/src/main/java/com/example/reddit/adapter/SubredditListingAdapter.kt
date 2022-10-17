@@ -4,19 +4,18 @@ import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
-import com.example.reddit.databinding.ItemListingImageBinding
-import com.example.reddit.databinding.ItemListingPostBinding
-import com.example.reddit.databinding.ItemListingVideoBinding
 import com.example.reddit.extension.glideImageWithParams
 import com.example.reddit.extension.inflateLayout
 import com.example.reddit.extension.setUrlAndMediaPlayer
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.SubredditListing
+import com.google.android.exoplayer2.ui.PlayerView
 import java.util.*
 
 class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing, listenerType: ListenerType) -> Unit) :
@@ -85,18 +84,8 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             view: View,
         ) : SubredditListingHolder(view) {
 
-            private val binding = ItemListingPostBinding.bind(view)
             fun onBind(listing: SubredditListing.ListingPost) {
-                with(binding) {
-                    txtSelfText.text = subSelfText(listing.selfText)
-                    showSampleViews(onItemClicked, itemView, listing)
-                }
-            }
-
-            private fun subSelfText(selfText: String): String {
-                if (selfText.length > 150)
-                    return "${selfText.subSequence(0, 148)} ..."
-                return selfText
+                showSampleViews(onItemClicked, itemView, listing)
             }
         }
 
@@ -105,13 +94,8 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             view: View,
         ) : SubredditListingHolder(view) {
 
-            private val binding = ItemListingImageBinding.bind(view)
             fun onBind(listing: SubredditListing.ListingImage) {
-                with(binding) {
-                    ivPlaceHolder.glideImageWithParams(itemView,
-                        listing.imageUrl)
-                    showSampleViews(onItemClicked, itemView, listing)
-                }
+                showSampleViews(onItemClicked, itemView, listing)
             }
         }
 
@@ -120,55 +104,17 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             view: View,
         ) : SubredditListingHolder(view) {
 
-            private val binding = ItemListingVideoBinding.bind(view)
             fun onBind(listing: SubredditListing.ListingVideo) {
-                with(binding) {
-                    videoView.setUrlAndMediaPlayer(itemView.context, listing.videoUrl)
-                    showSampleViews(onItemClicked, itemView, listing)
-                }
+                showSampleViews(onItemClicked, itemView, listing)
             }
         }
+    }
 
-        protected fun showSampleViews(
-            onItemClicked: (item: SubredditListing, listenerType: ListenerType) -> Unit,
-            itemView: View,
-            listing: SubredditListing,
-        ) {
-            with(itemView) {
-                findViewById<TextView>(R.id.txt_title).text = listing.title
-                findViewById<TextView>(R.id.txt_author_name).text = listing.author
-                findViewById<TextView>(R.id.txt_comment_num).text = listing.numComments.toString()
-                findViewById<TextView>(R.id.txt_published_at).text =
-                    getPublishedAtText(listing.created)
-                findViewById<TextView>(R.id.txt_share).setOnClickListener {
-                    shareUrl(listing.url)
-                }
-            }
-            saveUnsaveImageView(onItemClicked, itemView, listing.saved, listing)
-        }
-
-        private fun saveUnsaveImageView(
-            onItemClicked: (item: SubredditListing, listenerType: ListenerType) -> Unit,
-            itemView: View,
-            saved: Boolean,
-            item: SubredditListing,
-        ) {
-            with(itemView.findViewById<ImageView>(R.id.iv_save)) {
-                isVisible = !saved
-                setOnClickListener {
-                    onItemClicked(item, ListenerType.UNSAVE)
-                }
-            }
-            with(itemView.findViewById<ImageView>(R.id.iv_un_save)) {
-                isVisible = saved
-                setOnClickListener {
-                    onItemClicked(item, ListenerType.SAVE)
-                }
-            }
-        }
-
-
-        protected fun shareUrl(url: String) {
+    companion object {
+        private const val POST_TYPE = 1
+        private const val IMAGE_TYPE = 2
+        private const val VIDEO_TYPE = 3
+        private fun shareUrl(itemView: View, url: String) {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
             shareIntent.putExtra(Intent.EXTRA_TEXT, url)
@@ -176,7 +122,7 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             itemView.context.startActivity(Intent.createChooser(shareIntent, "send to"))
         }
 
-        protected fun getPublishedAtText(createdTime: Double): String {
+        private fun getPublishedAtText(createdTime: Double): String {
             val secondsInMilli: Long = 1000
             var different = Date().time - (createdTime.toLong() * secondsInMilli)
             val minutesInMilli = secondsInMilli * 60
@@ -205,11 +151,66 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
                 else -> "posted $elapsedSeconds second ago"
             }
         }
-    }
 
-    companion object {
-        private const val POST_TYPE = 1
-        private const val IMAGE_TYPE = 2
-        private const val VIDEO_TYPE = 3
+        fun showSampleViews(
+            onItemClicked: (item: SubredditListing, listenerType: ListenerType) -> Unit,
+            itemView: View,
+            listing: SubredditListing,
+        ) {
+            with(itemView) {
+                findViewById<TextView>(R.id.txt_title).text = listing.title
+                findViewById<TextView>(R.id.txt_author_name).text = listing.author
+                findViewById<TextView>(R.id.txt_comment_num).text = listing.numComments.toString()
+                findViewById<TextView>(R.id.txt_published_at).text =
+                    getPublishedAtText(listing.created)
+                findViewById<TextView>(R.id.txt_share).setOnClickListener {
+                    shareUrl(itemView, listing.url)
+                }
+                findViewById<LinearLayout>(R.id.linear_comment).setOnClickListener {
+                    onItemClicked(listing, ListenerType.COMMENT)
+                }
+                when (listing) {
+                    is SubredditListing.ListingVideo -> {
+                        findViewById<PlayerView>(R.id.videoView).setUrlAndMediaPlayer(itemView.context,
+                            listing.videoUrl)
+                    }
+                    is SubredditListing.ListingImage -> {
+                        findViewById<ImageView>(R.id.iv_place_holder).glideImageWithParams(itemView,
+                            listing.imageUrl)
+                    }
+                    is SubredditListing.ListingPost -> {
+                        findViewById<TextView>(R.id.txt_self_text).text =
+                            subSelfText(listing.selfText)
+                    }
+                }
+            }
+            saveUnSaveImageView(onItemClicked, itemView, listing.saved, listing)
+        }
+
+        private fun subSelfText(selfText: String): String {
+            if (selfText.length > 150)
+                return "${selfText.subSequence(0, 148)} ..."
+            return selfText
+        }
+
+        private fun saveUnSaveImageView(
+            onItemClicked: (item: SubredditListing, listenerType: ListenerType) -> Unit,
+            itemView: View,
+            saved: Boolean,
+            item: SubredditListing,
+        ) {
+            with(itemView.findViewById<ImageView>(R.id.iv_save)) {
+                isVisible = !saved
+                setOnClickListener {
+                    onItemClicked(item, ListenerType.UNSAVE)
+                }
+            }
+            with(itemView.findViewById<ImageView>(R.id.iv_un_save)) {
+                isVisible = saved
+                setOnClickListener {
+                    onItemClicked(item, ListenerType.SAVE)
+                }
+            }
+        }
     }
 }

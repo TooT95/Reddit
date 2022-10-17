@@ -12,21 +12,24 @@ object NetworkUtils {
     const val QUERY_ID = "id"
     const val QUERY_CATEGORY = "category"
 
-    const val PATH_SUB_NEW = "/subreddits/new"
-    const val PATH_SUB_POPULAR = "/subreddits/popular"
-    const val PATH_SUBREDDIT_SUBSCRIBER = "/subreddits/mine/subscriber"
-    const val PATH_ME = "/api/me"
-    const val PATH_FRIEND_LIST = "/api/v1/me/friends"
-    const val PATH_FRIEND_INFO = "/user/{friendName}/about"
-    const val PATH_SAVED_LIST = "/user/{friendName}/saved"
-    const val PATH_SUB_SEARCH = "/subreddits/search"
+    const val SUB_URL_SUB_NEW = "/subreddits/new"
+    const val SUB_URL_SUB_POPULAR = "/subreddits/popular"
+    const val SUB_URL_SUBREDDIT_SUBSCRIBER = "/subreddits/mine/subscriber"
+    const val SUB_URL_ME = "/api/me"
+    const val SUB_URL_COMMENT_INFO = "{commentlink}{id}"
+    const val SUB_URL_FRIEND_LIST = "/api/v1/me/friends"
+    const val SUB_URL_FRIEND_INFO = "/user/{friendName}/about"
+    const val SUB_URL_SAVED_LIST = "/user/{friendName}/saved"
+    const val SUB_URL_SUB_SEARCH = "/subreddits/search"
 
-    const val PATH_SUB_HOT = "/r/{sr}/hot.json"
-    const val PATH_SUBREDDIT_SUBSCRIBE = "/api/subscribe.json?"
+    const val SUB_URL_SUB_HOT = "/r/{sr}/hot.json"
+    const val SUB_URL_SUBREDDIT_SUBSCRIBE = "/api/subscribe.json?"
 
-    const val PATH_SAVE_UNSAVE = "/api/{action}?"
+    const val SUB_URL_SAVE_UN_SAVE = "/api/{action}?"
 
     const val PATH_SAVE_ACTION = "action"
     const val PATH_FRIEND_NAME = "friendName"
+    const val PATH_COMMENT_LINK = "commentlink"
+    const val PATH_COMMENT_LINK_ID = "id"
 
 }

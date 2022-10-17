@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
@@ -122,10 +123,22 @@ class SubredditListingFragment :
     }
 
     private fun onItemClickListener(item: SubredditListing, listenerType: ListenerType) {
-        if (listenerType == ListenerType.SAVE
-            || listenerType == ListenerType.UNSAVE
-        ) {
-            viewModel.saveUnsaveListing(item, listingAdapter.currentList.indexOf(item))
+        when (listenerType) {
+            ListenerType.SAVE,
+            ListenerType.UNSAVE,
+            -> {
+                viewModel.saveUnsaveListing(item, listingAdapter.currentList.indexOf(item))
+            }
+            ListenerType.COMMENT -> {
+                val bundle = Bundle().apply {
+                    putString(CommentListFragment.KEY_LISTING_COMMENT_LINK, item.commentLink)
+                }
+                findNavController().navigate(R.id.action_subredditListingFragment_to_commentListFragment,
+                    bundle)
+            }
+            else -> {
+
+            }
         }
     }
 
