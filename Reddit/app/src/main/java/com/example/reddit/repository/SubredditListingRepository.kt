@@ -117,9 +117,9 @@ class SubredditListingRepository @Inject constructor(private val subApi: Subredd
                 }
                 else -> {
                     try {
-                        val imageUrlCommon =
-                            if (imageUrl.contains(".jpg")) imageUrl else currentItemJson.getString(
-                                SubredditListing.COL_IMAGE_URl_COMMON)
+                        val imageUrlCommon = currentItemJson.getString(SubredditListing.COL_IMAGE_URl_COMMON)
+//                            if (imageUrl.contains(".jpg")) imageUrl else currentItemJson.getString(
+//                                SubredditListing.COL_IMAGE_URl_COMMON)
                         subredditListing.add(SubredditListing.ListingImage(id,
                             url,
                             saved,

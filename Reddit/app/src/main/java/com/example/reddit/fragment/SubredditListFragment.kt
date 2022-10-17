@@ -14,6 +14,7 @@ import com.example.reddit.extension.changeFlow
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.Subreddit
 import com.example.reddit.utils.Utils
+import com.example.reddit.viewmodel.AccountViewModel
 import com.example.reddit.viewmodel.SubredditListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,7 @@ class SubredditListFragment :
     private var isNew = true
     private var isLoading = false
     private val viewModel: SubredditListViewModel by viewModels()
+    private val accountViewModel: AccountViewModel by viewModels()
     private val srListAdapter: SubredditListAdapter by lazy {
         SubredditListAdapter(::itemClickListener)
     }
@@ -31,6 +33,7 @@ class SubredditListFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getNewSubredditList()
+        accountViewModel.getAccountInfo()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,6 +49,10 @@ class SubredditListFragment :
         viewModel.subredditSearchListLiveData.observe(viewLifecycleOwner, ::searchSubreddit)
         viewModel.subredditSubscribeLiveData.observe(viewLifecycleOwner, ::subscribeSubreddit)
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
+        accountViewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
+        accountViewModel.accountLiveData.observe(viewLifecycleOwner) {
+            Utils.account = it
+        }
     }
 
     private fun subscribeSubreddit(index: Int?) {

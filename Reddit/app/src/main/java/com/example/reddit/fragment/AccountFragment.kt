@@ -12,6 +12,7 @@ import com.example.reddit.databinding.FragmentAccountBinding
 import com.example.reddit.extension.glideImageWithParams
 import com.example.reddit.model.Account
 import com.example.reddit.model.subreddit.SubredditListing
+import com.example.reddit.utils.Utils
 import com.example.reddit.viewmodel.AccountViewModel
 import com.example.reddit.viewmodel.SubredditListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +54,10 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
     }
 
     private fun observeViewModels() {
-        viewModel.accountLiveData.observe(viewLifecycleOwner, ::showAccountInfo)
+        viewModel.accountLiveData.observe(viewLifecycleOwner) {
+            Utils.account = it
+            showAccountInfo(Utils.account!!)
+        }
         viewModel.accountSubredditCountLiveData.observe(viewLifecycleOwner) {
             binding.txtCommentSubreddit.text = "Сабреддиты: $it"
         }

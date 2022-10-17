@@ -2,6 +2,7 @@ package com.example.reddit.utils
 
 import android.content.Context
 import android.os.Build
+import com.example.reddit.model.Account
 
 object Utils {
 
@@ -25,6 +26,7 @@ object Utils {
 
     var SUB_AFTER = ""
     var SUB_LISTING_AFTER = ""
+    var account: Account? = null
 
     fun onboardPassed(context: Context): Boolean {
         return context.getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
