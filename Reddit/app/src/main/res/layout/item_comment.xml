@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/sr_list_item_card_bottom_margin"
+    app:cardCornerRadius="@dimen/dot_corner_radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/default_main_fragment_start_end_margin"
+            android:layout_height="@dimen/default_main_fragment_start_end_margin"
+            android:layout_marginStart="@dimen/comment_avatar_start_margin"
+            android:layout_marginTop="@dimen/comment_avatar_top_margin"
+            android:contentDescription="@string/text_auth"
+            android:src="@drawable/ic_loader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_author_name"
+            style="@style/TextListingAuthorWithColor14sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/comment_avatar_top_margin"
+            app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+            app:layout_constraintStart_toEndOf="@id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar"
+            tools:text="@tools:sample/last_names" />
+
+        <TextView
+            android:id="@+id/txt_published_at"
+            style="@style/TextPublishedAt12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/sr_list_txt_start_margin"
+            app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+            app:layout_constraintStart_toEndOf="@id/txt_author_name"
+            app:layout_constraintTop_toTopOf="@id/iv_avatar"
+            tools:text="@tools:sample/last_names" />
+
+        <TextView
+            android:id="@+id/txt_body"
+            style="@style/TextBody12sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+            android:layout_marginEnd="@dimen/body_end_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txt_author_name"
+            app:layout_constraintTop_toBottomOf="@id/txt_author_name"
+            tools:text="@tools:sample/last_names" />
+
+        <LinearLayout
+            android:id="@+id/linear_vote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/iv_avatar"
+            app:layout_constraintTop_toBottomOf="@id/txt_body">
+
+            <ImageView
+                android:id="@+id/iv_vote_up_marked"
+                android:layout_width="@dimen/margin_sr_listing_start_end"
+                android:layout_height="@dimen/default_main_fragment_bottom_margin"
+                android:contentDescription="@string/text_auth"
+                android:src="@drawable/ic_vote_up_marked"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_vote_up_not_marked"
+                android:layout_width="@dimen/margin_sr_listing_start_end"
+                android:layout_height="@dimen/default_main_fragment_bottom_margin"
+                android:contentDescription="@string/text_auth"
+                android:src="@drawable/ic_vote_up_not_marked"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/txt_vote_count"
+                style="@style/TextPublishedAt12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/comment_avatar_top_margin"
+                android:layout_marginEnd="@dimen/comment_avatar_top_margin"
+                tools:text="@tools:sample/last_names" />
+
+            <ImageView
+                android:id="@+id/iv_vote_down_marked"
+                android:layout_width="@dimen/margin_sr_listing_start_end"
+                android:layout_height="@dimen/default_main_fragment_bottom_margin"
+                android:contentDescription="@string/text_auth"
+                android:src="@drawable/ic_vote_down_marked"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_vote_down_not_marked"
+                android:layout_width="@dimen/margin_sr_listing_start_end"
+                android:layout_height="@dimen/default_main_fragment_bottom_margin"
+                android:contentDescription="@string/text_auth"
+                android:src="@drawable/ic_vote_down_not_marked"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_reply_text"
+            style="@style/TextPublishedAt12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10"
+            android:text="@string/text_reply_count"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/linear_vote"
+            app:layout_constraintTop_toTopOf="@id/linear_vote" />
+
+        <ImageView
+            android:id="@+id/iv_reply"
+            android:layout_width="@dimen/margin_sr_listing_start_end"
+            android:layout_height="@dimen/default_main_fragment_bottom_margin"
+            android:layout_marginEnd="@dimen/comment_avatar_top_margin"
+            android:contentDescription="@string/text_auth"
+            android:src="@drawable/ic_reply"
+            app:layout_constraintBottom_toBottomOf="@id/linear_vote"
+            app:layout_constraintEnd_toStartOf="@id/txt_reply"
+            app:layout_constraintTop_toTopOf="@id/linear_vote" />
+
+        <TextView
+            android:id="@+id/txt_reply"
+            style="@style/TextPublishedAt12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:text="@string/text_reply"
+            app:layout_constraintBottom_toBottomOf="@id/linear_vote"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/linear_vote" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

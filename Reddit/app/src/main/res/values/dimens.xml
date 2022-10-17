@@ -55,6 +55,9 @@
     <dimen name="friend_avatar_margin_top">35dp</dimen>
     <dimen name="friend_card_width">150dp</dimen>
     <dimen name="friend_card_height">176dp</dimen>
+    <dimen name="comment_avatar_top_margin">4dp</dimen>
+    <dimen name="comment_avatar_start_margin">14dp</dimen>
+    <dimen name="body_end_margin">20dp</dimen>
 
 
 </resources>

@@ -130,6 +130,9 @@ class SubredditListingFragment :
                 viewModel.saveUnsaveListing(item, listingAdapter.currentList.indexOf(item))
             }
             ListenerType.COMMENT -> {
+                if (item.numComments <= 0) {
+                    return
+                }
                 val bundle = Bundle().apply {
                     putString(CommentListFragment.KEY_LISTING_COMMENT_LINK, item.commentLink)
                 }

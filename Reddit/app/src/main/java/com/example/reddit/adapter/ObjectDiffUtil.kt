@@ -3,6 +3,7 @@ package com.example.reddit.adapter
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil
 import com.example.reddit.model.Account
+import com.example.reddit.model.Comment
 import com.example.reddit.model.subreddit.Subreddit
 import com.example.reddit.model.subreddit.SubredditListing
 
@@ -20,6 +21,10 @@ class ObjectDiffUtil<T : Any> : DiffUtil.ItemCallback<T>() {
             }
             is Account -> {
                 newItem as Account
+                oldItem.id == newItem.id
+            }
+            is Comment -> {
+                newItem as Comment
                 oldItem.id == newItem.id
             }
             else -> false

@@ -122,7 +122,7 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
             itemView.context.startActivity(Intent.createChooser(shareIntent, "send to"))
         }
 
-        private fun getPublishedAtText(createdTime: Double): String {
+        fun getPublishedAtText(createdTime: Double): String {
             val secondsInMilli: Long = 1000
             var different = Date().time - (createdTime.toLong() * secondsInMilli)
             val minutesInMilli = secondsInMilli * 60

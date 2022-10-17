@@ -16,6 +16,8 @@
     <string name="text_clear_saved">Очистить сохраненные</string>
     <string name="text_clear_saved_successfully">Сохраненные посты очищены успешно!</string>
     <string name="text_logout">Выйти</string>
+    <string name="text_reply">Ответить</string>
+    <string name="text_reply_count">Еще %s ответов →</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>

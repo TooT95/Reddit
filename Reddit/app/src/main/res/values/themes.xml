@@ -44,6 +44,11 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
+    <style name="TextBody12sp" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">serif-serif-black</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
     <style name="TextSub14sp" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="fontFamily">serif-serif-black</item>
         <item name="android:textStyle">bold</item>

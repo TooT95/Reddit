@@ -3,8 +3,11 @@ package com.example.reddit.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reddit.R
+import com.example.reddit.adapter.CommentListAdapter
 import com.example.reddit.adapter.SubredditListingAdapter
 import com.example.reddit.databinding.FragmentCommentListBinding
 import com.example.reddit.model.CommentListing
@@ -20,6 +23,10 @@ class CommentListFragment :
 
     lateinit var commentLink: String
     private val viewModel: CommentViewModel by viewModels()
+    private val commentAdapter: CommentListAdapter by lazy {
+        CommentListAdapter()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,11 +56,13 @@ class CommentListFragment :
             is SubredditListing.ListingPost -> layoutInflater.inflate(R.layout.item_listing_post,
                 null)
         }
-
+        setToolbarTitle(commentListing.listing.title)
         SubredditListingAdapter.showSampleViews(::onItemClicked,
             view,
             commentListing.listing)
         binding.frameItem.addView(view)
+        commentAdapter.submitList(commentListing.commentList)
+        showPbLoading(false)
     }
 
     private fun onItemClicked(item: SubredditListing, listenerType: ListenerType) {
@@ -62,7 +71,7 @@ class CommentListFragment :
 
     private fun initUI() {
         with(binding.inToolbar.toolbar) {
-            title = commentLink
+            setToolbarTitle(commentLink)
             if (Utils.haveM()) {
                 setTitleTextColor(resources.getColor(R.color.primaryTextColor,
                     resources.newTheme()))
@@ -71,6 +80,24 @@ class CommentListFragment :
                 activity?.onBackPressed()
             }
         }
+
+        with(binding.rvCommentList) {
+            adapter = commentAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+        showPbLoading(true)
+    }
+
+    private fun showPbLoading(show: Boolean) {
+        with(binding){
+            rvCommentList.isVisible = !show
+            pbLoading.isVisible = show
+            frameItem.isVisible = !show
+        }
+    }
+
+    private fun setToolbarTitle(text: String) {
+        binding.inToolbar.toolbar.title = text
     }
 
     companion object {

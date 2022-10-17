@@ -29,6 +29,7 @@ fun ViewGroup.inflateLayout(@LayoutRes layoutId: Int, attachToParent: Boolean = 
 fun ImageView.glideImageWithParams(view: View, url: String) {
     Glide.with(view)
         .load(url)
+        .placeholder(R.drawable.ic_avatar)
         .into(this)
 }
 
