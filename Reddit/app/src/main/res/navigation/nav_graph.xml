@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_likedSubredditFragment_to_commentListFragment"
             app:destination="@id/commentListFragment" />
+        <action
+            android:id="@+id/action_likedSubredditFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -51,7 +54,11 @@
         android:id="@+id/friendListFragment"
         android:name="com.example.reddit.ui.fragment.FriendListFragment"
         android:label="FriendListFragment"
-        tools:layout="@layout/fragment_friend_list" />
+        tools:layout="@layout/fragment_friend_list" >
+        <action
+            android:id="@+id/action_friendListFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/commentListFragment"
@@ -61,6 +68,9 @@
         <action
             android:id="@+id/action_commentListFragment_to_commentRepliedListFragment"
             app:destination="@id/commentRepliedListFragment" />
+        <action
+            android:id="@+id/action_commentListFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
 
     <fragment

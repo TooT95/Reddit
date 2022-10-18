@@ -44,12 +44,16 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
             onItemClicked: (item: Comment, listenerType: ListenerType) -> Unit,
             comment: Comment,
             view: View,
-            printReply:Boolean = true
+            printReply: Boolean = true,
         ) {
             with(view) {
                 findViewById<ImageView>(R.id.iv_avatar).glideImageWithParams(view, "")
                 findViewById<TextView>(R.id.txt_body).text = comment.body
-                findViewById<TextView>(R.id.txt_author_name).text = comment.author
+                val authorTxt = findViewById<TextView>(R.id.txt_author_name)
+                authorTxt.setOnClickListener {
+                    onItemClicked(comment, ListenerType.FRIEND)
+                }
+                authorTxt.text = comment.author
                 findViewById<TextView>(R.id.txt_published_at).text =
                     SubredditListingAdapter.getPublishedAtText(comment.date)
                 findViewById<TextView>(R.id.txt_vote_count).text = comment.score.toString()

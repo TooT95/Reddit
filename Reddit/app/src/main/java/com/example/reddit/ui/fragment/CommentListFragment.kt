@@ -68,7 +68,18 @@ class CommentListFragment :
     }
 
     private fun onItemClicked(item: SubredditListing, listenerType: ListenerType) {
+        when (listenerType) {
+            ListenerType.FRIEND -> {
+                val bundle = Bundle().apply {
+                    putString(UserFragment.KEY_USER_NAME, item.author)
+                }
+                findNavController().navigate(R.id.action_commentListFragment_to_userFragment,
+                    bundle)
+            }
+            else -> {
 
+            }
+        }
     }
 
     private fun onItemCommentClicked(item: Comment, listenerType: ListenerType) {
@@ -79,9 +90,17 @@ class CommentListFragment :
                 }
                 val bundle = Bundle().apply {
                     putString(KEY_LISTING_COMMENT_LINK, item.commentLink)
-                    putString(CommentRepliedListFragment.KEY_LISTING_COMMENT_AUTHOR, item.author)
+                    putString(CommentRepliedListFragment.KEY_LISTING_COMMENT_AUTHOR,
+                        item.author)
                 }
                 findNavController().navigate(R.id.action_commentListFragment_to_commentRepliedListFragment,
+                    bundle)
+            }
+            ListenerType.FRIEND -> {
+                val bundle = Bundle().apply {
+                    putString(UserFragment.KEY_USER_NAME, item.author)
+                }
+                findNavController().navigate(R.id.action_commentListFragment_to_userFragment,
                     bundle)
             }
             else -> {

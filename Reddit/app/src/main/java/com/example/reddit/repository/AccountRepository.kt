@@ -4,6 +4,8 @@ import com.example.reddit.model.Account
 import com.example.reddit.network.SubredditApi
 import com.example.reddit.network.UserApi
 import com.example.reddit.utils.Utils
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -13,6 +15,7 @@ import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+
 
 class AccountRepository @Inject constructor(
     private val subredditApi: SubredditApi,
@@ -103,6 +106,52 @@ class AccountRepository @Inject constructor(
         }
     }
 
+    suspend fun followUser(userName: String, follow: Boolean): Boolean {
+        return suspendCoroutine { continuation ->
+            userApi.followUser(userName,
+                createJsonRequestBody("name" to userName, "notes" to "add"))
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>,
+                    ) {
+                        if (response.isSuccessful) {
+                            continuation.resume(follow)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        continuation.resumeWithException(t)
+                    }
+                })
+        }
+    }
+
+    suspend fun unfollowUser(userName: String, follow: Boolean): Boolean {
+        return suspendCoroutine { continuation ->
+            userApi.unFollowUser(userName).enqueue(object : Callback<ResponseBody> {
+                override fun onResponse(
+                    call: Call<ResponseBody>,
+                    response: Response<ResponseBody>,
+                ) {
+                    if (response.isSuccessful) {
+                        continuation.resume(follow)
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                    continuation.resumeWithException(t)
+                }
+
+            })
+        }
+    }
+
+    private fun createJsonRequestBody(vararg params: Pair<String, String>) =
+        RequestBody.create(
+            "application/json; charset=utf-8".toMediaTypeOrNull(),
+            JSONObject(mapOf(*params)).toString())
+
     private fun getFriendListParsedJson(jsonString: String): List<Account> {
         val friendList = mutableListOf<Account>()
         val jsonObject = JSONObject(jsonString)
@@ -142,7 +191,6 @@ class AccountRepository @Inject constructor(
         private const val COL_KARMA = "comment_karma"
         private const val COL_IS_FRIEND = "is_friend"
         private const val COL_AVATAR_SNOO = "snoovatar_img"
-
     }
 
 }

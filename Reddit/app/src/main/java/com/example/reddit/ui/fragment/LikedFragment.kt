@@ -48,6 +48,14 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
                 findNavController().navigate(R.id.action_likedSubredditFragment_to_commentListFragment,
                     bundle)
             }
+            ListenerType.FRIEND -> {
+                val bundle = Bundle().apply {
+                    putString(UserFragment.KEY_USER_NAME,
+                        item.author)
+                }
+                findNavController().navigate(R.id.action_likedSubredditFragment_to_userFragment,
+                    bundle)
+            }
             else -> {
 
             }

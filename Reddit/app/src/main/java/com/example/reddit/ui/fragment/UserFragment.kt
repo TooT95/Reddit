@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::inflate) {
 
     private var userName: String = ""
+    private lateinit var defUser: Account
     private val viewModel: AccountViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +33,34 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
     private fun observeViewModels() {
         viewModel.friendInfoLiveData.observe(viewLifecycleOwner, ::userInfo)
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
+        viewModel.accountFollowLiveData.observe(viewLifecycleOwner, ::accountFollow)
+    }
+
+    private fun accountFollow(followed: Boolean) {
+        defUser.isFriend = followed
+        showFollowUnFollow(followed)
+        showFollowLoading(false)
     }
 
     private fun userInfo(user: Account) {
+        defUser = user
         with(binding) {
-            txtAccountName.text = user.name
-            txtAccountPrefix.text = user.id
-            txtCommentNum.text = user.karma.toString()
+            txtAccountName.text = defUser.name
+            txtAccountPrefix.text = defUser.id
+            txtCommentNum.text = defUser.karma.toString()
 
             materialFriendFollowed.setOnClickListener {
-
+                viewModel.unFollow(userName, !defUser.isFriend)
+                showFollowLoading(true)
             }
             materialFriendUnfollowed.setOnClickListener {
+                viewModel.follow(userName, !defUser.isFriend)
+                showFollowLoading(true)
             }
-            ivAvatar.glideImageWithParams(requireView(), user.avatarUrl)
+            ivAvatar.glideImageWithParams(requireView(), defUser.avatarUrl)
         }
         showPbLoading(false)
-        showFollowUnFollow(user)
+        showFollowUnFollow(defUser.isFriend)
     }
 
     private fun initUI() {
@@ -59,6 +71,7 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
             }
         }
         showPbLoading(true)
+        showFollowLoading(false)
     }
 
     private fun showPbLoading(show: Boolean) {
@@ -68,10 +81,17 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
         }
     }
 
-    private fun showFollowUnFollow(user: Account) {
+    private fun showFollowLoading(show: Boolean) {
         with(binding) {
-            materialFriendFollowed.isVisible = user.isFriend
-            materialFriendFollowed.isVisible = user.isFriend
+            pbFollowLoading.isVisible = show
+            linearFollowUnfollow.isVisible = !show
+        }
+    }
+
+    private fun showFollowUnFollow(followed: Boolean) {
+        with(binding) {
+            materialFriendFollowed.isVisible = followed
+            materialFriendUnfollowed.isVisible = !followed
         }
     }
 

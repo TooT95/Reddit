@@ -186,6 +186,16 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <ProgressBar
+            android:id="@+id/pb_follow_loading"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/ic_loader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/material_acc_sub" />
+
+
         <LinearLayout
             android:id="@+id/linear_follow_unfollow"
             android:layout_width="match_parent"
@@ -193,7 +203,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/material_acc_sub">
+            app:layout_constraintTop_toBottomOf="@id/pb_follow_loading">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/material_friend_unfollowed"

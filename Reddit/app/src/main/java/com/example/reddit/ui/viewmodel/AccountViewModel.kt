@@ -26,6 +26,7 @@ class AccountViewModel @Inject constructor(
 
     private val accountMutableLiveData = MutableLiveData<Account>()
     private val accountSubredditCountMutableLiveData = SingleLiveEvent<Int>()
+    private val accountFollowMutableLiveData = SingleLiveEvent<Boolean>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
     private val friendListMutableLiveData = MutableLiveData<List<Account>>()
     private val friendInfoMutableLiveData = MutableLiveData<Account>()
@@ -35,6 +36,9 @@ class AccountViewModel @Inject constructor(
 
     val accountSubredditCountLiveData: LiveData<Int>
         get() = accountSubredditCountMutableLiveData
+
+    val accountFollowLiveData: LiveData<Boolean>
+        get() = accountFollowMutableLiveData
 
     val toastLiveData: LiveData<String>
         get() = toastMutableLiveData
@@ -61,6 +65,18 @@ class AccountViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
             accountMutableLiveData.postValue(repository.getMe())
             accountSubredditCountMutableLiveData.postValue(repository.getSubredditList())
+        }
+    }
+
+    fun follow(userName: String, follow: Boolean) {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
+            accountFollowMutableLiveData.postValue(repository.followUser(userName, follow))
+        }
+    }
+
+    fun unFollow(userName: String, follow: Boolean) {
+        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
+            accountFollowMutableLiveData.postValue(repository.unfollowUser(userName, follow))
         }
     }
 }

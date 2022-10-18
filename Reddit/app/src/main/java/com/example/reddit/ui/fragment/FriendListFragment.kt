@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.reddit.R
 import com.example.reddit.ui.adapter.FriendListAdapter
@@ -18,7 +19,13 @@ class FriendListFragment :
 
     private val viewModel: AccountViewModel by viewModels()
     private val friendListAdapter: FriendListAdapter by lazy {
-        FriendListAdapter()
+        FriendListAdapter { userName ->
+            val bundle = Bundle().apply {
+                putString(UserFragment.KEY_USER_NAME, userName)
+            }
+            findNavController().navigate(R.id.action_friendListFragment_to_userFragment,
+                bundle)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
