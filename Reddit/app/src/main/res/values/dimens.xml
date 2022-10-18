@@ -58,6 +58,8 @@
     <dimen name="comment_avatar_top_margin">4dp</dimen>
     <dimen name="comment_avatar_start_margin">14dp</dimen>
     <dimen name="body_end_margin">20dp</dimen>
+    <dimen name="friend_name_start_margin">13dp</dimen>
+    <dimen name="friend_name_top_margin">33dp</dimen>
 
 
 </resources>
