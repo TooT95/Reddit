@@ -1,4 +1,4 @@
-package com.example.reddit.fragment
+package com.example.reddit.ui.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -8,15 +8,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
-import com.example.reddit.adapter.SubredditListAdapter
-import com.example.reddit.adapter.SubredditListingAdapter
+import com.example.reddit.ui.adapter.SubredditListAdapter
+import com.example.reddit.ui.adapter.SubredditListingAdapter
 import com.example.reddit.databinding.FragmentLikedBinding
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.Subreddit
 import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.utils.Utils
-import com.example.reddit.viewmodel.SubredditListViewModel
-import com.example.reddit.viewmodel.SubredditListingViewModel
+import com.example.reddit.ui.viewmodel.SubredditListViewModel
+import com.example.reddit.ui.viewmodel.SubredditListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

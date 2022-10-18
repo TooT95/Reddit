@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.example.reddit.fragment.OnboardFragment"
+        android:name="com.example.reddit.ui.fragment.OnboardFragment"
         android:label="OnboardingFragment"
         tools:layout="@layout/fragment_onboarding">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.reddit.fragment.AuthFragment"
+        android:name="com.example.reddit.ui.fragment.AuthFragment"
         android:label="AuthFragment"
         tools:layout="@layout/fragment_auth">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/OAuthFragment"
-        android:name="com.example.reddit.fragment.OAuthFragment"
+        android:name="com.example.reddit.ui.fragment.OAuthFragment"
         android:label="OAuthFragment"
         tools:layout="@layout/fragment_oauth">
     </fragment>

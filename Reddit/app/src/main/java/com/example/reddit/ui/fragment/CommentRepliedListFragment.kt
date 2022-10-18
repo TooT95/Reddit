@@ -1,4 +1,4 @@
-package com.example.reddit.fragment
+package com.example.reddit.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,22 +8,20 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.reddit.R
-import com.example.reddit.adapter.CommentListAdapter
-import com.example.reddit.adapter.SubredditListingAdapter
-import com.example.reddit.databinding.FragmentCommentListBinding
+import com.example.reddit.ui.adapter.CommentListAdapter
+import com.example.reddit.databinding.FragmentCommentRepliedListBinding
 import com.example.reddit.model.Comment
-import com.example.reddit.model.CommentListing
+import com.example.reddit.model.CommentReplied
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.SubredditListing
-import com.example.reddit.utils.Utils
-import com.example.reddit.viewmodel.CommentViewModel
+import com.example.reddit.ui.viewmodel.CommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CommentListFragment :
-    BaseFragment<FragmentCommentListBinding>(FragmentCommentListBinding::inflate) {
-
+class CommentRepliedListFragment :
+    BaseFragment<FragmentCommentRepliedListBinding>(FragmentCommentRepliedListBinding::inflate) {
     lateinit var commentLink: String
+    lateinit var author: String
     private val viewModel: CommentViewModel by viewModels()
     private val commentAdapter: CommentListAdapter by lazy {
         CommentListAdapter(::onItemCommentClicked)
@@ -32,9 +30,10 @@ class CommentListFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            commentLink = it.getString(KEY_LISTING_COMMENT_LINK, "")
+            commentLink = it.getString(CommentListFragment.KEY_LISTING_COMMENT_LINK, "")
+            author = it.getString(KEY_LISTING_COMMENT_AUTHOR, "")
         }
-        viewModel.getCommentInfo(commentLink)
+        viewModel.getCommentRepliedInfo(commentLink)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,25 +44,17 @@ class CommentListFragment :
 
     private fun observeViewModels() {
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
-        viewModel.commentInfoLiveData.observe(viewLifecycleOwner, ::showCommentInfoData)
+        viewModel.commentRepliedInfoLiveData.observe(viewLifecycleOwner, ::showCommentInfoData)
     }
 
     @SuppressLint("InflateParams")
-    private fun showCommentInfoData(commentListing: CommentListing) {
-        val view = when (commentListing.listing) {
-            is SubredditListing.ListingImage -> layoutInflater.inflate(R.layout.item_listing_image,
-                null)
-            is SubredditListing.ListingVideo -> layoutInflater.inflate(R.layout.item_listing_video,
-                null)
-            is SubredditListing.ListingPost -> layoutInflater.inflate(R.layout.item_listing_post,
-                null)
-        }
-        setToolbarTitle(commentListing.listing.title)
-        SubredditListingAdapter.showSampleViews(::onItemClicked,
-            view,
-            commentListing.listing)
+    private fun showCommentInfoData(commentReplied: CommentReplied) {
+        val view = layoutInflater.inflate(R.layout.item_comment, null)
+        CommentListAdapter.printCommentInfo(::onItemCommentClicked,
+            commentReplied.mainComment,
+            view, false)
         binding.frameItem.addView(view)
-        commentAdapter.submitList(commentListing.commentList)
+        commentAdapter.submitList(commentReplied.commentList)
         showPbLoading(false)
     }
 
@@ -78,11 +69,10 @@ class CommentListFragment :
                     return
                 }
                 val bundle = Bundle().apply {
-                    putString(KEY_LISTING_COMMENT_LINK, item.commentLink)
-                    putString(CommentRepliedListFragment.KEY_LISTING_COMMENT_AUTHOR, item.author)
+                    putString(CommentListFragment.KEY_LISTING_COMMENT_LINK, item.commentLink)
+                    putString(KEY_LISTING_COMMENT_AUTHOR, "$author>${item.author}")
                 }
-                findNavController().navigate(R.id.action_commentListFragment_to_commentRepliedListFragment,
-                    bundle)
+                findNavController().navigate(R.id.action_commentRepliedListFragment_self, bundle)
             }
             else -> {
 
@@ -92,9 +82,9 @@ class CommentListFragment :
 
     private fun initUI() {
         with(binding.inToolbar.toolbar) {
-            setToolbarTitle(commentLink)
-            if (Utils.haveM()) {
-                setTitleTextColor(resources.getColor(R.color.primaryTextColor,
+            setToolbarTitle(author)
+            if (com.example.reddit.utils.Utils.haveM()) {
+                setTitleTextColor(resources.getColor(com.example.reddit.R.color.primaryTextColor,
                     resources.newTheme()))
             }
             setNavigationOnClickListener {
@@ -122,7 +112,7 @@ class CommentListFragment :
     }
 
     companion object {
-        const val KEY_LISTING_COMMENT_LINK = "comment_perma_link"
+        const val KEY_LISTING_COMMENT_AUTHOR = "comment_author"
     }
 
 }

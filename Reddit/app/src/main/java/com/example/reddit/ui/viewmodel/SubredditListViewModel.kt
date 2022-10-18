@@ -1,10 +1,8 @@
-package com.example.reddit.viewmodel
+package com.example.reddit.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.reddit.extension.changeFlow
 import com.example.reddit.model.subreddit.Subreddit
-import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.repository.SubredditRepository
 import com.example.reddit.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel

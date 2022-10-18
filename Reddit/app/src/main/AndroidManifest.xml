@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Reddit"
         tools:targetApi="31">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.example.reddit.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

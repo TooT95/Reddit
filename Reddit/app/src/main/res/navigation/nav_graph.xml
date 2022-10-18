@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/subredditListFragment"
-        android:name="com.example.reddit.fragment.SubredditListFragment"
+        android:name="com.example.reddit.ui.fragment.SubredditListFragment"
         android:label="SubredditListFragment"
         tools:layout="@layout/fragment_subreddit_list">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/likedSubredditFragment"
-        android:name="com.example.reddit.fragment.LikedFragment"
+        android:name="com.example.reddit.ui.fragment.LikedFragment"
         android:label="LikedSubredditFragment"
         tools:layout="@layout/fragment_liked">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.example.reddit.fragment.AccountFragment"
+        android:name="com.example.reddit.ui.fragment.AccountFragment"
         android:label="AccountFragment"
         tools:layout="@layout/fragment_account">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/subredditListingFragment"
-        android:name="com.example.reddit.fragment.SubredditListingFragment"
+        android:name="com.example.reddit.ui.fragment.SubredditListingFragment"
         android:label="SubredditListingFragment"
         tools:layout="@layout/fragment_subreddit_listing">
         <action
@@ -43,13 +43,13 @@
     </fragment>
     <fragment
         android:id="@+id/friendListFragment"
-        android:name="com.example.reddit.fragment.FriendListFragment"
+        android:name="com.example.reddit.ui.fragment.FriendListFragment"
         android:label="FriendListFragment"
         tools:layout="@layout/fragment_friend_list" />
 
     <fragment
         android:id="@+id/commentListFragment"
-        android:name="com.example.reddit.fragment.CommentListFragment"
+        android:name="com.example.reddit.ui.fragment.CommentListFragment"
         android:label="CommentListFragment"
         tools:layout="@layout/fragment_comment_list">
         <action
@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/commentRepliedListFragment"
-        android:name="com.example.reddit.fragment.CommentRepliedListFragment"
+        android:name="com.example.reddit.ui.fragment.CommentRepliedListFragment"
         android:label="CommentRepliedListFragment"
         tools:layout="@layout/fragment_comment_replied_list" >
         <action

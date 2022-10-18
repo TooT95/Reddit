@@ -1,4 +1,4 @@
-package com.example.reddit.fragment
+package com.example.reddit.ui.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -6,10 +6,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.reddit.R
-import com.example.reddit.adapter.FriendListAdapter
+import com.example.reddit.ui.adapter.FriendListAdapter
 import com.example.reddit.databinding.FragmentFriendListBinding
 import com.example.reddit.utils.Utils
-import com.example.reddit.viewmodel.AccountViewModel
+import com.example.reddit.ui.viewmodel.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

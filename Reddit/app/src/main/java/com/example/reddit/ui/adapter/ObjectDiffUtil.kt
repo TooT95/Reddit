@@ -1,4 +1,4 @@
-package com.example.reddit.adapter
+package com.example.reddit.ui.adapter
 
 import android.annotation.SuppressLint
 import androidx.recyclerview.widget.DiffUtil

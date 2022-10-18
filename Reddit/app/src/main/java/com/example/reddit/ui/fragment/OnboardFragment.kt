@@ -1,4 +1,4 @@
-package com.example.reddit.fragment
+package com.example.reddit.ui.fragment
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.reddit.R
-import com.example.reddit.adapter.OnboardStateAdapter
+import com.example.reddit.ui.adapter.OnboardStateAdapter
 import com.example.reddit.databinding.FragmentOnboardingBinding
 import com.example.reddit.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
