@@ -61,8 +61,4 @@ object Utils {
         return ACCESS_TOKEN
     }
 
-    fun haveM(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-    }
-
 }

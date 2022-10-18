@@ -93,10 +93,8 @@ class CommentListFragment :
     private fun initUI() {
         with(binding.inToolbar.toolbar) {
             setToolbarTitle(commentLink)
-            if (Utils.haveM()) {
-                setTitleTextColor(resources.getColor(R.color.primaryTextColor,
-                    resources.newTheme()))
-            }
+            setTitleTextColor(resources.getColor(R.color.primaryTextColor,
+                resources.newTheme()))
             setNavigationOnClickListener {
                 activity?.onBackPressed()
             }

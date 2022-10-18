@@ -61,10 +61,8 @@ class FriendListFragment :
         }
         with(binding.inToolbar.toolbar) {
             title = resources.getString(R.string.text_friend_list)
-            if (Utils.haveM()) {
-                setTitleTextColor(resources.getColor(R.color.primaryTextColor,
-                    resources.newTheme()))
-            }
+            setTitleTextColor(resources.getColor(R.color.primaryTextColor,
+                resources.newTheme()))
             setNavigationOnClickListener {
                 activity?.onBackPressed()
             }

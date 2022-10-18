@@ -151,15 +151,13 @@ class SubredditListFragment :
     }
 
     private fun setUnsetTextAppearance() {
-        if (Utils.haveM()) {
-            with(binding) {
-                if (isNew) {
-                    txtNewSubreddit.setTextAppearance(R.style.TextSubredditListWithColor14sp)
-                    txtPopularSubreddit.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
-                } else {
-                    txtPopularSubreddit.setTextAppearance(R.style.TextSubredditListWithColor14sp)
-                    txtNewSubreddit.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
-                }
+        with(binding) {
+            if (isNew) {
+                txtNewSubreddit.setTextAppearance(R.style.TextSubredditListWithColor14sp)
+                txtPopularSubreddit.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
+            } else {
+                txtPopularSubreddit.setTextAppearance(R.style.TextSubredditListWithColor14sp)
+                txtNewSubreddit.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
             }
         }
     }

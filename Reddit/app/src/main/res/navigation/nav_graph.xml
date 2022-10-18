@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_likedSubredditFragment_to_subredditListingFragment"
             app:destination="@id/subredditListingFragment" />
+        <action
+            android:id="@+id/action_likedSubredditFragment_to_commentListFragment"
+            app:destination="@id/commentListFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"

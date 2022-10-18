@@ -34,10 +34,23 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
     }
 
     private fun onItemClickListener(item: SubredditListing, listenerType: ListenerType) {
-        if (listenerType == ListenerType.SAVE
-            || listenerType == ListenerType.UNSAVE
-        ) {
-            listingViewModel.saveUnsaveListing(item, srListingAdapter.currentList.indexOf(item))
+        when (listenerType) {
+            ListenerType.SAVE, ListenerType.UNSAVE -> {
+                listingViewModel.saveUnsaveListing(item, srListingAdapter.currentList.indexOf(item))
+            }
+            ListenerType.COMMENT -> {
+                if (item.numComments <= 0) {
+                    return
+                }
+                val bundle = Bundle().apply {
+                    putString(CommentListFragment.KEY_LISTING_COMMENT_LINK, item.commentLink)
+                }
+                findNavController().navigate(R.id.action_likedSubredditFragment_to_commentListFragment,
+                    bundle)
+            }
+            else -> {
+
+            }
         }
     }
 
@@ -171,6 +184,7 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
     }
 
     private fun initSubredditCommentListener() {
+        setUnsetTextAppearance()
         with(binding) {
             val itemClickListener = View.OnClickListener {
                 when (it) {
@@ -194,15 +208,13 @@ class LikedFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::i
     }
 
     private fun setUnsetTextAppearance() {
-        if (Utils.haveM()) {
-            with(binding) {
-                if (isSubreddit) {
-                    txtSubredditList.setTextAppearance(R.style.TextSubredditListWithColor14sp)
-                    txtCommentList.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
-                } else {
-                    txtCommentList.setTextAppearance(R.style.TextSubredditListWithColor14sp)
-                    txtSubredditList.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
-                }
+        with(binding) {
+            if (isSubreddit) {
+                txtSubredditList.setTextAppearance(R.style.TextSubredditListWithColor14sp)
+                txtCommentList.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
+            } else {
+                txtCommentList.setTextAppearance(R.style.TextSubredditListWithColor14sp)
+                txtSubredditList.setTextAppearance(R.style.TextSubredditListWithoutColor14sp)
             }
         }
     }

@@ -69,10 +69,8 @@ class SubredditListingFragment :
     private fun initUI() {
         with(binding.inToolbar.toolbar) {
             title = srName
-            if (Utils.haveM()) {
-                setTitleTextColor(resources.getColor(R.color.primaryTextColor,
-                    resources.newTheme()))
-            }
+            setTitleTextColor(resources.getColor(R.color.primaryTextColor,
+                resources.newTheme()))
             setNavigationOnClickListener {
                 activity?.onBackPressed()
             }

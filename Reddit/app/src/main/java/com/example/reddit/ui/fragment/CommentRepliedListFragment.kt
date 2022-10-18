@@ -83,10 +83,8 @@ class CommentRepliedListFragment :
     private fun initUI() {
         with(binding.inToolbar.toolbar) {
             setToolbarTitle(author)
-            if (com.example.reddit.utils.Utils.haveM()) {
-                setTitleTextColor(resources.getColor(com.example.reddit.R.color.primaryTextColor,
-                    resources.newTheme()))
-            }
+            setTitleTextColor(resources.getColor(com.example.reddit.R.color.primaryTextColor,
+                resources.newTheme()))
             setNavigationOnClickListener {
                 activity?.onBackPressed()
             }
