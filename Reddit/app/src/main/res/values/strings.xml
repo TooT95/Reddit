@@ -18,6 +18,11 @@
     <string name="text_logout">Выйти</string>
     <string name="text_reply">Ответить</string>
     <string name="text_reply_count">Еще %s ответов →</string>
+    <string name="text_send_to">Написать</string>
+    <string name="text_follow">Подписаться</string>
+    <string name="text_unfollow">В друзьях</string>
+    <string name="text_see_all_comment">Смотреть комментарии</string>
+    <string name="account_info">Сабреддиты: %s\n Комментарии %s</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>
@@ -27,7 +32,8 @@
     <array name="text_onboard_desc">
         <item>Здесь собраны сообщества по всевозможным интересам</item>
         <item>Ты можешь найти новые сабы по интересам и посмотреть сабы, на которые подписан</item>
-        <item>Вкладка избранное хранит закладки с комментариями и сабами. В профиле ты найдёшь информацию о себе.
+        <item>Вкладка избранное хранит закладки с комментариями и сабами. В профиле ты найдёшь
+            информацию о себе.
         </item>
     </array>
 </resources>

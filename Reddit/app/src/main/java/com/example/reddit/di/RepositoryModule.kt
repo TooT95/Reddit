@@ -3,6 +3,7 @@ package com.example.reddit.di
 import com.example.reddit.network.CommentApi
 import com.example.reddit.network.SubredditApi
 import com.example.reddit.network.SubredditListingApi
+import com.example.reddit.network.UserApi
 import com.example.reddit.repository.AccountRepository
 import com.example.reddit.repository.CommentRepository
 import com.example.reddit.repository.SubredditListingRepository
@@ -27,8 +28,8 @@ class RepositoryModule {
     }
 
     @Provides
-    fun provideAccountRepository(subredditApi: SubredditApi): AccountRepository {
-        return AccountRepository(subredditApi)
+    fun provideAccountRepository(subredditApi: SubredditApi, userApi: UserApi): AccountRepository {
+        return AccountRepository(subredditApi, userApi)
     }
 
     @Provides

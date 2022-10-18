@@ -63,6 +63,12 @@
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
 
+    <style name="TextFriendSendTo14sp" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">serif-serif-black</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
     <style name="TextListingAuthorWithColor14sp" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">serif-serif-black</item>
@@ -94,6 +100,13 @@
 
     <style name="TextWhiteTextColor14sp" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="TextSubscribe14sp" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>

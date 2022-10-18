@@ -1,9 +1,6 @@
 package com.example.reddit.di
 
-import com.example.reddit.network.BasicAuthInterceptor
-import com.example.reddit.network.CommentApi
-import com.example.reddit.network.SubredditApi
-import com.example.reddit.network.SubredditListingApi
+import com.example.reddit.network.*
 import com.example.reddit.utils.Utils
 import dagger.Module
 import dagger.Provides
@@ -50,5 +47,10 @@ class NetworkModule {
     @Provides
     fun provideCommentApi(retrofit: Retrofit): CommentApi {
         return retrofit.create(CommentApi::class.java)
+    }
+
+    @Provides
+    fun provideUserApi(retrofit: Retrofit): UserApi {
+        return retrofit.create()
     }
 }

@@ -159,7 +159,11 @@ class SubredditListingAdapter(private val onItemClicked: (item: SubredditListing
         ) {
             with(itemView) {
                 findViewById<TextView>(R.id.txt_title).text = listing.title
-                findViewById<TextView>(R.id.txt_author_name).text = listing.author
+                val authorTxt = findViewById<TextView>(R.id.txt_author_name)
+                authorTxt.text = listing.author
+                authorTxt.setOnClickListener {
+                    onItemClicked(listing, ListenerType.FRIEND)
+                }
                 findViewById<TextView>(R.id.txt_comment_num).text = listing.numComments.toString()
                 findViewById<TextView>(R.id.txt_published_at).text =
                     getPublishedAtText(listing.created)

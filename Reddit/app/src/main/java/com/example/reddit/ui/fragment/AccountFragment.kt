@@ -20,6 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBinding::inflate) {
 
+    private var commentCount = 0
+    private var subredditCount = 0
     private val viewModel: AccountViewModel by viewModels()
     private val viewModelListing: SubredditListingViewModel by viewModels()
     private lateinit var accountMe: Account
@@ -56,10 +58,12 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
     private fun observeViewModels() {
         viewModel.accountLiveData.observe(viewLifecycleOwner) {
             Utils.account = it
+            commentCount = it.karma
             showAccountInfo(Utils.account!!)
         }
         viewModel.accountSubredditCountLiveData.observe(viewLifecycleOwner) {
-            binding.txtCommentSubreddit.text = "Сабреддиты: $it"
+            subredditCount = it
+            printSubCommentInfo()
         }
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
         viewModelListing.toastLiveData.observe(viewLifecycleOwner, ::toast)
@@ -85,6 +89,13 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
         }
     }
 
+    private fun printSubCommentInfo() {
+        binding.txtCommentSubreddit.text =
+            resources.getString(R.string.account_info,
+                subredditCount.toString(),
+                commentCount.toString())
+    }
+
     @SuppressLint("SetTextI18n")
     private fun showAccountInfo(account: Account) {
         accountMe = account
@@ -94,6 +105,7 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(FragmentAccountBind
             txtAccountPrefix.text = "@${account.id}"
             ivAvatar.glideImageWithParams(requireView(), account.avatarUrl)
         }
+        printSubCommentInfo()
     }
 
     private fun showPbAccountLoading(show: Boolean) {

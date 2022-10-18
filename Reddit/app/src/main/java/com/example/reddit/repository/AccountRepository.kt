@@ -1,10 +1,9 @@
 package com.example.reddit.repository
 
 import com.example.reddit.model.Account
-import com.example.reddit.model.subreddit.Subreddit
 import com.example.reddit.network.SubredditApi
+import com.example.reddit.network.UserApi
 import com.example.reddit.utils.Utils
-import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -15,11 +14,14 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class AccountRepository @Inject constructor(private val subredditApi: SubredditApi) {
+class AccountRepository @Inject constructor(
+    private val subredditApi: SubredditApi,
+    private val userApi: UserApi,
+) {
 
     suspend fun getMe(): Account {
         return suspendCoroutine { continuation ->
-            subredditApi.getMe().enqueue(object : Callback<ResponseBody> {
+            userApi.getMe().enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>,
@@ -61,7 +63,7 @@ class AccountRepository @Inject constructor(private val subredditApi: SubredditA
 
     suspend fun getFriendList(): List<Account> {
         return suspendCoroutine { continuation ->
-            subredditApi.getFriendList().enqueue(object : Callback<ResponseBody> {
+            userApi.getFriendList().enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>,
@@ -82,7 +84,7 @@ class AccountRepository @Inject constructor(private val subredditApi: SubredditA
 
     suspend fun getFriendInfo(friendName: String): Account {
         return suspendCoroutine { continuation ->
-            subredditApi.getFriendInfo(friendName).enqueue(object : Callback<ResponseBody> {
+            userApi.getFriendInfo(friendName).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
                     call: Call<ResponseBody>,
                     response: Response<ResponseBody>,
@@ -128,13 +130,17 @@ class AccountRepository @Inject constructor(private val subredditApi: SubredditA
         val id = data.getString(COL_ID)
         val avatar = data.getString(COL_AVATAR)
         val avatarSnoo = data.getString(COL_AVATAR_SNOO)
-        return Account(id, avatarSnoo.ifEmpty { avatar }, name)
+        val karma = data.getInt(COL_KARMA)
+        val isFriend = data.getBoolean(COL_IS_FRIEND)
+        return Account(id, avatarSnoo.ifEmpty { avatar }, name, isFriend, karma)
     }
 
     companion object {
         private const val COL_NAME = "name"
         private const val COL_ID = "id"
         private const val COL_AVATAR = "icon_img"
+        private const val COL_KARMA = "comment_karma"
+        private const val COL_IS_FRIEND = "is_friend"
         private const val COL_AVATAR_SNOO = "snoovatar_img"
 
     }

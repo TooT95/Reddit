@@ -30,13 +30,4 @@ interface SubredditApi {
         @Query(NetworkUtils.QUERY_ACTION) action: String?,
     ): Call<ResponseBody>
 
-    @GET(NetworkUtils.SUB_URL_ME)
-    fun getMe(): Call<ResponseBody>
-
-    @GET(NetworkUtils.SUB_URL_FRIEND_LIST)
-    fun getFriendList(): Call<ResponseBody>
-
-    @GET(NetworkUtils.SUB_URL_FRIEND_INFO)
-    fun getFriendInfo(@Path(NetworkUtils.PATH_FRIEND_NAME) friendName: String): Call<ResponseBody>
-
 }

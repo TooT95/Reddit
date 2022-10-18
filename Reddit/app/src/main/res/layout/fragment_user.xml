@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_background"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:contentDescription="@string/text_auth"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_10"
+        android:indeterminateDrawable="@drawable/ic_loader"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/default_main_fragment_start_end_margin"
+        android:layout_marginTop="@dimen/account_material_top"
+        android:layout_marginEnd="@dimen/default_main_fragment_start_end_margin"
+        android:layout_marginBottom="@dimen/default_main_fragment_bottom_margin">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/material_acc_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/default_main_fragment_start_end_margin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_avatar"
+                    android:layout_width="@dimen/avatar_size"
+                    android:layout_height="@dimen/avatar_size"
+                    android:layout_marginStart="@dimen/margin_sr_listing_start_end"
+                    android:layout_marginTop="@dimen/sr_list_iv_width"
+                    app:cardCornerRadius="@dimen/default_search_radius"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/text_auth"
+                        tools:src="@tools:sample/avatars" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_friend_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/friend_name_start_margin"
+                    android:layout_marginTop="@dimen/friend_name_top_margin"
+                    android:backgroundTint="@color/account_name_background"
+                    app:cardCornerRadius="@dimen/default_main_fragment_start_end_margin"
+                    app:layout_constraintStart_toEndOf="@id/material_avatar"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txt_account_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:textAppearance="@style/TextAccountName20sp"
+                        tools:text="@tools:sample/full_names" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/material_friend_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+                    android:backgroundTint="@color/account_name_background"
+                    app:cardCornerRadius="@dimen/default_main_fragment_start_end_margin"
+                    app:layout_constraintStart_toStartOf="@id/material_friend_name"
+                    app:layout_constraintTop_toBottomOf="@id/material_friend_name">
+
+                    <TextView
+                        android:id="@+id/txt_account_prefix"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_marginEnd="@dimen/margin_10"
+                        android:textAppearance="@style/TextAccountPrefix16sp"
+                        tools:text="@tools:sample/full_names" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/linear_send_to"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/material_friend_name"
+                    app:layout_constraintTop_toBottomOf="@id/material_friend_id">
+
+                    <ImageView
+                        android:id="@+id/iv_send_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/text_auth"
+                        android:src="@drawable/ic_send_to"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_send_to"
+                        style="@style/TextFriendSendTo14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_author_subscribe_image"
+                        android:text="@string/text_send_to" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_comment_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+                    android:layout_marginBottom="@dimen/body_end_margin"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/material_friend_name"
+                    app:layout_constraintTop_toBottomOf="@id/linear_send_to">
+
+                    <ImageView
+                        android:id="@+id/iv_comment_sign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/text_auth"
+                        android:src="@drawable/ic_comment_sign"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/txt_comment_num"
+                        style="@style/TextFriendSendTo14sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_author_subscribe_image"
+                        tools:text="@tools:sample/full_names" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:id="@+id/linear_follow_unfollow"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/material_acc_sub">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_friend_unfollowed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+                android:backgroundTint="@color/primaryColor"
+                app:cardCornerRadius="@dimen/default_search_radius">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/txt_friend_follow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_weight="9"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_follow"
+                        android:textAppearance="@style/TextSubscribe14sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_subscribe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/text_auth"
+                        android:src="@drawable/ic_notsubscriber"
+                        app:tint="@color/primaryTextColor" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_friend_followed"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+                android:backgroundTint="@color/saved_icon"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/default_search_radius"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_acc_sub">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:id="@+id/txt_friend_unfollow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:layout_weight="9"
+                        android:gravity="center_vertical"
+                        android:text="@string/text_unfollow"
+                        android:textAppearance="@style/TextSubscribe14sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_unsubscribe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:contentDescription="@string/text_auth"
+                        android:src="@drawable/ic_subscriber"
+                        app:tint="@color/primaryTextColor" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/material_clear_saved"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"
+            android:backgroundTint="@color/primaryColor"
+            app:cardCornerRadius="@dimen/default_search_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear_follow_unfollow">
+
+            <TextView
+                android:id="@+id/txt_clear_saved"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:text="@string/text_see_all_comment"
+                android:textAppearance="@style/TextSubscribe14sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -137,6 +137,13 @@ class SubredditListingFragment :
                 findNavController().navigate(R.id.action_subredditListingFragment_to_commentListFragment,
                     bundle)
             }
+            ListenerType.FRIEND -> {
+                val bundle = Bundle().apply {
+                    putString(UserFragment.KEY_USER_NAME, item.author)
+                }
+                findNavController().navigate(R.id.action_subredditListingFragment_to_userFragment,
+                    bundle)
+            }
             else -> {
 
             }
