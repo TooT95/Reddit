@@ -28,6 +28,7 @@ class CommentViewModel @Inject constructor(
     }
     private val commentInfoMutableLivedata = MutableLiveData<CommentListing>()
     private val commentListMutableLivedata = MutableLiveData<List<Comment>>()
+    private val commentAddMutableLivedata = SingleLiveEvent<Pair<Int, Comment>>()
     private val commentVoteMutableLivedata = SingleLiveEvent<Pair<Comment, Int>>()
     private val commentRepliedInfoMutableLivedata = MutableLiveData<CommentReplied>()
     private val toastMutableLiveData = SingleLiveEvent<String>()
@@ -36,6 +37,8 @@ class CommentViewModel @Inject constructor(
         get() = commentInfoMutableLivedata
     val commentListLiveData: LiveData<List<Comment>>
         get() = commentListMutableLivedata
+    val commentAddLiveData: LiveData<Pair<Int, Comment>>
+        get() = commentAddMutableLivedata
     val commentVoteLiveData: LiveData<Pair<Comment, Int>>
         get() = commentVoteMutableLivedata
     val commentRepliedInfoLiveData: LiveData<CommentReplied>
@@ -64,6 +67,12 @@ class CommentViewModel @Inject constructor(
     fun getUserCommentList(userName: String) {
         viewModelScope.launch(exceptionScope + Dispatchers.IO) {
             commentListMutableLivedata.postValue(repository.getUserCommentList(userName))
+        }
+    }
+
+    fun addComment(text: String, linkId: String,index:Int) {
+        viewModelScope.launch(exceptionScope + Dispatchers.IO) {
+            commentAddMutableLivedata.postValue(repository.addComment(text, linkId,index))
         }
     }
 }

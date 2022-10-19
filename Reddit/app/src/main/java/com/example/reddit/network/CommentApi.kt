@@ -21,6 +21,13 @@ interface CommentApi {
         @Query(NetworkUtils.QUERY_COMMENT_DIR) dir: Int,
     ): Call<ResponseBody>
 
+    @POST(NetworkUtils.SUB_URL_COMMENT_ADD)
+    fun addComment(
+        @Query(NetworkUtils.QUERY_API_TYPE) apiType: String,
+        @Query(NetworkUtils.QUERY_TEXT) text: String,
+        @Query(NetworkUtils.QUERY_PARENT) parent: String,
+    ): Call<ResponseBody>
+
     @GET(NetworkUtils.SUB_URL_USER_COMMENT_LIST)
     fun getUserCommentList(
         @Path(NetworkUtils.PATH_FRIEND_NAME, encoded = true) userName: String,

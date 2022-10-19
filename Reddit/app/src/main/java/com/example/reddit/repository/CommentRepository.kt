@@ -84,6 +84,34 @@ class CommentRepository @Inject constructor(private val api: CommentApi) {
         }
     }
 
+    suspend fun addComment(text: String, parent: String, index: Int): Pair<Int, Comment> {
+        return suspendCoroutine { continuation ->
+            api.addComment("json", text, parent)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val responseString = response.body()?.string().orEmpty()
+                            val commentArray =
+                                JSONObject(responseString).getJSONObject(Utils.COL_JSON_API)
+                                    .getJSONObject(Utils.COL_DATA_API)
+                                    .getJSONArray(Utils.COL_THINGS_API)
+                            val commentJson = commentArray.getJSONObject(0)
+                                .getJSONObject(Utils.COL_DATA_API)
+                            continuation.resume(index to getCommentParsedJson(commentJson))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        continuation.resumeWithException(t)
+                    }
+
+                })
+        }
+    }
+
     suspend fun getUserCommentList(userName: String): List<Comment> {
         return suspendCoroutine { continuation ->
             api.getUserCommentList(userName)

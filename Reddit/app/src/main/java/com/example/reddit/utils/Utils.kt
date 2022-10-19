@@ -22,6 +22,8 @@ object Utils {
     val oAuthUrl = String.format(AUTH_URL, CLIENT_ID, STATE, REDIRECT_URI)
 
     const val COL_DATA_API = "data"
+    const val COL_JSON_API = "json"
+    const val COL_THINGS_API = "things"
     const val COL_CHILDREN_API = "children"
 
     var SUB_AFTER = ""

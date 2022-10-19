@@ -1,5 +1,7 @@
 package com.example.reddit.model
 
+import com.example.reddit.network.CommentApi
+
 data class Comment(
     val id: String,
     val body: String,
@@ -10,6 +12,7 @@ data class Comment(
     val commentLink: String,
     val replyCount: Int,
     val linkId: String,
+    var commentOwner: Comment? = null,
 ) {
 
 

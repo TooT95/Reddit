@@ -23,6 +23,7 @@
     <string name="text_unfollow">В друзьях</string>
     <string name="text_see_all_comment">Смотреть комментарии</string>
     <string name="account_info">Сабреддиты: %s\n Комментарии %s</string>
+    <string name="text_add_comment">Введите комментарии...</string>
 
     <array name="text_onboard_text">
         <item>Добро пожаловать в Humblr</item>

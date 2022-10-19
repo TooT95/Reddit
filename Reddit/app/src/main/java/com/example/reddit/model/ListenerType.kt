@@ -8,5 +8,6 @@ enum class ListenerType {
     COMMENT,
     FRIEND,
     VOTE,
-    UN_VOTE;
+    UN_VOTE,
+    REPLY;
 }

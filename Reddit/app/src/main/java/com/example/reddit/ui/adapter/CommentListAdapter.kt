@@ -1,7 +1,9 @@
 package com.example.reddit.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -43,14 +45,13 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
             comment: Comment,
             view: View,
             printReply: Boolean = true,
+            clickerWorked: Boolean = true,
         ) {
             with(view) {
                 findViewById<ImageView>(R.id.iv_avatar).glideImageWithParams(view, "")
                 findViewById<TextView>(R.id.txt_body).text = comment.body
                 val authorTxt = findViewById<TextView>(R.id.txt_author_name)
-                authorTxt.setOnClickListener {
-                    onItemClicked(comment, ListenerType.FRIEND)
-                }
+
                 authorTxt.text = comment.author
                 findViewById<TextView>(R.id.txt_published_at).text =
                     SubredditListingAdapter.getPublishedAtText(comment.date)
@@ -60,18 +61,6 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
                 val ivVoteDownNotMarked = findViewById<ImageView>(R.id.iv_vote_down_not_marked)
                 val ivVoteUpMarked = findViewById<ImageView>(R.id.iv_vote_up_marked)
                 val ivVoteDownMarked = findViewById<ImageView>(R.id.iv_vote_down_marked)
-                ivVoteUpNotMarked.setOnClickListener {
-                    onItemClicked(comment, ListenerType.VOTE)
-                }
-                ivVoteUpMarked.setOnClickListener {
-                    onItemClicked(comment, ListenerType.VOTE)
-                }
-                ivVoteDownNotMarked.setOnClickListener {
-                    onItemClicked(comment, ListenerType.UN_VOTE)
-                }
-                ivVoteDownMarked.setOnClickListener {
-                    onItemClicked(comment, ListenerType.UN_VOTE)
-                }
                 when (comment.likes) {
                     null -> {
                         ivVoteUpNotMarked.isVisible = true
@@ -92,6 +81,34 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
                         ivVoteDownNotMarked.isVisible = false
                     }
                 }
+                comment.commentOwner?.let {
+                    val commentView =
+                        LayoutInflater.from(view.context).inflate(R.layout.item_comment, null)
+                    printCommentInfo(onItemClicked, it, commentView, true, clickerWorked = false)
+                    val frame = view.findViewById<FrameLayout>(R.id.frame_comment_owner)
+                    frame.addView(commentView)
+                }
+                if (clickerWorked) {
+                    authorTxt.setOnClickListener {
+                        onItemClicked(comment, ListenerType.FRIEND)
+                    }
+                    findViewById<TextView>(R.id.txt_reply).setOnClickListener {
+                        onItemClicked(comment, ListenerType.REPLY)
+                    }
+                    ivVoteUpNotMarked.setOnClickListener {
+                        onItemClicked(comment, ListenerType.VOTE)
+                    }
+                    ivVoteUpMarked.setOnClickListener {
+                        onItemClicked(comment, ListenerType.VOTE)
+                    }
+                    ivVoteDownNotMarked.setOnClickListener {
+                        onItemClicked(comment, ListenerType.UN_VOTE)
+                    }
+                    ivVoteDownMarked.setOnClickListener {
+                        onItemClicked(comment, ListenerType.UN_VOTE)
+                    }
+                }
+
             }
             with(view.findViewById<TextView>(R.id.txt_reply_text)) {
                 text =
