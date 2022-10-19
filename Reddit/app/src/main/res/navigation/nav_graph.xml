@@ -54,7 +54,7 @@
         android:id="@+id/friendListFragment"
         android:name="com.example.reddit.ui.fragment.FriendListFragment"
         android:label="FriendListFragment"
-        tools:layout="@layout/fragment_friend_list" >
+        tools:layout="@layout/fragment_friend_list">
         <action
             android:id="@+id/action_friendListFragment_to_userFragment"
             app:destination="@id/userFragment" />
@@ -86,5 +86,14 @@
         android:id="@+id/userFragment"
         android:name="com.example.reddit.ui.fragment.UserFragment"
         android:label="UserFragment"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_userCommentListFragment"
+            app:destination="@id/userCommentListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userCommentListFragment"
+        android:name="com.example.reddit.ui.fragment.UserCommentListFragment"
+        android:label="UserCommentListFragment"
+        tools:layout="@layout/fragment_user_comment_list" />
 </navigation>

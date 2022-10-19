@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.reddit.R
-import com.example.reddit.databinding.ItemCommentBinding
 import com.example.reddit.extension.glideImageWithParams
 import com.example.reddit.extension.inflateLayout
 import com.example.reddit.model.Comment
@@ -32,7 +31,6 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
         view: View,
     ) : RecyclerView.ViewHolder(view) {
 
-        private val binding = ItemCommentBinding.bind(view)
         fun onBind(comment: Comment) {
             printCommentInfo(onItemClicked, comment, itemView)
         }
@@ -62,6 +60,18 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
                 val ivVoteDownNotMarked = findViewById<ImageView>(R.id.iv_vote_down_not_marked)
                 val ivVoteUpMarked = findViewById<ImageView>(R.id.iv_vote_up_marked)
                 val ivVoteDownMarked = findViewById<ImageView>(R.id.iv_vote_down_marked)
+                ivVoteUpNotMarked.setOnClickListener {
+                    onItemClicked(comment, ListenerType.VOTE)
+                }
+                ivVoteUpMarked.setOnClickListener {
+                    onItemClicked(comment, ListenerType.VOTE)
+                }
+                ivVoteDownNotMarked.setOnClickListener {
+                    onItemClicked(comment, ListenerType.UN_VOTE)
+                }
+                ivVoteDownMarked.setOnClickListener {
+                    onItemClicked(comment, ListenerType.UN_VOTE)
+                }
                 when (comment.likes) {
                     null -> {
                         ivVoteUpNotMarked.isVisible = true
@@ -85,11 +95,11 @@ class CommentListAdapter(private val onItemClicked: (item: Comment, listenerType
             }
             with(view.findViewById<TextView>(R.id.txt_reply_text)) {
                 text =
-                    view.resources.getString(com.example.reddit.R.string.text_reply_count,
+                    view.resources.getString(R.string.text_reply_count,
                         comment.replyCount.toString())
                 isVisible = comment.replyCount != 0 && printReply
                 setOnClickListener {
-                    onItemClicked(comment, com.example.reddit.model.ListenerType.COMMENT)
+                    onItemClicked(comment, ListenerType.COMMENT)
                 }
             }
         }

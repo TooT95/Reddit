@@ -18,7 +18,7 @@ interface SubredditListingApi {
     ): Call<ResponseBody>
 
     @POST(NetworkUtils.SUB_URL_SAVE_UN_SAVE)
-    fun saveUnsavePost(
+    fun saveUnSavePost(
         @Path(NetworkUtils.PATH_SAVE_ACTION) saveUnsave: String,
         @Query(NetworkUtils.QUERY_ID) id: String,
         @Query(NetworkUtils.QUERY_CATEGORY) category: String,

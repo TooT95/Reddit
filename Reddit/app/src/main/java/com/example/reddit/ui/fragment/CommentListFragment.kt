@@ -15,7 +15,6 @@ import com.example.reddit.model.Comment
 import com.example.reddit.model.CommentListing
 import com.example.reddit.model.ListenerType
 import com.example.reddit.model.subreddit.SubredditListing
-import com.example.reddit.utils.Utils
 import com.example.reddit.ui.viewmodel.CommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,6 +45,25 @@ class CommentListFragment :
     private fun observeViewModels() {
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
         viewModel.commentInfoLiveData.observe(viewLifecycleOwner, ::showCommentInfoData)
+        viewModel.commentVoteLiveData.observe(viewLifecycleOwner, ::commentVoted)
+    }
+
+    private fun commentVoted(params: Pair<Comment, Int>) {
+        val comment = params.first
+        val likes = when (params.second) {
+            1 -> true
+            -1 -> false
+            else -> null
+        }
+        val commentList = commentAdapter.currentList
+        commentList.filter {
+            it.id == comment.id
+        }.forEach {
+            it.likes = likes
+            it.score += params.second
+        }
+        commentAdapter.submitList(commentList)
+        commentAdapter.notifyItemChanged(commentAdapter.currentList.indexOf(comment))
     }
 
     @SuppressLint("InflateParams")
@@ -102,6 +120,16 @@ class CommentListFragment :
                 }
                 findNavController().navigate(R.id.action_commentListFragment_to_userFragment,
                     bundle)
+            }
+            ListenerType.VOTE -> {
+                val dir = if (item.likes == null)
+                    1 else 0
+                viewModel.voteComment(item, dir)
+            }
+            ListenerType.UN_VOTE -> {
+                val dir = if (item.likes == null)
+                    -1 else 0
+                viewModel.voteComment(item, dir)
             }
             else -> {
 

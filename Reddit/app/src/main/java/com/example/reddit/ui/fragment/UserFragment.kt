@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.example.reddit.R
 import com.example.reddit.databinding.FragmentUserBinding
 import com.example.reddit.extension.glideImageWithParams
 import com.example.reddit.model.Account
@@ -56,6 +58,13 @@ class UserFragment : BaseFragment<FragmentUserBinding>(FragmentUserBinding::infl
             materialFriendUnfollowed.setOnClickListener {
                 viewModel.follow(userName, !defUser.isFriend)
                 showFollowLoading(true)
+            }
+            materialCommentList.setOnClickListener {
+                val bundle = Bundle().apply {
+                    putString(KEY_USER_NAME, userName)
+                }
+                findNavController().navigate(R.id.action_userFragment_to_userCommentListFragment,
+                    bundle)
             }
             ivAvatar.glideImageWithParams(requireView(), defUser.avatarUrl)
         }

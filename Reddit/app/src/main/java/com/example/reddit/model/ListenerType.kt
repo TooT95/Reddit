@@ -6,5 +6,7 @@ enum class ListenerType {
     UNSAVE,
     SUBSCRIBE,
     COMMENT,
-    FRIEND;
+    FRIEND,
+    VOTE,
+    UN_VOTE;
 }

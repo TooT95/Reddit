@@ -11,7 +11,6 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -48,7 +47,7 @@ class SubredditListingRepository @Inject constructor(private val subApi: Subredd
 
     suspend fun saveUnsaveListing(name: String, save: Boolean, index: Int): Int? {
         return suspendCoroutine { continuation ->
-            subApi.saveUnsavePost(if (save) UN_SAVE_LISTING_ACTION else SAVE_LISTING_ACTION,
+            subApi.saveUnSavePost(if (save) UN_SAVE_LISTING_ACTION else SAVE_LISTING_ACTION,
                 name,
                 CATEGORY_LISTING).enqueue(object : Callback<ResponseBody> {
                 override fun onResponse(
@@ -154,8 +153,12 @@ class SubredditListingRepository @Inject constructor(private val subApi: Subredd
                         commentLink)
                 }
                 else -> {
-                    val imageUrlCommon =
-                        currentItemJson.getString(SubredditListing.COL_IMAGE_URl_COMMON)
+                    var imageUrlCommon = ""
+                    try {
+                        imageUrlCommon =
+                            currentItemJson.getString(SubredditListing.COL_IMAGE_URl_COMMON)
+                    } catch (t: Throwable) {
+                    }
 //                            if (imageUrl.contains(".jpg")) imageUrl else currentItemJson.getString(
 //                                SubredditListing.COL_IMAGE_URl_COMMON)
                     SubredditListing.ListingImage(id,

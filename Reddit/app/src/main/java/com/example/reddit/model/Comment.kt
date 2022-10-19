@@ -9,6 +9,7 @@ data class Comment(
     var likes: Boolean?,
     val commentLink: String,
     val replyCount: Int,
+    val linkId: String,
 ) {
 
 
@@ -21,5 +22,6 @@ data class Comment(
         const val COL_LIKES = "likes"
         const val COL_REPLY_COMMENT_LINK = "permalink"
         const val COL_REPLY_COUNT = "replies"
+        const val COL_LINK_ID = "name"
     }
 }

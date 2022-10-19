@@ -4,7 +4,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface SubredditApi {
@@ -25,7 +24,7 @@ interface SubredditApi {
     fun getSubscribedList(@Query(NetworkUtils.QUERY_AFTER) after: String?): Call<ResponseBody>
 
     @POST(NetworkUtils.SUB_URL_SUBREDDIT_SUBSCRIBE)
-    fun subUnsubSubreddit(
+    fun subUnSubSubreddit(
         @Query(NetworkUtils.QUERY_SUBREDDIT_PREFIXED_NAME) dName: String,
         @Query(NetworkUtils.QUERY_ACTION) action: String?,
     ): Call<ResponseBody>

@@ -79,7 +79,7 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
         return suspendCoroutine { continuation ->
             scope.launch {
                 val action = if (subreddit.userSubscriber) "unsub" else "sub"
-                subApi.subUnsubSubreddit(subreddit.dNamePrefixed, action)
+                subApi.subUnSubSubreddit(subreddit.dNamePrefixed, action)
                     .enqueue(object : Callback<ResponseBody> {
                         override fun onResponse(
                             call: Call<ResponseBody>,

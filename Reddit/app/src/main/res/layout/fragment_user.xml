@@ -288,7 +288,7 @@
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/material_clear_saved"
+            android:id="@+id/material_comment_list"
             android:layout_width="match_parent"
             android:layout_height="38dp"
             android:layout_marginTop="@dimen/sr_list_item_card_bottom_margin"

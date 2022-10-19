@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.reddit.R
 import com.example.reddit.ui.adapter.FriendListAdapter
 import com.example.reddit.databinding.FragmentFriendListBinding
-import com.example.reddit.utils.Utils
 import com.example.reddit.ui.viewmodel.AccountViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

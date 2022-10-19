@@ -1,7 +1,6 @@
 package com.example.reddit.network
 
 import com.example.reddit.utils.Utils
-import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.Response
 

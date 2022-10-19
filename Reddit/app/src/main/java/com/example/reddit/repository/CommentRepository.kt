@@ -63,6 +63,48 @@ class CommentRepository @Inject constructor(private val api: CommentApi) {
         }
     }
 
+    suspend fun voteComment(comment: Comment, dir: Int): Pair<Comment, Int> {
+        return suspendCoroutine { continuation ->
+            api.voteComment(comment.linkId, dir)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>,
+                    ) {
+                        if (response.isSuccessful) {
+                            continuation.resume(comment to dir)
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        continuation.resumeWithException(t)
+                    }
+
+                })
+        }
+    }
+
+    suspend fun getUserCommentList(userName: String): List<Comment> {
+        return suspendCoroutine { continuation ->
+            api.getUserCommentList(userName)
+                .enqueue(object : Callback<ResponseBody> {
+                    override fun onResponse(
+                        call: Call<ResponseBody>,
+                        response: Response<ResponseBody>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val responseString = response.body()?.string().orEmpty()
+                            continuation.resume(getCommentList(JSONObject(responseString)))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                        continuation.resumeWithException(t)
+                    }
+                })
+        }
+    }
+
     private fun getCommentInfoParsedJson(jsonString: String): CommentListing {
         val commonArray = JSONArray(jsonString)
         val childrenArray = commonArray.getJSONObject(0).getJSONObject(Utils.COL_DATA_API)
@@ -79,7 +121,8 @@ class CommentRepository @Inject constructor(private val api: CommentApi) {
         val currentItemJson =
             childrenArray.getJSONObject(0).getJSONObject(Utils.COL_DATA_API)
         val comment = getCommentParsedJson(currentItemJson)
-        return CommentReplied(comment, getCommentList(currentItemJson.getJSONObject(Comment.COL_REPLY_COUNT)))
+        return CommentReplied(comment,
+            getCommentList(currentItemJson.getJSONObject(Comment.COL_REPLY_COUNT)))
     }
 
     private fun getCommentList(jsonObject: JSONObject): List<Comment> {
@@ -101,6 +144,7 @@ class CommentRepository @Inject constructor(private val api: CommentApi) {
 
     private fun getCommentParsedJson(currentItemJson: JSONObject): Comment {
         val id = currentItemJson.getString(Comment.COL_ID)
+        val linkId = currentItemJson.getString(Comment.COL_LINK_ID)
         val body = currentItemJson.getString(Comment.COL_BODY)
         val date = currentItemJson.getDouble(Comment.COL_DATE)
         val author = currentItemJson.getString(Comment.COL_AUTHOR)
@@ -122,6 +166,6 @@ class CommentRepository @Inject constructor(private val api: CommentApi) {
             score,
             likes,
             commentLink,
-            replyCount)
+            replyCount, linkId)
     }
 }

@@ -13,9 +13,9 @@ import com.example.reddit.databinding.FragmentCommentRepliedListBinding
 import com.example.reddit.model.Comment
 import com.example.reddit.model.CommentReplied
 import com.example.reddit.model.ListenerType
-import com.example.reddit.model.subreddit.SubredditListing
 import com.example.reddit.ui.viewmodel.CommentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CommentRepliedListFragment :
@@ -45,6 +45,7 @@ class CommentRepliedListFragment :
     private fun observeViewModels() {
         viewModel.toastLiveData.observe(viewLifecycleOwner, ::toast)
         viewModel.commentRepliedInfoLiveData.observe(viewLifecycleOwner, ::showCommentInfoData)
+        viewModel.commentVoteLiveData.observe(viewLifecycleOwner, ::commentVoted)
     }
 
     @SuppressLint("InflateParams")
@@ -58,8 +59,22 @@ class CommentRepliedListFragment :
         showPbLoading(false)
     }
 
-    private fun onItemClicked(item: SubredditListing, listenerType: ListenerType) {
-
+    private fun commentVoted(params: Pair<Comment, Int>) {
+        val comment = params.first
+        val likes = when (params.second) {
+            1 -> true
+            -1 -> false
+            else -> null
+        }
+        val commentList = commentAdapter.currentList
+        commentList.filter {
+            it.id == comment.id
+        }.forEach {
+            it.likes = likes
+            it.score += params.second
+        }
+        commentAdapter.submitList(commentList)
+        commentAdapter.notifyItemChanged(commentAdapter.currentList.indexOf(comment))
     }
 
     private fun onItemCommentClicked(item: Comment, listenerType: ListenerType) {
@@ -74,6 +89,18 @@ class CommentRepliedListFragment :
                 }
                 findNavController().navigate(R.id.action_commentRepliedListFragment_self, bundle)
             }
+            ListenerType.VOTE -> {
+                val dir = if (item.likes == null)
+                    1 else 0
+                Timber.d("postlink ${item.linkId}")
+                viewModel.voteComment(item, dir)
+            }
+            ListenerType.UN_VOTE -> {
+                val dir = if (item.likes == null)
+                    -1 else 0
+                Timber.d("postlink ${item.linkId}")
+                viewModel.voteComment(item, dir)
+            }
             else -> {
 
             }
@@ -83,7 +110,7 @@ class CommentRepliedListFragment :
     private fun initUI() {
         with(binding.inToolbar.toolbar) {
             setToolbarTitle(author)
-            setTitleTextColor(resources.getColor(com.example.reddit.R.color.primaryTextColor,
+            setTitleTextColor(resources.getColor(R.color.primaryTextColor,
                 resources.newTheme()))
             setNavigationOnClickListener {
                 activity?.onBackPressed()

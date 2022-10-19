@@ -1,7 +1,7 @@
 package com.example.reddit.utils
 
 import android.content.Context
-import android.os.Build
+import android.content.SharedPreferences
 import com.example.reddit.model.Account
 
 object Utils {
@@ -61,4 +61,13 @@ object Utils {
         return ACCESS_TOKEN
     }
 
+    private fun Context.saveField(
+        saveFunction: SharedPreferences.Editor.() -> Unit
+    ) {
+        getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
+            .edit()
+            .apply {
+                saveFunction()
+            }.apply()
+    }
 }

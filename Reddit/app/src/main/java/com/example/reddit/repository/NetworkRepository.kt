@@ -2,12 +2,9 @@ package com.example.reddit.repository
 
 import android.app.Application
 import android.util.Base64
-import com.example.reddit.network.SubredditApi
 import com.example.reddit.utils.Utils
 import okhttp3.*
 import org.json.JSONObject
-import retrofit2.Callback
-import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -15,7 +12,7 @@ import javax.inject.Inject
 class NetworkRepository @Inject constructor(
     private val application: Application,
 ) {
-    suspend fun authTokenGot(): Boolean {
+    fun authTokenGot(): Boolean {
         val response = getToken().execute()
         if (response.isSuccessful) {
             val jsonData: String = response.body!!.string()

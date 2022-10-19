@@ -1,15 +1,11 @@
 package com.example.reddit.extension
 
 import android.content.Context
-import android.graphics.Color
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.MediaController
 import android.widget.SearchView
-import android.widget.VideoView
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.example.reddit.R
@@ -20,7 +16,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import timber.log.Timber
 
 fun ViewGroup.inflateLayout(@LayoutRes layoutId: Int, attachToParent: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutId, this, attachToParent)
