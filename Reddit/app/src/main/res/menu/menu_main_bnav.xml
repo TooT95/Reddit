@@ -10,9 +10,12 @@
         android:icon="@drawable/ic_liked"
         android:title="@string/text_sublist" />
     <item
+        android:id="@+id/onboardingFragment"
+        android:icon="@drawable/ic_info"
+        android:title="@string/text_sublist" />
+    <item
         android:id="@+id/accountFragment"
         android:icon="@drawable/ic_account"
         android:title="@string/text_sublist" />
-
 
 </menu>
