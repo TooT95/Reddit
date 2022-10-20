@@ -9,24 +9,24 @@ import retrofit2.http.Query
 
 interface SubredditListingApi {
 
-    @GET(NetworkUtils.SUB_URL_SUB_HOT)
+    @GET(NetworkContract.SUB_URL_SUB_HOT)
     fun getSrListingList(
-        @Path(NetworkUtils.QUERY_SUBREDDIT_FILTR) srName: String,
-        @Query(NetworkUtils.QUERY_LIMIT) limit: Int,
-        @Query(NetworkUtils.QUERY_AFTER) after: String?,
-        @Query(NetworkUtils.QUERY_SUBREDDIT_DETAIL) sr_detail: Int,
+        @Path(NetworkContract.QUERY_SUBREDDIT_FILTR) srName: String,
+        @Query(NetworkContract.QUERY_LIMIT) limit: Int,
+        @Query(NetworkContract.QUERY_AFTER) after: String?,
+        @Query(NetworkContract.QUERY_SUBREDDIT_DETAIL) sr_detail: Int,
     ): Call<ResponseBody>
 
-    @POST(NetworkUtils.SUB_URL_SAVE_UN_SAVE)
+    @POST(NetworkContract.SUB_URL_SAVE_UN_SAVE)
     fun saveUnSavePost(
-        @Path(NetworkUtils.PATH_SAVE_ACTION) saveUnsave: String,
-        @Query(NetworkUtils.QUERY_ID) id: String,
-        @Query(NetworkUtils.QUERY_CATEGORY) category: String,
+        @Path(NetworkContract.PATH_SAVE_ACTION) saveUnsave: String,
+        @Query(NetworkContract.QUERY_ID) id: String,
+        @Query(NetworkContract.QUERY_CATEGORY) category: String,
     ): Call<ResponseBody>
 
-    @GET(NetworkUtils.SUB_URL_SAVED_LIST)
+    @GET(NetworkContract.SUB_URL_SAVED_LIST)
     fun getSavedList(
-        @Path(NetworkUtils.PATH_FRIEND_NAME) accountName: String,
+        @Path(NetworkContract.PATH_FRIEND_NAME) accountName: String,
     ): Call<ResponseBody>
 
 }

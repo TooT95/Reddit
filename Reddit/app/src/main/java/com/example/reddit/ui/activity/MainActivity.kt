@@ -1,6 +1,7 @@
 package com.example.reddit.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
@@ -20,8 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        showMainNavGraph(show = false, isStart = true)
-        startMainFragment()
+        if(Utils.accessTokenValid(this)){
+            showMainNavGraph(true)
+        }else{
+            showMainNavGraph(show = false, isStart = true)
+            startMainFragment()
+        }
     }
 
     fun showMainNavGraph(show: Boolean, isStart: Boolean = true) {

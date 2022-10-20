@@ -2,9 +2,32 @@ package com.example.reddit.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Base64
 import com.example.reddit.model.Account
+import okhttp3.*
+import timber.log.Timber
+import java.util.concurrent.LinkedBlockingQueue
 
 object Utils {
+
+    fun accessTokenValid(context: Context): Boolean {
+        val queue = LinkedBlockingQueue<Boolean>()
+
+        Thread {
+            val client = OkHttpClient().newBuilder()
+                .build()
+            val request = Request.Builder()
+                .url("https://oauth.reddit.com/api/me")
+                .get()
+                .addHeader("Authorization",
+                    "bearer ${getSharedPrefAccessToken(context)}")
+                .build()
+            val response = client.newCall(request).execute()
+            queue.add(response.isSuccessful)
+        }.start()
+
+        return queue.take()
+    }
 
     private const val ONBOARD_VALUE_KEY = "onboard passed"
     private const val AUTH_CODE_KEY = "auth code key"
@@ -52,6 +75,12 @@ object Utils {
             .getString(AUTH_CODE_KEY, "") ?: ""
     }
 
+    private fun getSharedPrefAccessToken(context: Context): String {
+        ACCESS_TOKEN = context.getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
+            .getString(TOKEN_KEY, "") ?: ""
+        return ACCESS_TOKEN
+    }
+
     fun setAccessToken(context: Context, token: String) {
         ACCESS_TOKEN = token
         context.saveField {
@@ -64,7 +93,7 @@ object Utils {
     }
 
     private fun Context.saveField(
-        saveFunction: SharedPreferences.Editor.() -> Unit
+        saveFunction: SharedPreferences.Editor.() -> Unit,
     ) {
         getSharedPreferences(APP_SHARED_PREF_KEY, Context.MODE_PRIVATE)
             .edit()

@@ -1,6 +1,6 @@
 package com.example.reddit.network
 
-object NetworkUtils {
+object NetworkContract {
 
     const val QUERY_AFTER = "after"
     const val QUERY_SEARCH = "q"

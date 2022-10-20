@@ -1,7 +1,7 @@
 package com.example.reddit.repository
 
 import com.example.reddit.model.subreddit.Subreddit
-import com.example.reddit.network.NetworkUtils
+import com.example.reddit.network.NetworkContract
 import com.example.reddit.network.SubredditApi
 import com.example.reddit.utils.Utils
 import kotlinx.coroutines.CoroutineScope
@@ -135,9 +135,9 @@ class SubredditRepository @Inject constructor(private val subApi: SubredditApi) 
             val jsonObject = JSONObject(jsonString)
             val jsonDataObject = jsonObject.getJSONObject(Utils.COL_DATA_API)
             if (isSubreddit) {
-                Utils.SUB_AFTER = jsonDataObject.getString(NetworkUtils.QUERY_AFTER)
+                Utils.SUB_AFTER = jsonDataObject.getString(NetworkContract.QUERY_AFTER)
             } else
-                Utils.SUB_LISTING_AFTER = jsonDataObject.getString(NetworkUtils.QUERY_AFTER)
+                Utils.SUB_LISTING_AFTER = jsonDataObject.getString(NetworkContract.QUERY_AFTER)
             return jsonDataObject.getJSONArray(Utils.COL_CHILDREN_API)
         }
 

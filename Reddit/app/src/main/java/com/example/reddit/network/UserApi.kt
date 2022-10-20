@@ -7,22 +7,22 @@ import retrofit2.http.*
 
 interface UserApi {
 
-    @GET(NetworkUtils.SUB_URL_ME)
+    @GET(NetworkContract.SUB_URL_ME)
     fun getMe(): Call<ResponseBody>
 
-    @GET(NetworkUtils.SUB_URL_FRIEND_LIST)
+    @GET(NetworkContract.SUB_URL_FRIEND_LIST)
     fun getFriendList(): Call<ResponseBody>
 
-    @GET(NetworkUtils.SUB_URL_FRIEND_INFO)
-    fun getFriendInfo(@Path(NetworkUtils.PATH_FRIEND_NAME) friendName: String): Call<ResponseBody>
+    @GET(NetworkContract.SUB_URL_FRIEND_INFO)
+    fun getFriendInfo(@Path(NetworkContract.PATH_FRIEND_NAME) friendName: String): Call<ResponseBody>
 
-    @PUT(NetworkUtils.SUB_URL_FRIEND_FOLLOW_UN_FOLLOW)
+    @PUT(NetworkContract.SUB_URL_FRIEND_FOLLOW_UN_FOLLOW)
     fun followUser(
-        @Path(NetworkUtils.PATH_FRIEND_NAME) userName: String,
+        @Path(NetworkContract.PATH_FRIEND_NAME) userName: String,
         @Body params: RequestBody,
     ): Call<ResponseBody>
 
-    @DELETE(NetworkUtils.SUB_URL_FRIEND_FOLLOW_UN_FOLLOW)
-    fun unFollowUser(@Path(NetworkUtils.PATH_FRIEND_NAME) userName: String): Call<ResponseBody>
+    @DELETE(NetworkContract.SUB_URL_FRIEND_FOLLOW_UN_FOLLOW)
+    fun unFollowUser(@Path(NetworkContract.PATH_FRIEND_NAME) userName: String): Call<ResponseBody>
 
 }
