@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_subreddit_list">
         <action
             android:id="@+id/action_subredditListFragment_to_subredditListingFragment"
-            app:destination="@id/subredditListingFragment" />
+            app:destination="@id/subredditListingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/likedSubredditFragment"
@@ -21,13 +25,25 @@
         tools:layout="@layout/fragment_liked">
         <action
             android:id="@+id/action_likedSubredditFragment_to_subredditListingFragment"
-            app:destination="@id/subredditListingFragment" />
+            app:destination="@id/subredditListingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_likedSubredditFragment_to_commentListFragment"
-            app:destination="@id/commentListFragment" />
+            app:destination="@id/commentListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_likedSubredditFragment_to_userFragment"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -36,7 +52,11 @@
         tools:layout="@layout/fragment_account">
         <action
             android:id="@+id/action_accountFragment_to_friendListFragment"
-            app:destination="@id/friendListFragment" />
+            app:destination="@id/friendListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/subredditListingFragment"
@@ -45,10 +65,19 @@
         tools:layout="@layout/fragment_subreddit_listing">
         <action
             android:id="@+id/action_subredditListingFragment_to_commentListFragment"
-            app:destination="@id/commentListFragment" />
+            app:destination="@id/commentListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_subredditListingFragment_to_userFragment"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+             />
     </fragment>
     <fragment
         android:id="@+id/friendListFragment"
@@ -57,7 +86,11 @@
         tools:layout="@layout/fragment_friend_list">
         <action
             android:id="@+id/action_friendListFragment_to_userFragment"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -67,10 +100,18 @@
         tools:layout="@layout/fragment_comment_list">
         <action
             android:id="@+id/action_commentListFragment_to_commentRepliedListFragment"
-            app:destination="@id/commentRepliedListFragment" />
+            app:destination="@id/commentRepliedListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_commentListFragment_to_userFragment"
-            app:destination="@id/userFragment" />
+            app:destination="@id/userFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -80,7 +121,11 @@
         tools:layout="@layout/fragment_comment_replied_list">
         <action
             android:id="@+id/action_commentRepliedListFragment_self"
-            app:destination="@id/commentRepliedListFragment" />
+            app:destination="@id/commentRepliedListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/userFragment"
@@ -89,7 +134,11 @@
         tools:layout="@layout/fragment_user">
         <action
             android:id="@+id/action_userFragment_to_userCommentListFragment"
-            app:destination="@id/userCommentListFragment" />
+            app:destination="@id/userCommentListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/userCommentListFragment"
