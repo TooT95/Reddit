@@ -113,7 +113,7 @@
                 android:id="@+id/iv_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/primaryTextColor"
+                android:background="@null"
                 android:contentDescription="@string/text_search"
                 android:src="@drawable/ic_save_comment"
                 app:tint="@color/gray_icon" />
@@ -122,7 +122,7 @@
                 android:id="@+id/iv_un_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/primaryTextColor"
+                android:background="@null"
                 android:contentDescription="@string/text_search"
                 android:src="@drawable/ic_save_comment"
                 app:tint="@color/saved_icon" />

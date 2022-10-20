@@ -22,7 +22,6 @@ class OnboardFragment :
     }
 
     private fun initUI() {
-        val isMainGraph = findNavController().graph.id == R.id.nav_graph
         binding.apply {
             val animDrawable = constraintOnboard.background as AnimationDrawable
             animDrawable.setEnterFadeDuration(2500)
@@ -36,7 +35,9 @@ class OnboardFragment :
                     when (it.itemId) {
                         R.id.item_skip -> {
                             viewpagerOnboard.currentItem = viewpagerOnboard.currentItem + 1
-                            if (viewpagerOnboard.currentItem == 3) {
+                            if (includeToolbar.toolbar.menu.findItem(R.id.item_skip).title == resources.getString(
+                                    R.string.text_ready)
+                            ) {
                                 findNavController().navigate(R.id.action_loginFragment_to_employerMainFragment)
                                 Utils.saveOnboardPassed(requireContext(), true)
                             }
@@ -56,7 +57,7 @@ class OnboardFragment :
                     val item = includeToolbar.toolbar.menu.findItem(R.id.item_skip)
                     when (position) {
                         2 -> {
-                            if (isMainGraph) {
+                            if (Utils.onboardPassed(requireContext())) {
                                 item.title = ""
                             } else item.setTitle(R.string.text_ready)
                         }
